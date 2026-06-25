@@ -3,396 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAC 2026 | Desafíos del Futuro Cercano</title>
+    <title>Congreso Internacional Médico - Campeche 2026</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. VARIABLES Y RESET */
-        :root {
-            --bg-color: #f8fafc; /* Fondo gris/azul muy suave */
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --primary-teal: #26a69a;
-            --accent-orange: #ff9800;
-            --card-bg: #ffffff;
-            --soft-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
-            --hover-shadow: 0 30px 60px -15px rgba(38, 166, 154, 0.2);
-        }
-
+        /* =========================================
+           1. RESET Y CONFIGURACIÓN BASE
+           ========================================= */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        body, html {
+            height: 100%;
+            font-family: 'Outfit', sans-serif;
+            background-color: #0f172a; /* Fondo oscuro por si la imagen tarda en cargar */
+            color: #333;
             overflow-x: hidden;
         }
 
-        /* 2. HEADER (3 COLUMNAS) */
-        .header {
-            display: grid;
-            grid-template-columns: 250px 1fr 250px;
-            align-items: center;
-            padding: 20px 5%;
-            background: rgba(248, 250, 252, 0.8);
-            backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%;
+        /* =========================================
+           2. HEADER (MENÚ DE NAVEGACIÓN)
+           ========================================= */
+        .web-header {
+            position: absolute; /* Flota sobre la imagen de fondo */
             top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0,0,0,0.02);
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: grid;
+            grid-template-columns: 250px 1fr 200px; /* 3 Columnas: Logo, Menú, Idioma */
+            align-items: center;
+            padding: 0 60px;
+            z-index: 100; /* Asegura que esté por encima del contenido */
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8) 0%, transparent 100%); /* Sutil sombra superior para legibilidad */
         }
 
-        .brand {
+        /* Columna 1: Logo */
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
-            text-decoration: none;
         }
 
-        .brand-logo {
-            height: 45px;
+        .logo-img {
+            height: 70px; /* Ajusta el tamaño de tu logo aquí */
             width: auto;
-            border-radius: 8px; /* Por si el logo necesita contención */
+            object-fit: contain;
         }
 
-        .brand-text {
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--text-dark);
-            letter-spacing: -0.5px;
-        }
-        
-        .brand-text span {
-            color: var(--primary-teal);
-        }
-
+        /* Columna 2: Menú */
         .nav-menu {
             display: flex;
             justify-content: center;
-            gap: 35px;
             list-style: none;
+            gap: 40px;
         }
 
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 14px;
+        .nav-menu li {
+            font-weight: 500;
+            font-size: 15px;
+            color: #ffffff; /* Texto blanco para contrastar con el fondo */
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: color 0.3s ease;
         }
 
-        .nav-menu a:hover, .nav-menu a.active {
-            color: var(--primary-teal);
+        .nav-menu li:hover {
+            color: #fb923c; /* Color coral/naranja al pasar el mouse */
         }
 
-        .header-actions {
+        .nav-menu li.active {
+            font-weight: 800;
+            color: #fb923c;
+        }
+
+        /* Columna 3: Botón de Idioma */
+        .lang-area {
             display: flex;
             justify-content: flex-end;
         }
 
-        .btn-lang {
-            background: var(--card-bg);
-            color: var(--text-dark);
-            border: 2px solid transparent;
-            padding: 10px 24px;
+        .lang-btn {
+            background-color: rgba(255, 255, 255, 0.1); /* Botón semitransparente */
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 28px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 13px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px); /* Efecto de cristal */
         }
 
-        .btn-lang:hover {
-            border-color: var(--primary-teal);
-            color: var(--primary-teal);
-            box-shadow: 0 6px 20px rgba(38, 166, 154, 0.15);
+        .lang-btn:hover {
+            background-color: #fb923c;
+            border-color: #fb923c;
+            color: #ffffff;
         }
 
-        /* 3. HERO SECTION (SOFT UI) */
-        .hero {
-            margin-top: 100px;
-            padding: 40px 5%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+        /* =========================================
+           3. HERO SECTION (INMERSIÓN TOTAL)
+           ========================================= */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Ocupa toda la altura de la pantalla */
+            display: flex;
             align-items: center;
-            flex-grow: 1;
-            max-width: 1600px;
-            margin-inline: auto;
         }
 
-        /* Lado Izquierdo: Texto y Tarjetas */
+        /* Imagen de Fondo (Tu ilustración de Campeche) */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* AQUÍ DEBES PONER LA RUTA DE TU ILUSTRACIÓN DE CAMPECHE */
+            background-image: url('https://placehold.co/1920x1080/0f172a/fff?text=Ilustracion+Campeche+Aqui'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Capa de Color sobre la imagen para que el texto sea legible */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            /* Gradiente que oscurece el lado izquierdo donde va el texto */
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 40%, transparent 100%);
+        }
+
+        /* Contenedor del Texto (Lado Izquierdo) */
         .hero-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .badge {
-            background: rgba(255, 152, 0, 0.1);
-            color: var(--accent-orange);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+        /* Tipografía del Hero */
+        .hero-tag {
+            color: #fb923c; /* Naranja/Coral */
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            width: fit-content;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .hero-title {
-            font-size: clamp(40px, 4vw, 65px);
-            line-height: 1.1;
-            color: var(--text-dark);
+            color: #ffffff;
+            font-size: 72px;
             font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            max-width: 700px;
         }
 
         .hero-title span {
-            color: var(--primary-teal);
+            /* Degradado en el texto clave para darle un toque moderno */
+            background: linear-gradient(90deg, #2dd4bf, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-muted);
+        .hero-description {
+            color: #cbd5e1; /* Gris claro */
+            font-size: 20px;
+            font-weight: 300;
             line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 90%;
-        }
-
-        /* Soft Cards UI */
-        .info-cards {
-            display: flex;
-            gap: 25px;
+            max-width: 550px;
             margin-bottom: 40px;
         }
 
-        .soft-card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 24px;
-            box-shadow: var(--soft-shadow);
-            flex: 1;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-
-        .soft-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .soft-card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .icon-teal {
-            background: rgba(38, 166, 154, 0.1);
-            color: var(--primary-teal);
-        }
-
-        .icon-orange {
-            background: rgba(255, 152, 0, 0.1);
-            color: var(--accent-orange);
-        }
-
-        .soft-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .soft-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
+        /* Botón de Acción Principal */
         .cta-btn {
-            background: var(--primary-teal);
-            color: white;
+            background-color: #2dd4bf; /* Teal/Verde Agua vibrante */
+            color: #0f172a;
             border: none;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-weight: 700;
+            padding: 18px 45px;
+            border-radius: 8px;
+            font-weight: 800;
             font-size: 16px;
             cursor: pointer;
             width: fit-content;
-            box-shadow: 0 10px 20px -5px rgba(38, 166, 154, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .cta-btn:hover {
-            background: #1f8a80;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -5px rgba(38, 166, 154, 0.5);
-        }
-
-        /* Lado Derecho: Imagen Principal */
-        .hero-visual {
-            position: relative;
-            height: 650px;
-            width: 100%;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15);
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        /* Elemento Decorativo Flotante */
-        .floating-badge {
-            position: absolute;
-            bottom: 40px;
-            left: -30px;
-            background: var(--card-bg);
-            padding: 20px 30px;
-            border-radius: 20px;
-            box-shadow: var(--soft-shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-badge i {
-            font-size: 30px;
-            color: var(--accent-orange);
-        }
-
-        .floating-text h4 {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
-        
-        .floating-text p {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Responsive Básico */
-        @media (max-width: 1024px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding-top: 20px;
-            }
-            .hero-visual {
-                height: 400px;
-            }
-            .floating-badge {
-                left: 20px;
-            }
-            .header {
-                grid-template-columns: auto 1fr auto;
-            }
-            .nav-menu {
-                display: none; /* Aquí iría un menú hamburguesa en un proyecto real */
-            }
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(45, 212, 191, 0.6);
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <a href="#" class="brand">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_dno94wdno94wdno9_1_foddmj.webp" alt="CIAC Logo" class="brand-logo">
-            <div class="brand-text">CIAC <span>2026</span></div>
-        </a>
+    <header class="web-header">
         
+        <div class="logo-area">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_dno94wdno94wdno9_1_foddmj.webp" alt="Logo del Congreso" class="logo-img">
+        </div>
+
         <ul class="nav-menu">
-            <li><a href="#" class="active">Inicio</a></li>
-            <li><a href="#">Ciudad Sede</a></li>
-            <li><a href="#">Programa</a></li>
-            <li><a href="#">Inscripciones</a></li>
-            <li><a href="#">Becas</a></li>
+            <li class="active">Inicio</li>
+            <li>Ciudad Sede</li>
+            <li>Programa</li>
+            <li>Inscripciones</li>
+            <li>Organizadores</li>
         </ul>
 
-        <div class="header-actions">
-            <button class="btn-lang">English</button>
+        <div class="lang-area">
+            <button class="lang-btn">ENGLISH</button>
         </div>
+
     </header>
 
-    <section class="hero">
+    <section class="hero-section">
+        
+        <div class="hero-bg"></div>
+        
+        <div class="hero-overlay"></div>
         
         <div class="hero-content">
-            <div class="badge">Sede Histórica: Campeche</div>
-            
-            <h1 class="hero-title">
-                Innovación Médica <br><span>Global.</span>
-            </h1>
-            
-            <p class="hero-subtitle">
-                La cumbre interdisciplinaria que conecta el talento médico mexicano desde Berlín hasta Texas. Prepárate para los desafíos del futuro cercano.
-            </p>
-
-            <div class="info-cards">
-                <div class="soft-card">
-                    <div class="soft-card-icon icon-teal">
-                        <i class="fa-solid fa-user-doctor"></i>
-                    </div>
-                    <h3>Mentores Globales</h3>
-                    <p>Aprende de los estándares de oro de Suiza y Alemania en tu práctica clínica.</p>
-                </div>
-                
-                <div class="soft-card">
-                    <div class="soft-card-icon icon-orange">
-                        <i class="fa-solid fa-handshake-angle"></i>
-                    </div>
-                    <h3>Networking & Becas</h3>
-                    <p>Conecta con directivos y explora nuestro pabellón de oportunidades académicas.</p>
-                </div>
-            </div>
-
-            <button class="cta-btn">Asegurar mi Lugar</button>
-        </div>
-
-        <div class="hero-visual">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420439/Gemini_Generated_Image_kz649qkz649qkz64_2_qqpiqh.webp" alt="Malecón de Campeche Colorido" class="hero-img">
-            
-            <div class="floating-badge">
-                <i class="fa-solid fa-microchip"></i>
-                <div class="floating-text">
-                    <h4>Near Future Challenges</h4>
-                    <p>IA, Robótica y Regulación</p>
-                </div>
-            </div>
+            <p class="hero-tag">Edición 2026 • Campeche, México</p>
+            <h1 class="hero-title">La Cumbre Médica del <span>Mañana</span></h1>
+            <p class="hero-description">Más que un congreso, un retiro estratégico para el médico moderno. Descubre los desafíos del futuro cercano con líderes mexicanos globales en la capital histórica del Golfo.</p>
+            <button class="cta-btn">DESCUBRE LA SEDE</button>
         </div>
 
     </section>
