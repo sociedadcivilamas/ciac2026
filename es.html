@@ -3,610 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAC 2026 - 10 Premium Hero Templates</title>
+    <title>CIAC 2026 - Congreso Internacional de Medicina Avanzada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CORE CONFIGURATION & VARIABLES --- */
+        /* --- VARIABLES BASADAS EN TU PALETA --- */
         :root {
-            --logo-blue: #115D8C;
-            --logo-cyan: #1FBFAF;
-            --logo-green: #17A655;
-            --logo-orange: #F2921D;
-            --logo-pink: #d92377;
-            --dark-bg: #09131e;
-            --light-bg: #f8fafc;
-            --sidebar-width: 260px;
+            --c-brown: #613227;
+            --c-blue: #115D8C;
+            --c-cyan: #1FBFAF;
+            --c-green: #17A655;
+            --c-orange: #F2921D;
+            --c-pink: #d92377;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
         }
 
+        /* --- ESTILOS RESET Y GLOBALES --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--light-bg);
+            background-color: #ffffff;
+            color: var(--text-dark);
             overflow-x: hidden;
-            display: flex;
+            line-height: 1.6;
         }
 
-        /* --- INTERACTIVE TEMPLATE SWITCHER (SIDEBAR) --- */
-        .template-switcher {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: #111827;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 9999;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            overflow-y: auto;
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .template-switcher h3 {
-            color: #9ca3af;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            padding-left: 0.5rem;
-        }
-
-        .template-btn {
-            background: transparent;
-            border: none;
-            color: #d1d5db;
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .template-btn:hover {
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-        }
-
-        .template-btn.active {
-            background: var(--logo-blue);
-            color: white;
-            box-shadow: 0 4px 12px rgba(17, 93, 140, 0.3);
-        }
-
-        /* --- CONTAINER SYSTEM --- */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            width: calc(100vw - var(--sidebar-width));
-            height: 100vh;
-            position: relative;
-        }
-
-        .hero-section {
-            width: 100%;
-            height: 100vh;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: scale(0.98);
-            overflow: hidden;
-        }
-
-        .hero-section.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: scale(1);
-        }
-
-        /* --- GLOBAL REUSABLE COMPONENTS --- */
-        .logo-img {
-            max-width: 280px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));
-        }
-        
-        .logo-img-light {
-            filter: drop-shadow(0 8px 24px rgba(255,255,255,0.1)) brightness(1.2);
-        }
-
-        .btn-premium {
+        /* --- COMPONENTES REUTILIZABLES --- */
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             padding: 1rem 2.25rem;
-            background: var(--logo-blue);
+            background: var(--c-blue);
             color: white;
             font-weight: 700;
             text-decoration: none;
             border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(17, 93, 140, 0.25);
+            box-shadow: 0 10px 25px rgba(17, 93, 140, 0.2);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid transparent;
         }
 
-        .btn-premium:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(17, 93, 140, 0.35);
+            background: #0d4a70;
         }
 
         .meta-tag {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
             padding: 0.5rem 1.25rem;
-            background: rgba(17, 93, 140, 0.08);
-            color: var(--logo-blue);
-            font-weight: 600;
-            font-size: 0.85rem;
+            background: rgba(217, 35, 119, 0.08);
+            color: var(--c-pink);
+            font-weight: 700;
+            font-size: 0.8rem;
             border-radius: 30px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 1.5rem;
         }
 
-        /* ==========================================================================
-           TEMPLATE 1: BENTO CLINICAL GRID (Minimalista, Modular, Tendencia Estricta)
-           ========================================================================== */
-        #temp1 {
-            background: #f1f5f9;
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(12, 1fr);
-            gap: 1.25rem;
-            padding: 2rem;
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--c-blue);
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
-        #temp1 .bento-card {
-            background: white;
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(15,23,42,0.02);
-            border: 1px solid rgba(15,23,42,0.04);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .bento-hero { grid-column: 1 / 8; grid-row: 1 / 9; }
-        .bento-logo { grid-column: 8 / 13; grid-row: 1 / 6; align-items: center; justify-content: center; background: linear-gradient(135deg, #fff 0%, #edf8f6 100%); }
-        .bento-date { grid-column: 8 / 11; grid-row: 6 / 9; background: var(--logo-blue); color: white; text-align: center;}
-        .bento-loc { grid-column: 11 / 13; grid-row: 6 / 9; background: linear-gradient(135deg, var(--logo-cyan), var(--logo-green)); color: white; }
-        .bento-footer { grid-column: 1 / 13; grid-row: 9 / 13; flex-direction: row !important; align-items: center; justify-content: space-between; background: #0f172a; color: white;}
-        
-        #temp1 h1 { font-size: 3.5rem; color: #0f172a; font-weight: 800; line-height: 1.1; margin-top: 1rem; }
-        #temp1 h1 span { background: linear-gradient(90deg, var(--logo-blue), var(--logo-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* ==========================================================================
-           TEMPLATE 2: CHROMATIC MESH EMBED (Premium, Fluido, Futurista)
-           ========================================================================== */
-        #temp2 {
-            background: #fff;
+        /* --- BARRA DE NAVEGACIÓN --- */
+        header.site-navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 8%;
-        }
-        #temp2 .mesh-bg {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            right: -100px;
-            top: -100px;
-            background: radial-gradient(circle, rgba(31,191,175,0.2) 0%, rgba(17,93,140,0.15) 50%, transparent 100%);
-            filter: blur(60px);
-            z-index: 1;
-        }
-        #temp2 .mesh-bg-2 {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            left: -100px;
-            bottom: -100px;
-            background: radial-gradient(circle, rgba(242,146,29,0.15) 0%, transparent 100%);
-            filter: blur(80px);
-            z-index: 1;
-        }
-        #temp2 .content, #temp2 .graphic { position: relative; z-index: 2; }
-        #temp2 h1 { font-size: 4.5rem; font-weight: 800; color: #0f172a; line-height: 1.05; }
-        #temp2 p { font-size: 1.25rem; color: #475569; margin: 1.5rem 0 2.5rem 0; max-width: 540px; }
-        #temp2 .graphic {
-            background: rgba(255,255,255,0.6);
-            padding: 4rem;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.8);
-            box-shadow: 0 30px 60px rgba(17,93,140,0.05);
-            backdrop-filter: blur(20px);
+            align-items: center;
+            padding: 2rem 6%;
+            z-index: 100;
         }
 
-        /* ==========================================================================
-           TEMPLATE 3: LABORATORY IMMERSIVE DARK (Elegancia Absoluta, Tecnológico)
-           ========================================================================== */
-        #temp3 {
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 10%;
-            color: white;
-        }
-        #temp3::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; width: 50%; height: 100%;
-            background: linear-gradient(to right, var(--dark-bg) 0%, transparent 100%), 
-                        radial-gradient(ellipse at center, rgba(23,166,85,0.15) 0%, transparent 70%);
-        }
-        #temp3 .meta-tag { background: rgba(31,191,175,0.15); color: var(--logo-cyan); }
-        #temp3 h1 { font-size: 5rem; font-weight: 800; max-width: 800px; line-height: 1.1; margin: 1.5rem 0; }
-        #temp3 h1 span { background: linear-gradient(to right, #fff, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #temp3 .location-bar {
+        .nav-links {
             display: flex;
             gap: 3rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            max-width: 600px;
         }
-        #temp3 .loc-item h4 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; }
-        #temp3 .loc-item p { font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem; color: var(--logo-cyan); }
 
-        /* ==========================================================================
-           TEMPLATE 4: THE CYRILLIC SPLIT SCREEN (Diseño Asimétrico Editorial)
-           ========================================================================== */
-        #temp4 {
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--c-cyan);
+        }
+
+        /* --- SECCIÓN 1: HERO (TEMPLATE 7) --- */
+        .hero-section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
             background: #fff;
-            display: flex;
         }
-        #temp4 .left-pane {
+
+        .hero-text-side {
             width: 55%;
-            height: 100%;
-            background: #fafafa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            border-right: 1px solid #eee;
+            padding: 0 6% 0 8%;
+            z-index: 3;
         }
-        #temp4 .right-pane {
+
+        .hero-text-side h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text-side h1 span {
+            color: var(--c-pink);
+            background: linear-gradient(90deg, var(--c-orange), var(--c-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text-side p {
+            margin-bottom: 2.5rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 580px;
+        }
+
+        .hero-image-side {
             width: 45%;
             height: 100%;
-            background: linear-gradient(135deg, var(--logo-blue) 0%, #0a3a59 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             position: relative;
-        }
-        #temp4 h1 { font-size: 3.8rem; font-weight: 800; color: var(--logo-blue); line-height: 1.1; }
-        #temp4 h1 span { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--logo-orange); }
-        #temp4 p { margin: 2rem 0; color: #64748b; font-size: 1.1rem; }
-
-        /* ==========================================================================
-           TEMPLATE 5: LIQUID GRADIENT SPHERES (Cinético, Fluido, 2025 Trend)
-           ========================================================================== */
-        #temp5 {
-            background: #0b0f19;
+            background: linear-gradient(135deg, var(--c-blue) 0%, #08334e 100%);
+            clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
         }
-        .sphere {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(50px);
-            opacity: 0.6;
-            animation: float 12s infinite alternate;
-        }
-        .sphere-1 { width: 400px; height: 400px; background: var(--logo-blue); top: 10%; left: 15%; }
-        .sphere-2 { width: 350px; height: 350px; background: var(--logo-orange); bottom: 10%; right: 15%; animation-delay: -4s; }
-        .sphere-3 { width: 300px; height: 300px; background: var(--logo-pink); top: 40%; right: 30%; animation-delay: -8s; }
-        
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg) scale(1); }
-            100% { transform: translateY(40px) rotate(180deg) scale(1.1); }
-        }
-        #temp5 .glass-box {
-            position: relative;
-            z-index: 5;
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            padding: 5rem;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.08);
-            max-width: 900px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #temp5 h1 { font-size: 4.5rem; color: white; font-weight: 800; margin: 2rem 0; line-height: 1.1; }
-        #temp5 h1 span { color: var(--logo-cyan); }
-        #temp5 p { color: #94a3b8; font-size: 1.25rem; max-width: 600px; margin-bottom: 2.5rem; }
 
-        /* ==========================================================================
-           TEMPLATE 6: NEOMORPHIC CLINICAL CLEAN (Impecable, Espacio Negativo)
-           ========================================================================== */
-        #temp6 {
-            background: #f8fafc;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
+        .hero-logo-img {
+            max-width: 320px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25)) brightness(1.05);
+            animation: subtle-float 6s ease-in-out infinite;
         }
-        #temp6 .clean-grid {
+
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- SECCIÓN 2: MÉTRICAS / CIFRAS --- */
+        .metrics-section {
+            padding: 5rem 8%;
+            background: var(--bg-light);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            border-top: 1px solid #e2e8f0;
         }
-        #temp6 h1 { font-size: 4rem; font-weight: 800; color: #0f172a; letter-spacing: -2px; line-height: 1.05; }
-        #temp6 h1 mark { background: none; color: var(--logo-green); }
-        #temp6 .accent-line { width: 80px; height: 6px; background: var(--logo-cyan); margin-bottom: 2rem; border-radius: 3px; }
-        #temp6 .info-pill { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); border-left: 4px solid var(--logo-blue); }
 
-        /* ==========================================================================
-           TEMPLATE 7: THE ABSTRACT OVERLAY HERO (Geométrico, Dinámico)
-           ========================================================================== */
-        #temp7 {
+        .metric-card {
             background: #fff;
-            display: flex;
-            align-items: center;
-        }
-        #temp7 .text-side { width: 50%; padding-left: 10%; z-index: 3; }
-        #temp7 .image-side { 
-            width: 50%; height: 100%; 
-            position: relative;
-            background: linear-gradient(45deg, var(--logo-blue), var(--logo-cyan));
-            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #temp7 h1 { font-size: 4.2rem; font-weight: 800; color: #0f172a; line-height: 1.15; }
-        #temp7 h1 span { color: var(--logo-pink); }
-
-        /* ==========================================================================
-           TEMPLATE 8: THE DIGITAL HUB (Simetría Radical, Centrado de Vanguardia)
-           ========================================================================== */
-        #temp8 {
-            background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border-bottom: 4px solid var(--c-cyan);
             text-align: center;
-            padding: 0 15%;
         }
-        #temp8 h1 { font-size: 3.8rem; font-weight: 800; color: var(--logo-blue); margin: 2rem 0 1rem 0; }
-        #temp8 .badge-row { display: flex; gap: 1rem; margin-top: 2rem; }
-        #temp8 .badge-item { background: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); color: #475569;}
 
-        /* ==========================================================================
-           TEMPLATE 9: BRUTALIST MEDICAL TYPOGRAPHY (Neo-Brutalismo Elegante)
-           ========================================================================== */
-        #temp9 {
+        .metric-card:nth-child(2) { border-bottom-color: var(--c-green); }
+        .metric-card:nth-child(3) { border-bottom-color: var(--c-orange); }
+        .metric-card:nth-child(4) { border-bottom-color: var(--c-pink); }
+
+        .metric-num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* --- SECCIÓN 3: EJES TEMÁTICOS --- */
+        .topics-section {
+            padding: 8rem 8%;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .topic-card {
+            padding: 3rem 2.5rem;
+            border-radius: 24px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: var(--c-blue);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(17, 93, 140, 0.06);
+            border-color: rgba(17, 93, 140, 0.15);
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .topic-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .topic-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- SECCIÓN 4: PONENTES --- */
+        .speakers-section {
+            padding: 8rem 8%;
+            background: var(--bg-light);
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .speaker-card {
             background: #fff;
-            padding: 4rem 6%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: transform 0.3s;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .speaker-img {
+            width: 100%;
+            height: 280px;
+            background: #cbd5e1; /* Reemplazable por fotos reales */
+            object-fit: cover;
+        }
+
+        .speaker-info {
+            padding: 1.5rem;
+        }
+
+        .speaker-info h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .speaker-info p {
+            color: var(--c-cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .speaker-institution {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* --- SECCIÓN 5: SEDE Y REGISTRO (SPLIT CONTRARIO) --- */
+        .registration-section {
+            width: 100%;
+            min-height: 80vh;
+            display: flex;
+        }
+
+        .reg-info-side {
+            width: 45%;
+            background: linear-gradient(135deg, #09131e 0%, var(--c-brown) 100%);
+            clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+            padding: 6rem 8% 6rem 6%;
+            color: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-        #temp9 .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
-        #temp9 .giant-text { font-size: 7.5rem; font-weight: 800; color: #0f172a; line-height: 0.9; letter-spacing: -4px; margin: 3rem 0;}
-        #temp9 .giant-text span { color: transparent; -webkit-text-stroke: 2px var(--logo-blue); }
-        #temp9 .bottom-row { display: flex; justify-content: space-between; align-items: flex-end; border-top: 2px solid #0f172a; padding-top: 2rem; }
-
-        /* ==========================================================================
-           TEMPLATE 10: GLOWING MEDICAL HORIZON (Premium Dark, Gradiente Lineal)
-           ========================================================================== */
-        #temp10 {
-            background: #050b14;
-            display: flex;
-            align-items: center;
             justify-content: center;
         }
-        #temp10 .glow-line {
-            position: absolute;
-            top: 0; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--logo-cyan), var(--logo-orange), transparent);
-            box-shadow: 0 0 40px 5px var(--logo-cyan);
+
+        .reg-info-side h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
         }
-        #temp10 .center-wrap { max-width: 800px; text-align: center; display: flex; flex-direction: column; align-items: center;}
-        #temp10 h1 { font-size: 5rem; font-weight: 300; color: white; margin: 2rem 0; }
-        #temp10 h1 strong { font-weight: 800; background: linear-gradient(90deg, var(--logo-cyan), var(--logo-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .venue-detail {
+            margin-top: 2rem;
+            border-left: 3px solid var(--c-orange);
+            padding-left: 1.5rem;
+        }
+
+        .reg-form-side {
+            width: 55%;
+            padding: 6rem 10% 6rem 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--c-blue);
+        }
+
+        /* --- RESPONSIVIDAD --- */
+        @media (max-width: 1024px) {
+            .hero-section { flex-direction: column; height: auto; padding-top: 8rem; }
+            .hero-text-side { width: 100%; padding: 4rem 6%; text-align: center; }
+            .hero-text-side p { margin: 0 auto 2.5rem auto; }
+            .hero-image-side { width: 100%; height: 50vh; clip-path: none; }
+            .metrics-section { grid-template-columns: repeat(2, 1fr); }
+            .topics-grid { grid-template-columns: 1fr 1fr; }
+            .speakers-grid { grid-template-columns: 1fr 1fr; }
+            .registration-section { flex-direction: column; }
+            .reg-info-side { width: 100%; clip-path: none; padding: 4rem 6%; }
+            .reg-form-side { width: 100%; padding: 4rem 6%; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .hero-text-side h1 { font-size: 2.8rem; }
+            .metrics-section { grid-template-columns: 1fr; }
+            .topics-grid { grid-template-columns: 1fr; }
+            .speakers-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="template-switcher">
-        <h3>CIAC 2026 Templates</h3>
-        <button class="template-btn active" onclick="switchHero(1)">1. Bento Grid Clinical</button>
-        <button class="template-btn" onclick="switchHero(2)">2. Chromatic Mesh</button>
-        <button class="template-btn" onclick="switchHero(3)">3. Immersive Dark Lab</button>
-        <button class="template-btn" onclick="switchHero(4)">4. Editorial Split Screen</button>
-        <button class="template-btn" onclick="switchHero(5)">5. Liquid Spheres (Glow)</button>
-        <button class="template-btn" onclick="switchHero(6)">6. Clean Space Neomorphic</button>
-        <button class="template-btn" onclick="switchHero(7)">7. Geometric Abstract</button>
-        <button class="template-btn" onclick="switchHero(8)">8. Radial Digital Hub</button>
-        <button class="template-btn" onclick="switchHero(9)">9. Brutalist Editorial</button>
-        <button class="template-btn" onclick="switchHero(10)">10. Medical Horizon Dark</button>
-    </div>
+    <header class="site-navbar">
+        <div class="nav-logo">
+            <span style="font-weight: 800; color: var(--c-blue); font-size: 1.2rem;">CIAC 2026</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#ejes">Ejes Temáticos</a>
+            <a href="#ponentes">Ponentes</a>
+            <a href="#registro">Inscripciones</a>
+        </nav>
+    </header>
 
-    <div class="main-content">
+    <section id="inicio" class="hero-section">
+        <div class="hero-text-side">
+            <span class="meta-tag">Inscripciones Abiertas • Septiembre 2026</span>
+            <h1>Conectando Líderes,<br>Descubriendo <span>Soluciones Médicas</span></h1>
+            <p>El encuentro científico anual de referencia global. Cuatro días dedicados por completo a la divulgación de evidencia de vanguardia, mesas clínicas avanzadas y simposios de actualización en Campeche.</p>
+            <a href="#registro" class="btn-primary">Registrarme al Congreso</a>
+        </div>
+        <div class="hero-image-side">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="hero-logo-img" alt="CIAC 2026 Logo">
+        </div>
+    </section>
 
-        <header id="temp1" class="hero-section active">
-            <div class="bento-card bento-hero">
-                <span class="meta-tag" style="width: fit-content;">Congreso Internacional Médico 2026</span>
-                <h1>Innovación Científica en el Corazón de <span>Campeche</span></h1>
-            </div>
-            <div class="bento-card bento-logo">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
-            </div>
-            <div class="bento-card bento-date">
-                <h3 style="font-size: 2.5rem; font-weight: 800;">17-20</h3>
-                <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem;">Septiembre 2026</p>
-            </div>
-            <div class="bento-card bento-loc">
-                <h4 style="font-size: 1.2rem; font-weight: 800;">Sede Oficial</h4>
-                <p style="font-size: 0.9rem; opacity: 0.9;">Centro de Convenciones Campeche, México</p>
-            </div>
-            <div class="bento-card bento-footer">
-                <p style="font-weight: 600; opacity: 0.8;">Únete al epicentro de la medicina moderna.</p>
-                <a href="#" class="btn-premium" style="background: white; color: var(--dark-bg); box-shadow: none;">Registrarme Ahora →</a>
-            </div>
-        </header>
+    <section class="metrics-section">
+        <div class="metric-card">
+            <div class="metric-num">50+</div>
+            <div class="metric-label">Ponentes Internacionales</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-num">40+</div>
+            <div class="metric-label">Horas Académicas</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-num">1,200</div>
+            <div class="metric-label">Especialistas Reunidos</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-num">Aval</div>
+            <div class="metric-label">Consejos Médicos Oficiales</div>
+        </div>
+    </section>
 
-        <header id="temp2" class="hero-section">
-            <div class="mesh-bg"></div>
-            <div class="mesh-bg-2"></div>
-            <div class="content">
-                <span class="meta-tag">CIAC 2026 • MÉXICO</span>
-                <h1>El Futuro de la<br>Medicina Clínica</h1>
-                <p>Un espacio de convergencia global donde la ciencia, la tecnología médica y los profesionales de la salud redefinen los límites del bienestar.</p>
-                <a href="#" class="btn-premium">Explorar Programa Científico</a>
+    <section id="ejes" class="topics-section">
+        <span class="meta-tag" style="background: rgba(31,191,175,0.08); color: var(--c-cyan);">Programa Científico</span>
+        <h2 class="section-title">Pilares Clínicos de la Edición 2026</h2>
+        <p style="color: var(--text-muted); max-width: 600px;">Nuestro comité científico ha seleccionado áreas críticas que están impulsando cambios drásticos en la praxis médica global.</p>
+        
+        <div class="topics-grid">
+            <div class="topic-card">
+                <span class="topic-icon">🧬</span>
+                <h3>Innovación Genómica</h3>
+                <p>Abordajes clínicos y terapias personalizadas dirigidas mediante mapeo molecular de última generación.</p>
             </div>
-            <div class="graphic">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
+            <div class="topic-card" style="border-left: 6px solid var(--c-green);">
+                <span class="topic-icon">🤖</span>
+                <h3>IA aplicada a Diagnósticos</h3>
+                <p>Modelos predictivos y algoritmos de machine learning implementados en la optimización hospitalaria diaria.</p>
             </div>
-        </header>
+            <div class="topic-card" style="border-left: 6px solid var(--c-orange);">
+                <span class="topic-icon">🏥</span>
+                <h3>Gestión Sanitaria Eficiente</h3>
+                <p>Nuevos paradigmas operativos post-sistemas híbridos y soluciones de sustentabilidad en la salud pública.</p>
+            </div>
+        </div>
+    </section>
 
-        <header id="temp3" class="hero-section">
-            <span class="meta-tag">Congreso Médico de Vanguardia</span>
-            <h1><span>Explorando Nuevas Fronteras</span><br>Médicas y Tecnológicas</h1>
-            <a href="#" class="btn-premium" style="background: var(--logo-cyan); width: fit-content;">Obtener Pase de Acceso</a>
-            <div class="location-bar">
-                <div class="loc-item">
-                    <h4>Fecha</h4>
-                    <p>Sep 17 • 20, 2026</p>
-                </div>
-                <div class="loc-item">
-                    <h4>Lugar</h4>
-                    <p>Campeche, MX</p>
-                </div>
-                <div class="loc-item" style="border: none;">
-                    <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 140px;" alt="CIAC Logo">
-                </div>
-            </div>
-        </header>
-
-        <header id="temp4" class="hero-section">
-            <div class="left-pane">
-                <span class="meta-tag">Edición Especial 2026</span>
-                <h1>Evidencia Científica<br>que Transforma <span>Vidas.</span></h1>
-                <p>El congreso médico interactivo que reúne a las mentes más brillantes de la salud en un entorno colonial de clase mundial.</p>
-                <div>
-                    <a href="#" class="btn-premium">Registro en Línea</a>
-                </div>
-            </div>
-            <div class="right-pane">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" alt="CIAC Logo">
-            </div>
-        </header>
-
-        <header id="temp5" class="hero-section">
-            <div class="sphere sphere-1"></div>
-            <div class="sphere sphere-2"></div>
-            <div class="sphere sphere-3"></div>
-            <div class="glass-box">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 200px; margin-bottom: 1rem;" alt="CIAC Logo">
-                <h1>CIAC 2026: El Epicentro del <span>Conocimiento Médico</span></h1>
-                <p>Rompiendo paradigmas a través de conferencias magistrales, talleres quirúrgicos interactivos y networking de alto nivel profesional.</p>
-                <a href="#" class="btn-premium" style="background: linear-gradient(90deg, var(--logo-cyan), var(--logo-green));">Adquirir Boletos</a>
-            </div>
-        </header>
-
-        <header id="temp6" class="hero-section">
-            <div class="clean-grid">
-                <div>
-                    <div class="accent-line"></div>
-                    <h1>Donde la Ciencia Médica<br>Conecta con la <mark>Innovación.</mark></h1>
-                    <p style="color: #475569; margin: 1.5rem 0 2.5rem 0; font-size: 1.1rem;">Únete a miles de especialistas globales en la histórica e inspiradora ciudad de Campeche.</p>
-                    <a href="#" class="btn-premium" style="background: #0f172a;">Reservar mi Lugar</a>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 2rem; align-items: flex-end;">
-                    <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
-                    <div class="info-pill">
-                        <span style="font-weight: 800; color: var(--logo-blue); display: block; font-size: 1.2rem;">17 - 20 Septiembre</span>
-                        <span style="color: #64748b; font-size: 0.9rem;">Talleres Pre-congreso disponibles</span>
-                    </div>
+    <section id="ponentes" class="speakers-section">
+        <span class="meta-tag" style="background: rgba(23,166,85,0.08); color: var(--c-green);">Keynote Speakers</span>
+        <h2 class="section-title">Líderes de Opinión Internacionales</h2>
+        
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+                <div class="speaker-info">
+                    <h3>Dra. Elena Rostova</h3>
+                    <p>Neurociencia Traslacional</p>
+                    <div class="speaker-institution">Hospital Clínico de Múnich, Alemania</div>
                 </div>
             </div>
-        </header>
+            <div class="speaker-card">
+                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+                <div class="speaker-info">
+                    <h3>Dr. Marcus Vance</h3>
+                    <p>Oncología e Inteligencia Artificial</p>
+                    <div class="speaker-institution">Mayo Clinic, EE. UU.</div>
+                </div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+                <div class="speaker-info">
+                    <h3>Dra. Amara Kante</h3>
+                    <p>Inmunología Quirúrgica</p>
+                    <div class="speaker-institution">Institut Pasteur, Francia</div>
+                </div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
+                <div class="speaker-info">
+                    <h3>Dr. Sergio Méndez</h3>
+                    <p>Cardiología Intervencionista</p>
+                    <div class="speaker-institution">Instituto Nacional de Cardiología, MX</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <header id="temp7" class="hero-section">
-            <div class="text-side">
-                <span class="meta-tag" style="background: rgba(217,35,119,0.1); color: var(--logo-pink);">Inscripciones Abiertas</span>
-                <h1>Conectando Líderes,<br>Descubriendo <span>Soluciones Médicas</span></h1>
-                <p style="margin: 2rem 0; color: #475569; max-width: 500px;">Presentaciones de papers de investigación, simposios exclusivos y tecnología de diagnóstico de última generación.</p>
-                <a href="#" class="btn-premium" style="background: var(--logo-blue);">Ver Ponentes Especialistas</a>
-            </div>
-            <div class="image-side">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 320px;" alt="CIAC Logo">
-            </div>
-        </header>
-
-        <header id="temp8" class="hero-section">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" style="max-width: 240px;" alt="CIAC Logo">
-            <h1>Intercambio Científico de Clase Mundial</h1>
-            <p style="color: #64748b; font-size: 1.2rem; max-width: 700px;">El evento anual imprescindible para investigadores, médicos clínicos y académicos del sector salud.</p>
-            <div class="badge-row">
-                <div class="badge-item">✓ +50 Speakers Internacionales</div>
-                <div class="badge-item">✓ Valor Curricular Avalado</div>
-                <div class="badge-item">✓ Campeche, México</div>
-            </div>
-            <a href="#" class="btn-premium" style="margin-top: 3rem;">Descargar Convocatoria</a>
-        </header>
-
-        <header id="temp9" class="hero-section">
-            <div class="top-row">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" style="max-width: 180px;" alt="CIAC Logo">
-                <span style="font-weight: 800; font-size: 1.2rem; text-align: right; color: var(--logo-blue);">CONGRESO CIAC<br>CAMPECHE 2026</span>
-            </div>
-            <div class="giant-text">
-                CIENCIA <span>MÉDICA</span><br>AVANZADA.
-            </div>
-            <div class="bottom-row">
-                <p style="max-width: 450px; font-weight: 600; color: #475569;">Participa en las mesas de debate que definirán las pautas clínicas operativas de la próxima década.</p>
-                <a href="#" class="btn-premium" style="background: #0f172a; border-radius: 0; padding: 1.25rem 3rem;">Registrarme Ahora</a>
-            </div>
-        </header>
-
-        <header id="temp10" class="hero-section">
-            <div class="glow-line"></div>
-            <div class="center-wrap">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 200px;" alt="CIAC Logo">
-                <h1>Hacia un Nuevo Paradigma <strong>Sanitario</strong></h1>
-                <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 600px;">Forma parte del ecosistema donde el conocimiento empírico se fusiona con soluciones humanas sustentables.</p>
-                <a href="#" class="btn-premium" style="background: transparent; border-color: white; box-shadow: none;">Consultar Tarifas de Inscripción</a>
-            </div>
-        </header>
-
-    </div>
-
-    <script>
-        function switchHero(index) {
-            // Desactivar todos los botones y secciones
-            document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.hero-section').forEach(sec => sec.classList.remove('active'));
+    <section id="registro" class="registration-section">
+        <div class="reg-info-side">
+            <h2>Sede Oficial del Congreso</h2>
+            <p>Disfruta de ponencias magistrales en un entorno cómodo y equipado con la máxima infraestructura tecnológica de la región sur-sureste de México.</p>
             
-            // Activar la seleccionada
-            document.querySelectorAll('.template-btn')[index - 1].classList.add('active');
-            document.getElementById(`temp${index}`).classList.add('active');
-        }
-    </script>
+            <div class="venue-detail">
+                <strong style="color: var(--c-orange); display: block; margin-bottom: 0.25rem;">Centro de Convenciones Campeche XXI</strong>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Av. Pedro Sáinz de Baranda, Centro Histórico, Campeche, México.</p>
+            </div>
+        </div>
+        
+        <div class="reg-form-side">
+            <span class="meta-tag" style="width: fit-content;">Formulario Oficial</span>
+            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 2rem;">Asegura tu Acceso Académico</h2>
+            
+            <form action="#" onsubmit="event.preventDefault(); alert('¡Simulación de registro exitosa!');">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" placeholder="Ej. Dr. Carlos Gómez" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico Profesional</label>
+                    <input type="email" id="email" placeholder="carlos.gomez@hospital.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="specialty">Especialidad Médica</label>
+                    <select id="specialty">
+                        <option>Medicina General</option>
+                        <option>Cardiología</option>
+                        <option>Oncología</option>
+                        <option>Pediatría</option>
+                        <option>Otra Especialidad</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="border: none; width: 100%; justify-content: center; margin-top: 1rem; cursor: pointer;">
+                    Completar Prerregistro Científico
+                </button>
+            </form>
+        </div>
+    </section>
+
 </body>
 </html>
