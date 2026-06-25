@@ -3,253 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Congreso Internacional Médico - Campeche 2026</title>
+    <title>CIAC 2026 - Congreso Médico Campeche</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           1. RESET Y CONFIGURACIÓN BASE
+           1. RESET Y VARIABLES
            ========================================= */
+        :root {
+            --primary-blue: #1e3a8a;    /* Azul profundo del logo CIAC */
+            --teal: #2dd4bf;            /* Color agua del logo */
+            --orange: #fb923c;          /* Naranja cálido */
+            --bg-gradient: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%); /* Degradado suave tipo FUEN */
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        body, html {
-            height: 100%;
-            font-family: 'Outfit', sans-serif;
-            background-color: #0f172a; /* Fondo oscuro por si la imagen tarda en cargar */
-            color: #333;
+        body {
+            background: var(--bg-gradient);
+            color: var(--primary-blue);
             overflow-x: hidden;
         }
 
         /* =========================================
-           2. HEADER (MENÚ DE NAVEGACIÓN)
+           2. NAVEGACIÓN (HEADER)
            ========================================= */
-        .web-header {
-            position: absolute; /* Flota sobre la imagen de fondo */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            display: grid;
-            grid-template-columns: 250px 1fr 200px; /* 3 Columnas: Logo, Menú, Idioma */
-            align-items: center;
-            padding: 0 60px;
-            z-index: 100; /* Asegura que esté por encima del contenido */
-            background: #FFFFFF
-        }
-
-        /* Columna 1: Logo */
-        .logo-area {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 70px; /* Ajusta el tamaño de tu logo aquí */
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* Columna 2: Menú */
-        .nav-menu {
+        .navbar {
             display: flex;
             justify-content: center;
-            list-style: none;
+            align-items: center;
+            padding: 30px 50px;
             gap: 40px;
-        }
-
-        .nav-menu li {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 15px;
-            color: #ffffff; /* Texto blanco para contrastar con el fondo */
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            color: var(--primary-blue);
         }
 
-        .nav-menu li:hover {
-            color: #fb923c; /* Color coral/naranja al pasar el mouse */
+        .navbar a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
         }
 
-        .nav-menu li.active {
-            font-weight: 800;
-            color: #fb923c;
+        .navbar a:hover {
+            color: var(--teal);
         }
 
-        /* Columna 3: Botón de Idioma */
-        .lang-area {
+        /* Switch de Idioma (ES / EN) */
+        .lang-switch {
             display: flex;
-            justify-content: flex-end;
+            background: #93c5fd; /* Azul clarito */
+            border-radius: 30px;
+            padding: 4px;
+            margin-left: auto; /* Empuja el switch a la derecha */
         }
 
-        .lang-btn {
-            background-color: rgba(255, 255, 255, 0.1); /* Botón semitransparente */
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 13px;
+        .lang-switch span {
+            padding: 6px 16px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px); /* Efecto de cristal */
+            font-size: 13px;
+            font-weight: 800;
         }
 
-        .lang-btn:hover {
-            background-color: #fb923c;
-            border-color: #fb923c;
-            color: #ffffff;
+        .lang-switch .active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .lang-switch .inactive {
+            color: white;
         }
 
         /* =========================================
-           3. HERO SECTION (INMERSIÓN TOTAL)
+           3. HERO SECTION (Logo Centrado)
            ========================================= */
-        .hero-section {
-            position: relative;
-            width: 100%;
-            height: 100vh; /* Ocupa toda la altura de la pantalla */
-            display: flex;
-            align-items: center;
-        }
-
-        /* Imagen de Fondo (Tu ilustración de Campeche) */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            /* AQUÍ DEBES PONER LA RUTA DE TU ILUSTRACIÓN DE CAMPECHE */
-            background-image: url('https://placehold.co/1920x1080/0f172a/fff?text=Ilustracion+Campeche+Aqui'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* Capa de Color sobre la imagen para que el texto sea legible */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            /* Gradiente que oscurece el lado izquierdo donde va el texto */
-            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 40%, transparent 100%);
-        }
-
-        /* Contenedor del Texto (Lado Izquierdo) */
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 60px;
+        .hero {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px 100px;
         }
 
-        /* Tipografía del Hero */
-        .hero-tag {
-            color: #fb923c; /* Naranja/Coral */
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        .hero-logo {
+            max-width: 450px;
             margin-bottom: 20px;
+            /* Aquí usamos el logo oficial que me enviaste */
         }
 
-        .hero-title {
-            color: #ffffff;
-            font-size: 72px;
+        .hero-dates {
+            font-size: 24px;
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            max-width: 700px;
+            color: #60a5fa; /* Azul claro para el texto secundario */
+            margin-top: 15px;
         }
 
-        .hero-title span {
-            /* Degradado en el texto clave para darle un toque moderno */
-            background: linear-gradient(90deg, #2dd4bf, #fb923c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* =========================================
+           4. SECCIÓN DE SEDE CON EFECTO CRISTAL (GLASSMORPHISM)
+           ========================================= */
+        .venue-section {
+            position: relative;
+            width: 90%;
+            max-width: 1300px;
+            height: 600px;
+            margin: 0 auto 100px;
+            border-radius: 40px; /* Esquinas muy redondeadas tipo FUEN */
+            overflow: hidden;
+            
+            /* Aquí usamos tu ilustración de Campeche de fondo */
+            background-image: url('https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_kz649qkz649qkz64_2_r4q3z2.png');
+            background-size: cover;
+            background-position: center;
+            
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding: 40px;
+            gap: 20px;
         }
 
-        .hero-description {
-            color: #cbd5e1; /* Gris claro */
-            font-size: 20px;
-            font-weight: 300;
-            line-height: 1.6;
-            max-width: 550px;
-            margin-bottom: 40px;
+        /* Título sobre la imagen */
+        .venue-title {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            color: white;
+            text-align: right;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .venue-title h2 { font-size: 50px; font-weight: 800; line-height: 1; }
+        .venue-title p { font-size: 22px; font-weight: 600; }
+
+        /* Tarjetas de Cristal (Glassmorphism) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7); /* Blanco semi-transparente */
+            backdrop-filter: blur(15px); /* Efecto borroso de cristal */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            padding: 40px 30px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* Botón de Acción Principal */
-        .cta-btn {
-            background-color: #2dd4bf; /* Teal/Verde Agua vibrante */
-            color: #0f172a;
-            border: none;
-            padding: 18px 45px;
-            border-radius: 8px;
+        .glass-card h3 {
+            font-size: 30px;
             font-weight: 800;
-            font-size: 16px;
+            color: var(--primary-blue);
+            margin: 15px 0 10px;
+        }
+
+        .glass-card p {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .glass-btn {
+            background: transparent;
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
             cursor: pointer;
-            width: fit-content;
-            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.4);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s;
         }
 
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(45, 212, 191, 0.6);
+        .glass-btn:hover {
+            background: var(--primary-blue);
+            color: white;
         }
+
+        /* =========================================
+           5. BANNER CTA (FOOTER)
+           ========================================= */
+        .cta-banner {
+            background: var(--primary-blue);
+            width: 90%;
+            max-width: 1300px;
+            margin: 0 auto 60px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 60px;
+            color: white;
+        }
+
+        .cta-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Usamos el logo en miniatura para el banner */
+        .cta-logo {
+            height: 80px;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        .cta-text h2 {
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .cta-text p {
+            color: #93c5fd;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .cta-btn-main {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn-main:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
     </style>
 </head>
 <body>
 
-    <header class="web-header">
+    <nav class="navbar">
+        <a href="#">Inicio</a>
+        <a href="#">Programa</a>
+        <a href="#">Información</a>
+        <a href="#">Registro</a>
+        <a href="#">Ponentes</a>
         
-        <div class="logo-area">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_dno94wdno94wdno9_1_foddmj.webp" alt="Logo del Congreso" class="logo-img">
+        <div class="lang-switch">
+            <span class="active">ES</span>
+            <span class="inactive">EN</span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_dno94wdno94wdno9_1_foddmj.webp" alt="CIAC 2026 Logo" class="hero-logo">
+        <div class="hero-dates">15–18 Octubre</div>
+    </section>
+
+    <section class="venue-section">
+        
+        <div class="venue-title">
+            <h2>Campeche</h2>
+            <p>CONGRESO MÉDICO</p>
         </div>
 
-        <ul class="nav-menu">
-            <li class="active">Inicio</li>
-            <li>Ciudad Sede</li>
-            <li>Programa</li>
-            <li>Inscripciones</li>
-            <li>Organizadores</li>
-        </ul>
-
-        <div class="lang-area">
-            <button class="lang-btn">ENGLISH</button>
+        <div class="glass-card">
+            <div style="font-size: 40px;">🥂</div>
+            <h3>Apertura</h3>
+            <p>Jueves, 15 Octubre<br>19:00 hrs<br>Fuerte de San Miguel</p>
+            <button class="glass-btn">Ver Programa</button>
         </div>
 
-    </header>
-
-    <section class="hero-section">
-        
-        <div class="hero-bg"></div>
-        
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-            <p class="hero-tag">Edición 2026 • Campeche, México</p>
-            <h1 class="hero-title">La Cumbre Médica del <span>Mañana</span></h1>
-            <p class="hero-description">Más que un congreso, un retiro estratégico para el médico moderno. Descubre los desafíos del futuro cercano con líderes mexicanos globales en la capital histórica del Golfo.</p>
-            <button class="cta-btn">DESCUBRE LA SEDE</button>
+        <div class="glass-card">
+            <div style="font-size: 40px;">🏛️</div>
+            <h3>Sede</h3>
+            <p>Centro Internacional de Convenciones Campeche XXI</p>
+            <button class="glass-btn">Abrir Mapa</button>
         </div>
 
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-left">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782420382/Gemini_Generated_Image_dno94wdno94wdno9_1_foddmj.webp" alt="CIAC Icon" class="cta-logo">
+            <div class="cta-text">
+                <h2>CIAC 2026</h2>
+                <p>15–18 Octubre • Campeche</p>
+            </div>
+        </div>
+        <button class="cta-btn-main">Regístrate ahora</button>
     </section>
 
 </body>
