@@ -3,247 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUEN 2026 - Header</title>
+    <title>CIAC 2026 - 10 Premium Hero Templates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        /* Paleta de Colores Personalizada */
+        /* --- CORE CONFIGURATION & VARIABLES --- */
         :root {
-            --c-brown: #613227;
-            --c-dark-blue: #115D8C;
-            --c-cyan: #1FBFAF;
-            --c-green: #17A655;
-            --c-orange: #F2921D;
-            --bg-light: #e8f4f8;
+            --logo-blue: #115D8C;
+            --logo-cyan: #1FBFAF;
+            --logo-green: #17A655;
+            --logo-orange: #F2921D;
+            --logo-pink: #d92377;
+            --dark-bg: #09131e;
+            --light-bg: #f8fafc;
+            --sidebar-width: 260px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            /* Fondo con un gradado sutil para que resalte el logo */
-            background: linear-gradient(135g, #fdfdfd 0%, var(--bg-light) 100%);
-            min-height: 100vh;
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+            display: flex;
+        }
+
+        /* --- INTERACTIVE TEMPLATE SWITCHER (SIDEBAR) --- */
+        .template-switcher {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: #111827;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 9999;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* --- Navegación --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 5%;
-            position: relative;
-            z-inx: 10;
+        .template-switcher h3 {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            font-weight: 700;
-            color: var(--c-dark-blue);
-        }
-
-        .nav-links a {
-            text-coration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--c-cyan);
-        }
-
-        .lang-switch {
-            display: flex;
-            background-color: var(--c-cyan);
-            borr-radius: 20px;
-            overflow: hidn;
-        }
-
-        .lang-switch span {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            font-weight: bold;
+        .template-btn {
+            background: transparent;
+            border: none;
+            color: #d1d5db;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .template-btn:hover {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+        }
+
+        .template-btn.active {
+            background: var(--logo-blue);
             color: white;
-            transition: background 0.3s ease;
+            box-shadow: 0 4px 12px rgba(17, 93, 140, 0.3);
         }
 
-        .lang-switch .active {
-            background-color: var(--c-dark-blue);
-        }
-
-        /* --- Sección Hero --- */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 5%;
+        /* --- CONTAINER SYSTEM --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100vw - var(--sidebar-width));
+            height: 100vh;
             position: relative;
         }
 
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
+        .hero-section {
             width: 100%;
-            max-width: 1200px;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: scale(0.98);
+            overflow: hidden;
         }
 
-        .hero-logo {
-            width: 100%;
-            max-width: 320px;
+        .hero-section.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        /* --- GLOBAL REUSABLE COMPONENTS --- */
+        .logo-img {
+            max-width: 280px;
             height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));
+        }
+        
+        .logo-img-light {
+            filter: drop-shadow(0 8px 24px rgba(255,255,255,0.1)) brightness(1.2);
         }
 
-        .hero-text {
-            text-align: left;
+        .btn-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.25rem;
+            background: var(--logo-blue);
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(17, 93, 140, 0.25);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid transparent;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(17, 93, 140, 0.35);
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(17, 93, 140, 0.08);
+            color: var(--logo-blue);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ==========================================================================
+           TEMPLATE 1: BENTO CLINICAL GRID (Minimalista, Modular, Tendencia Estricta)
+           ========================================================================== */
+        #temp1 {
+            background: #f1f5f9;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            gap: 1.25rem;
+            padding: 2rem;
+        }
+        #temp1 .bento-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(15,23,42,0.02);
+            border: 1px solid rgba(15,23,42,0.04);
             display: flex;
             flex-direction: column;
+            justify-content: center;
+        }
+        .bento-hero { grid-column: 1 / 8; grid-row: 1 / 9; }
+        .bento-logo { grid-column: 8 / 13; grid-row: 1 / 6; align-items: center; justify-content: center; background: linear-gradient(135deg, #fff 0%, #edf8f6 100%); }
+        .bento-date { grid-column: 8 / 11; grid-row: 6 / 9; background: var(--logo-blue); color: white; text-align: center;}
+        .bento-loc { grid-column: 11 / 13; grid-row: 6 / 9; background: linear-gradient(135deg, var(--logo-cyan), var(--logo-green)); color: white; }
+        .bento-footer { grid-column: 1 / 13; grid-row: 9 / 13; flex-direction: row !important; align-items: center; justify-content: space-between; background: #0f172a; color: white;}
+        
+        #temp1 h1 { font-size: 3.5rem; color: #0f172a; font-weight: 800; line-height: 1.1; margin-top: 1rem; }
+        #temp1 h1 span { background: linear-gradient(90deg, var(--logo-blue), var(--logo-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* ==========================================================================
+           TEMPLATE 2: CHROMATIC MESH EMBED (Premium, Fluido, Futurista)
+           ========================================================================== */
+        #temp2 {
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+        }
+        #temp2 .mesh-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            right: -100px;
+            top: -100px;
+            background: radial-gradient(circle, rgba(31,191,175,0.2) 0%, rgba(17,93,140,0.15) 50%, transparent 100%);
+            filter: blur(60px);
+            z-index: 1;
+        }
+        #temp2 .mesh-bg-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            left: -100px;
+            bottom: -100px;
+            background: radial-gradient(circle, rgba(242,146,29,0.15) 0%, transparent 100%);
+            filter: blur(80px);
+            z-index: 1;
+        }
+        #temp2 .content, #temp2 .graphic { position: relative; z-index: 2; }
+        #temp2 h1 { font-size: 4.5rem; font-weight: 800; color: #0f172a; line-height: 1.05; }
+        #temp2 p { font-size: 1.25rem; color: #475569; margin: 1.5rem 0 2.5rem 0; max-width: 540px; }
+        #temp2 .graphic {
+            background: rgba(255,255,255,0.6);
+            padding: 4rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 30px 60px rgba(17,93,140,0.05);
+            backdrop-filter: blur(20px);
         }
 
-        .location-top {
-            align-self: flex-end;
-            color: var(--c-dark-blue);
-            font-weight: 700;
-            font-size: 1.4rem;
+        /* ==========================================================================
+           TEMPLATE 3: LABORATORY IMMERSIVE DARK (Elegancia Absoluta, Tecnológico)
+           ========================================================================== */
+        #temp3 {
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10%;
+            color: white;
         }
-
-        .hero-text h1 {
-            font-size: 5rem;
-            color: var(--c-dark-blue);
-            line-height: 1;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        .hero-text h1 span {
-            color: var(--c-orange);
-        }
-
-        .hero-text h2 {
-            font-size: 3.5rem;
-            color: var(--c-dark-blue);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .location-bottom {
-            align-self: flex-end;
-            font-size: 2.2rem;
-            color: var(--c-orange);
-            font-weight: 700;
-            position: relative;
-            margin-top: -3.5rem;
-            margin-bottom: 2.5rem;
-        }
-
-        /* Subrayado estilo "marcador" */
-        .location-bottom::after {
+        #temp3::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: -10px;
-            right: -10px;
-            height: 6px;
-            background-color: var(--c-orange);
-            border-radius: 10px;
-            opacity: 0.7;
+            top: 0; right: 0; width: 50%; height: 100%;
+            background: linear-gradient(to right, var(--dark-bg) 0%, transparent 100%), 
+                        radial-gradient(ellipse at center, rgba(23,166,85,0.15) 0%, transparent 70%);
         }
-
-        .date {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--c-cyan);
-            font-weight: 700;
-            margin-top: 1rem;
+        #temp3 .meta-tag { background: rgba(31,191,175,0.15); color: var(--logo-cyan); }
+        #temp3 h1 { font-size: 5rem; font-weight: 800; max-width: 800px; line-height: 1.1; margin: 1.5rem 0; }
+        #temp3 h1 span { background: linear-gradient(to right, #fff, rgba(255,255,255,0.4)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #temp3 .location-bar {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            max-width: 600px;
         }
+        #temp3 .loc-item h4 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; }
+        #temp3 .loc-item p { font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem; color: var(--logo-cyan); }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 2rem;
-            width: 45px;
-            height: 45px;
-            background: white;
-            border-radius: 50%;
+        /* ==========================================================================
+           TEMPLATE 4: THE CYRILLIC SPLIT SCREEN (Diseño Asimétrico Editorial)
+           ========================================================================== */
+        #temp4 {
+            background: #fff;
+            display: flex;
+        }
+        #temp4 .left-pane {
+            width: 55%;
+            height: 100%;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            border-right: 1px solid #eee;
+        }
+        #temp4 .right-pane {
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--logo-blue) 0%, #0a3a59 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #temp4 h1 { font-size: 3.8rem; font-weight: 800; color: var(--logo-blue); line-height: 1.1; }
+        #temp4 h1 span { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--logo-orange); }
+        #temp4 p { margin: 2rem 0; color: #64748b; font-size: 1.1rem; }
+
+        /* ==========================================================================
+           TEMPLATE 5: LIQUID GRADIENT SPHERES (Cinético, Fluido, 2025 Trend)
+           ========================================================================== */
+        #temp5 {
+            background: #0b0f19;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--c-dark-blue);
-            box-shadow: 0 4px 10px rgba(17, 93, 140, 0.15);
-            font-weight: bold;
-            font-size: 1.2rem;
-            cursor: pointer;
+            text-align: center;
         }
+        .sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.6;
+            animation: float 12s infinite alternate;
+        }
+        .sphere-1 { width: 400px; height: 400px; background: var(--logo-blue); top: 10%; left: 15%; }
+        .sphere-2 { width: 350px; height: 350px; background: var(--logo-orange); bottom: 10%; right: 15%; animation-delay: -4s; }
+        .sphere-3 { width: 300px; height: 300px; background: var(--logo-pink); top: 40%; right: 30%; animation-delay: -8s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            100% { transform: translateY(40px) rotate(180deg) scale(1.1); }
+        }
+        #temp5 .glass-box {
+            position: relative;
+            z-index: 5;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 5rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.08);
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #temp5 h1 { font-size: 4.5rem; color: white; font-weight: 800; margin: 2rem 0; line-height: 1.1; }
+        #temp5 h1 span { color: var(--logo-cyan); }
+        #temp5 p { color: #94a3b8; font-size: 1.25rem; max-width: 600px; margin-bottom: 2.5rem; }
 
-        /* --- Responsividad para móviles --- */
-        @media (max-width: 900px) {
-            .hero-content {
-                gap: 2rem;
-                text-align: center;
-            }
-            .hero-text {
-                align-items: center;
-            }
-            .location-top, .location-bottom {
-                align-self: center;
-                margin-top: 0;
-            }
-            .location-bottom {
-                margin-bottom: 1rem;
-            }
+        /* ==========================================================================
+           TEMPLATE 6: NEOMORPHIC CLINICAL CLEAN (Impecable, Espacio Negativo)
+           ========================================================================== */
+        #temp6 {
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
         }
+        #temp6 .clean-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        #temp6 h1 { font-size: 4rem; font-weight: 800; color: #0f172a; letter-spacing: -2px; line-height: 1.05; }
+        #temp6 h1 mark { background: none; color: var(--logo-green); }
+        #temp6 .accent-line { width: 80px; height: 6px; background: var(--logo-cyan); margin-bottom: 2rem; border-radius: 3px; }
+        #temp6 .info-pill { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); border-left: 4px solid var(--logo-blue); }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; } /* Oculta enlaces en móvil para simplificar */
-            .hero-text h1 { font-size: 3.5rem; }
-            .hero-text h2 { font-size: 2.5rem; }
-            .date { font-size: 1.5rem; }
+        /* ==========================================================================
+           TEMPLATE 7: THE ABSTRACT OVERLAY HERO (Geométrico, Dinámico)
+           ========================================================================== */
+        #temp7 {
+            background: #fff;
+            display: flex;
+            align-items: center;
         }
+        #temp7 .text-side { width: 50%; padding-left: 10%; z-index: 3; }
+        #temp7 .image-side { 
+            width: 50%; height: 100%; 
+            position: relative;
+            background: linear-gradient(45deg, var(--logo-blue), var(--logo-cyan));
+            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #temp7 h1 { font-size: 4.2rem; font-weight: 800; color: #0f172a; line-height: 1.15; }
+        #temp7 h1 span { color: var(--logo-pink); }
+
+        /* ==========================================================================
+           TEMPLATE 8: THE DIGITAL HUB (Simetría Radical, Centrado de Vanguardia)
+           ========================================================================== */
+        #temp8 {
+            background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 15%;
+        }
+        #temp8 h1 { font-size: 3.8rem; font-weight: 800; color: var(--logo-blue); margin: 2rem 0 1rem 0; }
+        #temp8 .badge-row { display: flex; gap: 1rem; margin-top: 2rem; }
+        #temp8 .badge-item { background: white; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(0,0,0,0.04); color: #475569;}
+
+        /* ==========================================================================
+           TEMPLATE 9: BRUTALIST MEDICAL TYPOGRAPHY (Neo-Brutalismo Elegante)
+           ========================================================================== */
+        #temp9 {
+            background: #fff;
+            padding: 4rem 6%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #temp9 .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+        #temp9 .giant-text { font-size: 7.5rem; font-weight: 800; color: #0f172a; line-height: 0.9; letter-spacing: -4px; margin: 3rem 0;}
+        #temp9 .giant-text span { color: transparent; -webkit-text-stroke: 2px var(--logo-blue); }
+        #temp9 .bottom-row { display: flex; justify-content: space-between; align-items: flex-end; border-top: 2px solid #0f172a; padding-top: 2rem; }
+
+        /* ==========================================================================
+           TEMPLATE 10: GLOWING MEDICAL HORIZON (Premium Dark, Gradiente Lineal)
+           ========================================================================== */
+        #temp10 {
+            background: #050b14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #temp10 .glow-line {
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--logo-cyan), var(--logo-orange), transparent);
+            box-shadow: 0 0 40px 5px var(--logo-cyan);
+        }
+        #temp10 .center-wrap { max-width: 800px; text-align: center; display: flex; flex-direction: column; align-items: center;}
+        #temp10 h1 { font-size: 5rem; font-weight: 300; color: white; margin: 2rem 0; }
+        #temp10 h1 strong { font-weight: 800; background: linear-gradient(90deg, var(--logo-cyan), var(--logo-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-links">
-            <a href="#greetings">Greetings</a>
-            <a href="#program">Program</a>
-            <a href="#info">Information</a>
-            <a href="#register">Register</a>
-            <a href="#hosts">Hosts</a>
-        </div>
-        <div class="lang-switch">
-            <span class="active">ES</span>
-            <span>EN</span>
-        </div>
-    </nav>
+    <div class="template-switcher">
+        <h3>CIAC 2026 Templates</h3>
+        <button class="template-btn active" onclick="switchHero(1)">1. Bento Grid Clinical</button>
+        <button class="template-btn" onclick="switchHero(2)">2. Chromatic Mesh</button>
+        <button class="template-btn" onclick="switchHero(3)">3. Immersive Dark Lab</button>
+        <button class="template-btn" onclick="switchHero(4)">4. Editorial Split Screen</button>
+        <button class="template-btn" onclick="switchHero(5)">5. Liquid Spheres (Glow)</button>
+        <button class="template-btn" onclick="switchHero(6)">6. Clean Space Neomorphic</button>
+        <button class="template-btn" onclick="switchHero(7)">7. Geometric Abstract</button>
+        <button class="template-btn" onclick="switchHero(8)">8. Radial Digital Hub</button>
+        <button class="template-btn" onclick="switchHero(9)">9. Brutalist Editorial</button>
+        <button class="template-btn" onclick="switchHero(10)">10. Medical Horizon Dark</button>
+    </div>
 
-    <header class="hero">
-        <div class="hero-content">
-            
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" alt="FUEN 2026 Logo" class="hero-logo">
-            
-            <div class="hero-text">
-                <div class="location-top">Helsinki</div>
-                <h1>FUEN <span>2026</span></h1
-                <h2>CONGRESS</h2>
-                <div class="date">17–20 September</div>
+    <div class="main-content">
+
+        <header id="temp1" class="hero-section active">
+            <div class="bento-card bento-hero">
+                <span class="meta-tag" style="width: fit-content;">Congreso Internacional Médico 2026</span>
+                <h1>Innovación Científica en el Corazón de <span>Campeche</span></h1>
             </div>
+            <div class="bento-card bento-logo">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
+            </div>
+            <div class="bento-card bento-date">
+                <h3 style="font-size: 2.5rem; font-weight: 800;">17-20</h3>
+                <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem;">Septiembre 2026</p>
+            </div>
+            <div class="bento-card bento-loc">
+                <h4 style="font-size: 1.2rem; font-weight: 800;">Sede Oficial</h4>
+                <p style="font-size: 0.9rem; opacity: 0.9;">Centro de Convenciones Campeche, México</p>
+            </div>
+            <div class="bento-card bento-footer">
+                <p style="font-weight: 600; opacity: 0.8;">Únete al epicentro de la medicina moderna.</p>
+                <a href="#" class="btn-premium" style="background: white; color: var(--dark-bg); box-shadow: none;">Registrarme Ahora →</a>
+            </div>
+        </header>
 
-        </div>
-        
-        <div class="scroll-down">↓</div>
-    </header>
+        <header id="temp2" class="hero-section">
+            <div class="mesh-bg"></div>
+            <div class="mesh-bg-2"></div>
+            <div class="content">
+                <span class="meta-tag">CIAC 2026 • MÉXICO</span>
+                <h1>El Futuro de la<br>Medicina Clínica</h1>
+                <p>Un espacio de convergencia global donde la ciencia, la tecnología médica y los profesionales de la salud redefinen los límites del bienestar.</p>
+                <a href="#" class="btn-premium">Explorar Programa Científico</a>
+            </div>
+            <div class="graphic">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
+            </div>
+        </header>
 
+        <header id="temp3" class="hero-section">
+            <span class="meta-tag">Congreso Médico de Vanguardia</span>
+            <h1><span>Explorando Nuevas Fronteras</span><br>Médicas y Tecnológicas</h1>
+            <a href="#" class="btn-premium" style="background: var(--logo-cyan); width: fit-content;">Obtener Pase de Acceso</a>
+            <div class="location-bar">
+                <div class="loc-item">
+                    <h4>Fecha</h4>
+                    <p>Sep 17 • 20, 2026</p>
+                </div>
+                <div class="loc-item">
+                    <h4>Lugar</h4>
+                    <p>Campeche, MX</p>
+                </div>
+                <div class="loc-item" style="border: none;">
+                    <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 140px;" alt="CIAC Logo">
+                </div>
+            </div>
+        </header>
+
+        <header id="temp4" class="hero-section">
+            <div class="left-pane">
+                <span class="meta-tag">Edición Especial 2026</span>
+                <h1>Evidencia Científica<br>que Transforma <span>Vidas.</span></h1>
+                <p>El congreso médico interactivo que reúne a las mentes más brillantes de la salud en un entorno colonial de clase mundial.</p>
+                <div>
+                    <a href="#" class="btn-premium">Registro en Línea</a>
+                </div>
+            </div>
+            <div class="right-pane">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" alt="CIAC Logo">
+            </div>
+        </header>
+
+        <header id="temp5" class="hero-section">
+            <div class="sphere sphere-1"></div>
+            <div class="sphere sphere-2"></div>
+            <div class="sphere sphere-3"></div>
+            <div class="glass-box">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 200px; margin-bottom: 1rem;" alt="CIAC Logo">
+                <h1>CIAC 2026: El Epicentro del <span>Conocimiento Médico</span></h1>
+                <p>Rompiendo paradigmas a través de conferencias magistrales, talleres quirúrgicos interactivos y networking de alto nivel profesional.</p>
+                <a href="#" class="btn-premium" style="background: linear-gradient(90deg, var(--logo-cyan), var(--logo-green));">Adquirir Boletos</a>
+            </div>
+        </header>
+
+        <header id="temp6" class="hero-section">
+            <div class="clean-grid">
+                <div>
+                    <div class="accent-line"></div>
+                    <h1>Donde la Ciencia Médica<br>Conecta con la <mark>Innovación.</mark></h1>
+                    <p style="color: #475569; margin: 1.5rem 0 2.5rem 0; font-size: 1.1rem;">Únete a miles de especialistas globales en la histórica e inspiradora ciudad de Campeche.</p>
+                    <a href="#" class="btn-premium" style="background: #0f172a;">Reservar mi Lugar</a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2rem; align-items: flex-end;">
+                    <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" alt="CIAC Logo">
+                    <div class="info-pill">
+                        <span style="font-weight: 800; color: var(--logo-blue); display: block; font-size: 1.2rem;">17 - 20 Septiembre</span>
+                        <span style="color: #64748b; font-size: 0.9rem;">Talleres Pre-congreso disponibles</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <header id="temp7" class="hero-section">
+            <div class="text-side">
+                <span class="meta-tag" style="background: rgba(217,35,119,0.1); color: var(--logo-pink);">Inscripciones Abiertas</span>
+                <h1>Conectando Líderes,<br>Descubriendo <span>Soluciones Médicas</span></h1>
+                <p style="margin: 2rem 0; color: #475569; max-width: 500px;">Presentaciones de papers de investigación, simposios exclusivos y tecnología de diagnóstico de última generación.</p>
+                <a href="#" class="btn-premium" style="background: var(--logo-blue);">Ver Ponentes Especialistas</a>
+            </div>
+            <div class="image-side">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 320px;" alt="CIAC Logo">
+            </div>
+        </header>
+
+        <header id="temp8" class="hero-section">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" style="max-width: 240px;" alt="CIAC Logo">
+            <h1>Intercambio Científico de Clase Mundial</h1>
+            <p style="color: #64748b; font-size: 1.2rem; max-width: 700px;">El evento anual imprescindible para investigadores, médicos clínicos y académicos del sector salud.</p>
+            <div class="badge-row">
+                <div class="badge-item">✓ +50 Speakers Internacionales</div>
+                <div class="badge-item">✓ Valor Curricular Avalado</div>
+                <div class="badge-item">✓ Campeche, México</div>
+            </div>
+            <a href="#" class="btn-premium" style="margin-top: 3rem;">Descargar Convocatoria</a>
+        </header>
+
+        <header id="temp9" class="hero-section">
+            <div class="top-row">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img" style="max-width: 180px;" alt="CIAC Logo">
+                <span style="font-weight: 800; font-size: 1.2rem; text-align: right; color: var(--logo-blue);">CONGRESO CIAC<br>CAMPECHE 2026</span>
+            </div>
+            <div class="giant-text">
+                CIENCIA <span>MÉDICA</span><br>AVANZADA.
+            </div>
+            <div class="bottom-row">
+                <p style="max-width: 450px; font-weight: 600; color: #475569;">Participa en las mesas de debate que definirán las pautas clínicas operativas de la próxima década.</p>
+                <a href="#" class="btn-premium" style="background: #0f172a; border-radius: 0; padding: 1.25rem 3rem;">Registrarme Ahora</a>
+            </div>
+        </header>
+
+        <header id="temp10" class="hero-section">
+            <div class="glow-line"></div>
+            <div class="center-wrap">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="logo-img logo-img-light" style="max-width: 200px;" alt="CIAC Logo">
+                <h1>Hacia un Nuevo Paradigma <strong>Sanitario</strong></h1>
+                <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 600px;">Forma parte del ecosistema donde el conocimiento empírico se fusiona con soluciones humanas sustentables.</p>
+                <a href="#" class="btn-premium" style="background: transparent; border-color: white; box-shadow: none;">Consultar Tarifas de Inscripción</a>
+            </div>
+        </header>
+
+    </div>
+
+    <script>
+        function switchHero(index) {
+            // Desactivar todos los botones y secciones
+            document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.hero-section').forEach(sec => sec.classList.remove('active'));
+            
+            // Activar la seleccionada
+            document.querySelectorAll('.template-btn')[index - 1].classList.add('active');
+            document.getElementById(`temp${index}`).classList.add('active');
+        }
+    </script>
 </body>
 </html>
