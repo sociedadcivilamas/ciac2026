@@ -88,29 +88,23 @@
 
         /* Botón de Idioma Estilo Semi-Flat */
        .btn-lang {
-            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
-            border: none; /* Removemos el borde tradicional */
-            color: #fff !important; /* Forzamos texto blanco siempre */
+            background: transparent;
+            border: 1px solid #fff; /* Línea ultra fina editorial */
+            color: #fff !important;
             font-family: var(--font-main);
             font-weight: 700;
             font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            padding: 0.6rem 1.4rem; /* Un poco más de aire interno */
-            border-radius: 0; /* Flat puro, esquinas de bloque rígido */
-            cursor: pointer;
-            text-decoration: none; /* Quita la línea de enlace */
+            letter-spacing: 0.15em;
+            padding: 0.6rem 1.3rem;
+            border-radius: 0;
+            text-decoration: none;
             text-transform: uppercase;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
+            transition: background 0.4s var(--bezier-premium), border-color 0.4s ease;
         }
-
+        
         .btn-lang:hover {
-            /* Al pasar el cursor, el botón brilla y se expande sutilmente de forma cinética */
-            filter: brightness(1.15);
-            transform: scale(1.05);
+            background: linear-gradient(90deg, var(--teal), var(--pink));
+            border-color: transparent;
         }
 
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
