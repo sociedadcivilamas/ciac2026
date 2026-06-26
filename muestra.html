@@ -87,26 +87,27 @@
         }
 
         /* Botón de Idioma Estilo Semi-Flat */
-       .btn-lang {
-            background: linear-gradient(90deg, var(--teal), var(--pink), var(--teal));
-            background-size: 200% 100%; /* Duplica el tamaño para el desplazamiento */
-            background-position: left center;
+     .btn-lang {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--pink) 100%);
             border: none;
             color: #fff !important;
             font-family: var(--font-main);
-            font-weight: 700;
+            font-weight: 800;
             font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            padding: 0.6rem 1.4rem;
-            border-radius: 0;
+            letter-spacing: 0.1em;
+            padding: 0.6rem 1.5rem;
             text-decoration: none;
             text-transform: uppercase;
-            transition: background-position 0.5s var(--bezier-premium), transform 0.3s ease;
+            /* Cortamos el botón de forma diagonal flat */
+            transform: skewX(-15deg); 
+            display: inline-block;
+            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
         }
         
         .btn-lang:hover {
-            background-position: right center; /* Desplaza el color */
-            transform: translateY(-2px);
+            filter: brightness(1.2);
+            /* Al pasar el cursor se inclina un poco más de forma cinética */
+            transform: skewX(-20deg) scale(1.05); 
         }
 
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
