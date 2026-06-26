@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 — Gradient Semi-Flat Experience</title>
+    <title>CIMC 2026 — Gradient Semi-Flat Experience [CORREGIDO]</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- SISTEMA DE DISEÑO MAESTRO GRADIENT SEMI-FLAT --- */
+        /* --- SISTEMA DE DISEÑO GRADIENT SEMI-FLAT --- */
         :root {
             --cimc-blue: #1e3a8a;
             --teal: #38bdf8;
@@ -45,147 +45,113 @@
             width: 100%;
         }
 
-        /* --- ENCABEZADO ESTRUCTURAL (DESKTOP BASE) --- */
-        header {
+        /* --- BARRA DE NAVEGACIÓN DEL MENÚ (DESKTOP) --- */
+        .navbar {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
-            background: #ffffff;
-            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: initFadeDown 1s var(--bezier-premium) forwards;
-        }
-
-        .navbar {
-            min-height: 110px;
-            padding: 0 clamp(24px, 5vw, 96px);
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .brand {
+            height: 90px;
             display: flex;
             align-items: center;
+            padding: 0 5vw;
+            z-index: 200;
+            background-color: #ffffff;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
         }
 
-        .full-logo {
-            width: 230px;
-            height: auto;
-            display: block;
-        }
-
-        /* Enlaces de Navegación Centrados Verticalmente */
-        .nav-links {
+        .nav-content {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
             gap: 2.5rem;
             list-style: none;
-            padding-right: 1rem;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--cimc-blue);
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 600;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             display: block;
             line-height: 1;
-            transition: color 0.3s ease;
         }
-
+        
         .nav-links a:hover {
             color: var(--pink);
         }
 
-        /* --- BOTÓN DE IDIOMA ROSA NEÓN GRADIENT SEMI-FLAT --- */
         .btn-lang {
-            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%); 
             border: none;
-            color: #fff !important;
+            color: #fff !important; 
             font-family: var(--font-main);
             font-weight: 800;
             font-size: 0.75rem;
             letter-spacing: 0.12em;
-            padding: 0.7rem 1.6rem;
-            border-radius: 4px;
+            padding: 0.7rem 1.6rem; 
+            border-radius: 4px; 
             text-decoration: none;
             text-transform: uppercase;
             line-height: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); 
             transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
-            white-space: nowrap;
         }
-
+        
         .btn-lang:hover {
             filter: brightness(1.15);
             transform: translateY(-2px) scale(1.03);
         }
 
-        /* Botón de Menú Hamburguesa (Oculto en Desktop) */
         .menu-btn {
             display: none;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            border: 1px solid rgba(30, 58, 138, 0.15);
-            background: #f1f5f9;
-            color: var(--cimc-blue);
-            font-size: 24px;
-            cursor: pointer;
-            flex-shrink: 0;
-            line-height: 1;
         }
 
-        /* Menú Desplegable Móvil Funcional */
         .mobile-menu {
             display: none;
-            background: #ffffff;
-            padding: 0 24px 22px;
-            border-bottom: 1px solid rgba(30, 58, 138, 0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .mobile-menu.open {
+        /* --- BLOQUE DE BRANDING FIJO --- */
+        .branding-block {
+            position: absolute;
+            top: 25px;
+            left: 5vw;
+            z-index: 150;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: initFadeUp 1s var(--bezier-premium) 0.2s forwards;
+        }
+
+        .full-logo {
+            width: 250px;
+            height: auto;
             display: block;
         }
 
-        .mobile-menu a {
-            display: block;
-            padding: 15px 0;
-            border-top: 1px solid rgba(30, 58, 138, 0.08);
-            font-weight: 700;
-            color: var(--cimc-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.85rem;
-        }
-
-        .mobile-menu .mobile-lang {
-            margin-top: 14px;
-            padding: 14px 20px;
-            text-align: center;
-            border-top: none;
-        }
-
-        /* --- SECCIÓN 1: OPENER HERO (MÁXIMO AIRE EDITORIAL) --- */
+        /* --- SECCIÓN 1: OPENER HERO (DESKTOP) --- */
         .opener-hero {
             position: relative;
             width: 100vw;
             height: 100vh;
             display: flex;
             align-items: center;
-            padding: 140px 5vw 0 5vw; /* Equilibrio perfecto abajo del header */
+            padding: 15vh 5vw 0 5vw;
             overflow: hidden;
             background: linear-gradient(-45deg, #f1f5f9, #e2e8f0, #e0f2fe, #fef9c3);
             background-size: 400% 400%;
@@ -244,13 +210,12 @@
             animation: initFadeUp 1s var(--bezier-premium) 0.4s forwards;
         }
 
-        /* Letras Descomprimidas Sofisticadas */
         .hero-title {
             font-size: clamp(3.2rem, 5.5vw, 4.8rem);
             font-weight: 800;
             line-height: 1.1;
             color: var(--dark-surface);
-            letter-spacing: 0.02em; /* Corregido según retroalimentación */
+            letter-spacing: -0.02em;
             margin-bottom: 2.5rem;
             animation: initFadeUp 1s var(--bezier-premium) 0.6s forwards;
         }
@@ -267,7 +232,8 @@
             color: #475569;
             font-weight: 400;
             letter-spacing: 0.02em;
-            max-width: 650px;
+            margin-bottom: 3rem;
+            max-width: 900px;
             animation: initFadeUp 1s var(--bezier-premium) 0.8s forwards;
         }
 
@@ -302,7 +268,87 @@
             animation: rotateData 15s linear infinite;
         }
 
-        /* --- SECCIÓN 2: DE SCROLL REACTIVA --- */
+        /* --- NUEVA SECCIÓN: BENTO GRID DE ACTIVIDADES --- */
+        .bento-section {
+            padding: 12vh 5vw;
+            background-color: #f8fafc;
+            position: relative;
+            z-index: 20;
+        }
+
+        .bento-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .bento-card {
+            background: #ffffff;
+            border: 1px solid rgba(30, 58, 138, 0.08);
+            padding: 3rem;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+            transition: transform 0.4s var(--bezier-premium), box-shadow 0.4s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .bento-card.wide-card {
+            grid-column: span 2;
+            border-left: 5px solid var(--pink);
+        }
+
+        .bento-card.accent-card {
+            border-left: 5px solid var(--teal);
+        }
+
+        .bento-card.gold-card {
+            border-left: 5px solid var(--gold);
+        }
+
+        .bento-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--cimc-blue);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+
+        .bento-card p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #475569;
+            font-weight: 400;
+        }
+
+        /* Contenedor Elegante de Banderas */
+        .bento-flags-container {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+            padding-top: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .bento-flag-img {
+            width: 38px;
+            height: 26px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- SECCIÓN 3: SCROLL --- */
         .scroll-section {
             position: relative;
             min-height: 100vh;
@@ -386,50 +432,182 @@
         }
         @keyframes rotateData { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- CONTROL MÓVIL ADAPTATIVO BASADO EN TU ARQUITECTURA --- */
-        @media (max-width: 1180px) {
-            .nav-links, .navbar > .btn-lang {
-                display: none; /* Oculta componentes de escritorio */
+        /* --- REDISEÑO INTEGRAL MÓVIL (MÁXIMA FIDELIDAD CON TU SEGUNDO CÓDIGO) --- */
+        @media (max-width: 968px) {
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 200;
+                background: #ffffff;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                transform: none;
+                animation: none;
             }
 
+            .navbar {
+                position: relative;
+                height: 80px;
+                padding: 0 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: none;
+                background-color: transparent;
+            }
+
+            .nav-content {
+                display: none; /* Desactivar contenedor desktop */
+            }
+
+            .branding-block {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                animation: none;
+                opacity: 1;
+            }
+
+            .full-logo {
+                width: 170px;
+            }
+
+            /* Habilitar botón menú nativo */
             .menu-btn {
-                display: inline-flex; /* Activa el disparador de tu control */
+                display: inline-flex;
                 align-items: center;
                 justify-content: center;
             }
 
-            .navbar {
-                min-height: 85px;
-                grid-template-columns: auto 1fr auto; /* Rejilla colapsada */
+            /* Menú colapsable funcional */
+            .mobile-menu {
+                display: none;
+                background: #ffffff;
+                padding: 10px 24px 24px 24px;
+                border-top: 1px solid rgba(0,0,0,0.05);
             }
 
-            .full-logo {
-                width: 180px;
+            .mobile-menu.open {
+                display: block;
             }
 
+            .mobile-menu a {
+                display: block;
+                padding: 16px 0;
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+                font-weight: 700;
+                color: var(--cimc-blue);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-size: 0.85rem;
+            }
+
+            .mobile-menu .mobile-lang-link {
+                margin-top: 16px;
+                border-bottom: none;
+            }
+
+            /* RESTRUCTURACIÓN RADICAL DEL HERO EN MÓVIL (Basado en tu diseño de Canvas Oscuro) */
             .opener-hero {
-                padding-top: 130px;
+                padding: 60px 24px;
                 height: auto;
-                min-height: 100vh;
-                align-items: flex-start;
+                min-height: calc(100vh - 80px);
+                align-items: center;
+                color: #ffffff;
+                /* El degradado profundo de tu segundo código */
+                background: 
+                    radial-gradient(circle at 85% 20%, rgba(255,255,255,0.14), transparent 18%),
+                    radial-gradient(circle at 18% 82%, rgba(236, 72, 153, 0.15), transparent 20%),
+                    linear-gradient(135deg, #160f4b 0%, #1e3a8a 50%, #3320a8 100%);
+                background-size: auto;
+                animation: none;
             }
 
-            .hero-grid, .scroll-grid {
+            /* Inyección de las mallas y anillos abstractos del segundo código */
+            .opener-hero::before {
+                content: "";
+                position: absolute;
+                width: 360px;
+                height: 360px;
+                border-radius: 50%;
+                right: -130px;
+                top: -70px;
+                background: repeating-radial-gradient(circle, rgba(255,255,255,0.15) 0 1px, transparent 1px 9px);
+                opacity: 0.55;
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .opener-hero::after {
+                content: "";
+                position: absolute;
+                width: 280px;
+                height: 280px;
+                border-radius: 50%;
+                right: -80px;
+                bottom: -110px;
+                background: radial-gradient(circle, rgba(255,255,255,0.06), rgba(255,255,255,0.01) 60%, transparent 72%);
+                border: 22px solid rgba(255,255,255,0.08);
+                pointer-events: none;
+                z-index: 1;
+            }
+
+            .hero-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
 
+            .hero-text-container {
+                width: 100%;
+            }
+
+            .hero-tagline {
+                font-size: 0.9rem;
+                color: var(--teal); /* Cambia a tono claro legible sobre fondo oscuro */
+                margin-bottom: 1.5rem;
+                font-weight: 800;
+            }
+
             .hero-title {
-                font-size: 2.3rem;
-                line-height: 1.2;
+                font-size: clamp(2.2rem, 8vw, 3rem);
+                line-height: 1.15;
+                color: #ffffff;
+                margin-bottom: 1.8rem;
+            }
+
+            /* Forzar visualización de gradiente sobre fondo oscuro */
+            .hero-title span {
+                background: linear-gradient(90deg, #ffffff, var(--teal));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .hero-description {
                 margin: 0 auto;
+                font-size: 1.05rem;
+                color: rgba(255, 255, 255, 0.8);
+                line-height: 1.6;
             }
 
-            .canvas-container, .scroll-geo-block {
-                display: none;
+            .geo-shape, .canvas-container {
+                display: none; /* Desactivar elementos flotantes de Desktop */
+            }
+
+            /* Adaptación Bento en Celular */
+            .bento-grid-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .bento-card.wide-card {
+                grid-column: span 1;
+            }
+            .bento-card {
+                padding: 2rem;
+            }
+            .scroll-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
             }
         }
     </style>
@@ -438,28 +616,33 @@
 
     <header>
         <nav class="navbar">
-            <a href="#" class="brand">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026 Logo" class="full-logo">
-            </a>
+            <div class="branding-block">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="full-logo">
+            </div>
 
-            <ul class="nav-links">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#ejes-foro">Ejes</a></li>
-                <li><a href="#">Sede</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#ejes-foro">Ciudad anfitriona</a></li>
+                    <li><a href="#">Programa</a></li>
+                    <li><a href="#">Organizadores</a></li>
+                    <li><a href="#">Inscríbete</a></li>
+                </ul>
+                <a href="en.html" class="btn-lang">English</a>
+            </div>
 
-            <a href="en.html" class="btn-lang">English</a>
-
-            <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
+            <button class="menu-btn" id="menuBtn" aria-label="Menú" style="background: transparent; border: 1px solid rgba(0,0,0,0.1); width: 44px; height: 44px; border-radius: 50%; font-size: 20px; cursor: pointer; color: var(--cimc-blue);">☰</button>
         </nav>
 
         <div class="mobile-menu" id="mobileMenu">
             <a href="#">Inicio</a>
-            <a href="#ejes-foro">Ejes</a>
-            <a href="#">Sede</a>
-            <a href="#">Contacto</a>
-            <a href="en.html" class="btn-lang mobile-lang">English</a>
+            <a href="#ejes-foro">Ciudad anfitriona</a>
+            <a href="#">Programa</a>
+            <a href="#">Organizadores</a>
+            <a href="#">Inscríbete</a>
+            <div class="mobile-lang-link">
+                <a href="en.html" class="btn-lang" style="width: 100%; display: flex;">English</a>
+            </div>
         </div>
     </header>
 
@@ -470,7 +653,7 @@
 
             <div class="container hero-grid">
                 <div class="hero-text-container">
-                    <span class="hero-tagline">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE</span>
+                    <span class="hero-tagline">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE 2026</span>
                     <h1 class="hero-title"><span>Retos de la Medicina en el futuro cercano</span></h1>
                     <p class="hero-description">CIMC 2026 fusiona la herencia estructural de los centros históricos con la vanguardia del diseño sostenible y las tecnologías globales.</p>
                 </div>
@@ -481,12 +664,44 @@
             </div>
         </section>
 
+        <section class="bento-section">
+            <div class="container">
+                <div class="bento-grid-layout">
+                    
+                    <div class="bento-card wide-card">
+                        <h3>Ponencias</h3>
+                        <p>El CIMC 2026 tendrá de ponentes a Mexicanos radicados en México y en el extranjero que compartirán su análisis de los retos que enfrenta la medicina en el futuro cercano.<br><br>Cada ponencia está enfocada en el desarrollo de estrategias innovadoras para el área de la salud que serán aplicadas muy pronto.</p>
+                        
+                        <div class="bento-flags-container">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781380094/Flag_of_Mexico.svg_urzzpa.png" alt="México" class="bento-flag-img">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781402614/Flag_of_Switzerland__Pantone.svg_yz1g75.png" alt="Suiza" class="bento-flag-img">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781402584/Flag_of_Portugal__official.svg_qzvhnt.png" alt="Portugal" class="bento-flag-img">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781380094/Flag_of_the_United_States__DDD-F-416E_specifications.svg_mtnkyo.webp" alt="USA" class="bento-flag-img">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781380094/Flag_of_Germany.svg_zev3ny.png" alt="Alemania" class="bento-flag-img">
+                            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1781380121/Flag_of_the_Philippines.svg_tjvedu.png" alt="Filipinas" class="bento-flag-img">
+                        </div>
+                    </div>
+
+                    <div class="bento-card accent-card">
+                        <h3>Talleres</h3>
+                        <p>Se ofrecerán 4 talleres al inicio de cada día. Estos talleres son ideales para fortalecer habilidades clínicas, médicas y tecnológicas en un entorno personalizado directo con expertos.</p>
+                    </div>
+
+                    <div class="bento-card gold-card">
+                        <h3>Networking</h3>
+                        <p>El Congreso incluye una Cena cultural y una Cena Baile donde habrá lugar para convivio y Networking profesional entre especialistas de la salud.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <section id="ejes-foro" class="scroll-section">
             <div class="scroll-geo-block"></div>
             
             <div class="container scroll-grid">
                 <div class="scroll-reveal-text">
-                    <h2>Evolución<br>Patrimonial.</h2>
+                    <h2>¿Qué es el<br>CIMC 2026?</h2>
                 </div>
                 <div>
                     <p class="scroll-description">
@@ -498,7 +713,7 @@
     </main>
 
     <script>
-        // Tu lógica funcional nativa para el control del menú móvil
+        // Disparador estructural e interacciones del Menú Móvil
         const menuBtn = document.getElementById("menuBtn");
         const mobileMenu = document.getElementById("mobileMenu");
 
@@ -508,7 +723,6 @@
                 menuBtn.textContent = mobileMenu.classList.contains("open") ? "×" : "☰";
             });
 
-            // Cerrar el menú automáticamente al hacer clic en un enlace de sección
             mobileMenu.querySelectorAll("a").forEach(link => {
                 link.addEventListener("click", () => {
                     mobileMenu.classList.remove("open");
@@ -517,7 +731,7 @@
             });
         }
 
-        // Observador de la sección reactiva por Scroll
+        // Observador de scroll reactivo
         const scrollSection = document.getElementById('ejes-foro');
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
