@@ -88,28 +88,31 @@
 
         /* Botón de Idioma Estilo Semi-Flat */
      .btn-lang {
-            background: linear-gradient(135deg, var(--teal) 0%, var(--pink) 100%);
-            border: none;
+            background: transparent;
             color: #fff !important;
             font-family: var(--font-main);
             font-weight: 800;
             font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            padding: 0.6rem 1.5rem;
+            letter-spacing: 0.12em;
+            padding: 0.6rem 1.4rem;
             text-decoration: none;
             text-transform: uppercase;
-            /* Cortamos el botón de forma diagonal flat */
-            transform: skewX(-15deg); 
+            border-radius: 50px; /* Transforma el cuadrado en cápsula */
             display: inline-block;
-            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
+            /* Usamos un truco premium de borde con gradiente */
+            border: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--teal), var(--pink)) 1;
+            /* Nota: Para que el border-radius funcione con gradiente usamos este ajuste de abajo */
+            border: 2px solid;
+            border-color: var(--pink);
+            transition: all 0.3s ease;
         }
         
         .btn-lang:hover {
-            filter: brightness(1.2);
-            /* Al pasar el cursor se inclina un poco más de forma cinética */
-            transform: skewX(-20deg) scale(1.05); 
+            background: var(--pink);
+            border-color: var(--pink);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5); /* Brillo neón */
         }
-
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
         .branding-block {
             position: fixed;
