@@ -87,24 +87,30 @@
         }
 
         /* Botón de Idioma Estilo Semi-Flat */
-        .btn-lang {
-            background: transparent;
-            border: 2px solid #fff;
-            color: #fff;
+       .btn-lang {
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
+            border: none; /* Removemos el borde tradicional */
+            color: #fff !important; /* Forzamos texto blanco siempre */
             font-family: var(--font-main);
             font-weight: 700;
             font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            padding: 0.5rem 0.9rem;
-            border-radius: 0;
+            letter-spacing: 0.12em;
+            padding: 0.6rem 1.4rem; /* Un poco más de aire interno */
+            border-radius: 0; /* Flat puro, esquinas de bloque rígido */
             cursor: pointer;
-            transition: all 0.3s ease;
+            text-decoration: none; /* Quita la línea de enlace */
+            text-transform: uppercase;
             line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
         }
 
         .btn-lang:hover {
-            background-color: #fff;
-            color: #000;
+            /* Al pasar el cursor, el botón brilla y se expande sutilmente de forma cinética */
+            filter: brightness(1.15);
+            transform: scale(1.05);
         }
 
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
@@ -446,7 +452,7 @@
                 <li><a href="#">Sede</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
-            <button class="btn-lang" onclick="toggleLanguage()">EN</button>
+            <a href="en.html" class="btn-lang">English</a>
         </div>
     </nav>
 
@@ -460,7 +466,7 @@
 
         <div class="container hero-grid">
             <div class="hero-text-container">
-                <span class="hero-tagline">INTERNACIONAL MÉDICO DE CAMPECHE</span>
+                <span class="hero-tagline">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE</span>
                 <h1 class="hero-title"><span>Retos de la Medicina en el futuro cercano</span></h1>
                 <p class="hero-description">CIMC 2026 fusiona la herencia estructural de los centros históricos con la vanguardia del diseño sostenible y las tecnologías globales.</p>
             </div>
