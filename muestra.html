@@ -47,7 +47,7 @@
 
         /* --- BARRA DE NAVEGACIÓN DEL MENÚ --- */
         .navbar {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -102,6 +102,7 @@
             border: 2px solid transparent;
             border-image: linear-gradient(90deg, var(--teal), var(--pink)) 1;
             /* Nota: Para que el border-radius funcione con gradiente usamos este ajuste de abajo */
+             box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
             border: 2px solid;
             border-color: var(--pink);
             transition: all 0.3s ease;
@@ -355,7 +356,7 @@
         @media (max-width: 968px) {
             /* Desactivamos mix-blend-mode en móvil para evitar artefactos visuales raros */
             .navbar { 
-                position: absolute;
+                position: fixed;
                 top: 100px; /* Mandamos el menú DEBAJO del logotipo */
                 height: auto;
                 padding: 1rem 0;
