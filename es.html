@@ -3,558 +3,601 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAC 2026 - Congreso Internacional de Medicina Avanzada</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>CIAC 2026 Campeche México - Website GitHub Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- VARIABLES BASADAS EN TU PALETA --- */
+        /* --- ESTILOS GLOBALES --- */
         :root {
-            --c-brown: #613227;
-            --c-blue: #115D8C;
-            --c-cyan: #1FBFAF;
-            --c-green: #17A655;
-            --c-orange: #F2921D;
-            --c-pink: #d92377;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --bg-light: #f8fafc;
+            --primary-blue: #1e3a8a; /* Azul oscuro del texto de CIAC */
+            --teal: #38bdf8; /* Azul verdoso del fuerte */
+            --gold: #facc15; /* Naranja dorado del fuerte */
+            --gradient-1-start: #38bdf8;
+            --gradient-1-end: #facc15;
+            --gradient-bar: linear-gradient(90deg, #ec4899 0%, #38bdf8 50%, #4ade80 100%);
+            --background-light: #f9fafb;
+            --text-dark: #1f2937;
+            --spacing-unit: 1rem;
+            --navbar-height: 80px;
         }
 
-        /* --- ESTILOS RESET Y GLOBALES --- */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
             color: var(--text-dark);
-            overflow-x: hidden;
             line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- COMPONENTES REUTILIZABLES --- */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2.25rem;
-            background: var(--c-blue);
-            color: white;
+        h1, h2, h3 {
+            color: var(--primary-blue);
             font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(17, 93, 140, 0.2);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(17, 93, 140, 0.35);
-            background: #0d4a70;
+        p {
+            color: var(--text-dark);
+            font-weight: 300;
+            font-size: 1.1rem;
         }
 
-        .meta-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1.25rem;
-            background: rgba(217, 35, 119, 0.08);
-            color: var(--c-pink);
-            font-weight: 700;
-            font-size: 0.8rem;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-size: 2.75rem;
-            font-weight: 800;
-            color: var(--c-blue);
-            line-height: 1.2;
-            margin-bottom: 1rem;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
         }
 
         /* --- BARRA DE NAVEGACIÓN --- */
-        header.site-navbar {
+        .navbar {
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .navbar-content {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        .navbar-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .navbar-logo {
+            height: calc(var(--navbar-height) * 0.7);
+            width: auto;
+            /* El logotipo solo se usa aquí */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links li a::after {
+            content: '';
+            display: block;
+            width: 0%;
+            height: 2px;
+            background: var(--gradient-bar);
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Barra de gradiente multicolor sutil arriba de la navbar */
+        .navbar::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 6%;
-            z-index: 100;
+            height: 4px;
+            background: var(--gradient-bar);
+            z-index: 1001;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--c-cyan);
-        }
-
-        /* --- SECCIÓN 1: HERO (TEMPLATE 7) --- */
-        .hero-section {
-            width: 100%;
+        /* --- SECCIÓN HERO --- */
+        .hero {
             height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
             position: relative;
-            background: #fff;
+            background-color: #fff;
+            padding-top: calc(var(--navbar-height) + 2rem); /* Aire para la navbar */
         }
 
-        .hero-text-side {
-            width: 55%;
-            padding: 0 6% 0 8%;
-            z-index: 3;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(250, 204, 21, 0.1));
+            z-index: 1;
         }
 
-        .hero-text-side h1 {
-            font-size: 4.2rem;
-            font-weight: 800;
-            color: var(--text-dark);
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-title {
+            font-size: 4rem;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text-side h1 span {
-            color: var(--c-pink);
-            background: linear-gradient(90deg, var(--c-orange), var(--c-pink));
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-text-side p {
-            margin-bottom: 2.5rem;
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            max-width: 580px;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto calc(var(--spacing-unit) * 3) auto;
+            color: var(--primary-blue);
         }
 
-        .hero-image-side {
-            width: 45%;
-            height: 100%;
-            position: relative;
-            background: linear-gradient(135deg, var(--c-blue) 0%, #08334e 100%);
-            clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-logo-img {
-            max-width: 320px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25)) brightness(1.05);
-            animation: subtle-float 6s ease-in-out infinite;
-        }
-
-        @keyframes subtle-float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* --- SECCIÓN 2: MÉTRICAS / CIFRAS --- */
-        .metrics-section {
-            padding: 5rem 8%;
-            background: var(--bg-light);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .metric-card {
-            background: #fff;
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border-bottom: 4px solid var(--c-cyan);
-            text-align: center;
-        }
-
-        .metric-card:nth-child(2) { border-bottom-color: var(--c-green); }
-        .metric-card:nth-child(3) { border-bottom-color: var(--c-orange); }
-        .metric-card:nth-child(4) { border-bottom-color: var(--c-pink); }
-
-        .metric-num {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-label {
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-bar);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
             font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* --- SECCIÓN 3: EJES TEMÁTICOS --- */
-        .topics-section {
-            padding: 8rem 8%;
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
         }
 
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .topic-card {
-            padding: 3rem 2.5rem;
-            border-radius: 24px;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
+        /* --- SECCIÓN SOBRE LA CONFERENCIA (ABOUT) --- */
+        .about {
+            padding: calc(var(--spacing-unit) * 8) 0;
+            background-color: var(--background-light);
+            text-align: center;
+            margin-top: -10vh; /* Para ocupar la pantalla */
             position: relative;
-            overflow: hidden;
+            z-index: 10;
         }
 
-        .topic-card::before {
+        .about::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 6px; height: 100%;
-            background: var(--c-blue);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-bar);
         }
 
-        .topic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(17, 93, 140, 0.06);
-            border-color: rgba(17, 93, 140, 0.15);
+        .about-text-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .topic-icon {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
             display: inline-block;
         }
 
-        .topic-card h3 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
+        .about h2::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
         }
 
-        .topic-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        /* --- SECCIÓN DE ORADORES (SPEAKERS) --- */
+        .speakers {
+            padding: calc(var(--spacing-unit) * 8) 0;
+            background-color: #fff;
         }
 
-        /* --- SECCIÓN 4: PONENTES --- */
-        .speakers-section {
-            padding: 8rem 8%;
-            background: var(--bg-light);
+        .speakers h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: calc(var(--spacing-unit) * 5);
         }
 
-        .speakers-grid {
+        .speaker-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2.5rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+            margin-top: calc(var(--spacing-unit) * 5);
         }
 
         .speaker-card {
-            background: #fff;
-            border-radius: 24px;
+            background-color: #fff;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 2);
+            position: relative;
         }
 
         .speaker-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
         }
 
-        .speaker-img {
-            width: 100%;
-            height: 280px;
-            background: #cbd5e1; /* Reemplazable por fotos reales */
+        .speaker-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
             object-fit: cover;
+            margin: 0 auto calc(var(--spacing-unit) * 1.5) auto;
+            border: 4px solid var(--teal);
         }
 
-        .speaker-info {
-            padding: 1.5rem;
-        }
-
-        .speaker-info h3 {
+        .speaker-name {
+            font-weight: 600;
+            color: var(--primary-blue);
             font-size: 1.2rem;
-            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .speaker-title {
             color: var(--text-dark);
-        }
-
-        .speaker-info p {
-            color: var(--c-cyan);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.25rem;
-        }
-
-        .speaker-institution {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        /* --- SECCIÓN 5: SEDE Y REGISTRO (SPLIT CONTRARIO) --- */
-        .registration-section {
-            width: 100%;
-            min-height: 80vh;
-            display: flex;
-        }
-
-        .reg-info-side {
-            width: 45%;
-            background: linear-gradient(135deg, #09131e 0%, var(--c-brown) 100%);
-            clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-            padding: 6rem 8% 6rem 6%;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .reg-info-side h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-        }
-
-        .venue-detail {
-            margin-top: 2rem;
-            border-left: 3px solid var(--c-orange);
-            padding-left: 1.5rem;
-        }
-
-        .reg-form-side {
-            width: 55%;
-            padding: 6rem 10% 6rem 6%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
+            font-weight: 300;
             font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            margin-bottom: 1rem;
         }
 
-        .form-group input, .form-group select {
+        .speaker-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .speaker-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            padding: 1rem 1.25rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            outline: none;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--c-blue);
+        .speaker-card:hover::after {
+            opacity: 1;
+        }
+
+        /* --- SECCIÓN DEL LUGAR (VENUE) --- */
+        .venue {
+            padding: calc(var(--spacing-unit) * 8) 0;
+            background-color: var(--background-light);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .venue h2 {
+            font-size: 3rem;
+            margin-bottom: calc(var(--spacing-unit) * 5);
+        }
+
+        .venue-content {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 5);
+        }
+
+        .venue-map-placeholder {
+            flex: 1;
+            height: 400px;
+            background-image: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(250, 204, 21, 0.2)), url('https://img.freepik.com/foto-gratis/vista-aerea-fortaleza-puerto-marino_1048-18151.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .venue-map-placeholder::after {
+            content: 'Mapa de Campeche - Fuerte San Miguel';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background-color: rgba(30, 58, 138, 0.7);
+            border-radius: 50px;
+        }
+
+        .venue-text-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .venue-text-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PIE DE PÁGINA (FOOTER) --- */
+        .footer {
+            padding: calc(var(--spacing-unit) * 4) 0;
+            background-color: var(--primary-blue);
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .footer-logo-container {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links li a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links li a:hover {
+            color: #fff;
+        }
+
+        .footer::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-bar);
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- RESPONSIVIDAD --- */
-        @media (max-width: 1024px) {
-            .hero-section { flex-direction: column; height: auto; padding-top: 8rem; }
-            .hero-text-side { width: 100%; padding: 4rem 6%; text-align: center; }
-            .hero-text-side p { margin: 0 auto 2.5rem auto; }
-            .hero-image-side { width: 100%; height: 50vh; clip-path: none; }
-            .metrics-section { grid-template-columns: repeat(2, 1fr); }
-            .topics-grid { grid-template-columns: 1fr 1fr; }
-            .speakers-grid { grid-template-columns: 1fr 1fr; }
-            .registration-section { flex-direction: column; }
-            .reg-info-side { width: 100%; clip-path: none; padding: 4rem 6%; }
-            .reg-form-side { width: 100%; padding: 4rem 6%; }
-        }
+        @media (max-width: 900px) {
+            .navbar-content {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+            }
 
-        @media (max-width: 640px) {
-            .nav-links { display: none; }
-            .hero-text-side h1 { font-size: 2.8rem; }
-            .metrics-section { grid-template-columns: 1fr; }
-            .topics-grid { grid-template-columns: 1fr; }
-            .speakers-grid { grid-template-columns: 1fr; }
+            .navbar-logo-container {
+                height: 50px;
+            }
+
+            .navbar-logo {
+                height: 40px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                margin-top: 10px;
+            }
+
+            .hero {
+                padding-top: calc(var(--navbar-height) + 6rem);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about h2, .speakers h2, .venue h2 {
+                font-size: 2rem;
+            }
+
+            .venue-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .venue-map-placeholder {
+                height: 250px;
+            }
+
+            .venue-text-content {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header class="site-navbar">
-        <div class="nav-logo">
-            <span style="font-weight: 800; color: var(--c-blue); font-size: 1.2rem;">CIAC 2026</span>
+    <nav class="navbar">
+        <div class="navbar-content container">
+            <a href="#" class="navbar-logo-container">
+                <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026 Campeche México Logo" class="navbar-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#about">Sobre CIAC</a></li>
+                <li><a href="#speakers">Oradores</a></li>
+                <li><a href="#venue">Lugar</a></li>
+                <li><a href="#registro">Registro</a></li>
+            </ul>
         </div>
-        <nav class="nav-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#ejes">Ejes Temáticos</a>
-            <a href="#ponentes">Ponentes</a>
-            <a href="#registro">Inscripciones</a>
-        </nav>
-    </header>
+    </nav>
 
-    <section id="inicio" class="hero-section">
-        <div class="hero-text-side">
-            <span class="meta-tag">Inscripciones Abiertas • Septiembre 2026</span>
-            <h1>Conectando Líderes,<br>Descubriendo <span>Soluciones Médicas</span></h1>
-            <p>El encuentro científico anual de referencia global. Cuatro días dedicados por completo a la divulgación de evidencia de vanguardia, mesas clínicas avanzadas y simposios de actualización en Campeche.</p>
-            <a href="#registro" class="btn-primary">Registrarme al Congreso</a>
-        </div>
-        <div class="hero-image-side">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782424559/Gemini_Generated_Image_dno94wdno94wdno9_suuren.webp" class="hero-logo-img" alt="CIAC 2026 Logo">
+    <section id="hero" class="hero">
+        <div class="hero-content container">
+            <h1 class="hero-title">CIAC 2026</h1>
+            <p class="hero-subtitle">Conferencia Internacional sobre Ciudades y Arquitectura Colonial. Innovación en el Patrimonio.</p>
+            <a href="#registro" class="hero-btn">Registrarse Ahora</a>
         </div>
     </section>
 
-    <section class="metrics-section">
-        <div class="metric-card">
-            <div class="metric-num">50+</div>
-            <div class="metric-label">Ponentes Internacionales</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-num">40+</div>
-            <div class="metric-label">Horas Académicas</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-num">1,200</div>
-            <div class="metric-label">Especialistas Reunidos</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-num">Aval</div>
-            <div class="metric-label">Consejos Médicos Oficiales</div>
+    <section id="about" class="about">
+        <div class="container about-text-content">
+            <h2>Innovación y Patrimonio</h2>
+            <p>CIAC 2026 Campeche es un foro global donde arquitectos, urbanistas y expertos en patrimonio se reúnen para explorar la convergencia de la tecnología moderna y la preservación de ciudades históricas coloniales. Acompáñanos a descubrir soluciones sostenibles y visionarias para los desafíos urbanos del mañana, en el marco incomparable de la ciudad fortificada de Campeche.</p>
         </div>
     </section>
 
-    <section id="ejes" class="topics-section">
-        <span class="meta-tag" style="background: rgba(31,191,175,0.08); color: var(--c-cyan);">Programa Científico</span>
-        <h2 class="section-title">Pilares Clínicos de la Edición 2026</h2>
-        <p style="color: var(--text-muted); max-width: 600px;">Nuestro comité científico ha seleccionado áreas críticas que están impulsando cambios drásticos en la praxis médica global.</p>
-        
-        <div class="topics-grid">
-            <div class="topic-card">
-                <span class="topic-icon">🧬</span>
-                <h3>Innovación Genómica</h3>
-                <p>Abordajes clínicos y terapias personalizadas dirigidas mediante mapeo molecular de última generación.</p>
-            </div>
-            <div class="topic-card" style="border-left: 6px solid var(--c-green);">
-                <span class="topic-icon">🤖</span>
-                <h3>IA aplicada a Diagnósticos</h3>
-                <p>Modelos predictivos y algoritmos de machine learning implementados en la optimización hospitalaria diaria.</p>
-            </div>
-            <div class="topic-card" style="border-left: 6px solid var(--c-orange);">
-                <span class="topic-icon">🏥</span>
-                <h3>Gestión Sanitaria Eficiente</h3>
-                <p>Nuevos paradigmas operativos post-sistemas híbridos y soluciones de sustentabilidad en la salud pública.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="ponentes" class="speakers-section">
-        <span class="meta-tag" style="background: rgba(23,166,85,0.08); color: var(--c-green);">Keynote Speakers</span>
-        <h2 class="section-title">Líderes de Opinión Internacionales</h2>
-        
-        <div class="speakers-grid">
-            <div class="speaker-card">
-                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-                <div class="speaker-info">
-                    <h3>Dra. Elena Rostova</h3>
-                    <p>Neurociencia Traslacional</p>
-                    <div class="speaker-institution">Hospital Clínico de Múnich, Alemania</div>
+    <section id="speakers" class="speakers">
+        <div class="container">
+            <h2>Oradores Destacados</h2>
+            <div class="speaker-grid">
+                <div class="speaker-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Oradora 1" class="speaker-photo">
+                    <p class="speaker-name">Dr. Elena Rodríguez</p>
+                    <p class="speaker-title">Directora de Preservación Digital, UNESCO</p>
+                    <p class="speaker-desc">Líder en escaneo láser y modelado 3D para la documentación de sitios históricos coloniales.</p>
                 </div>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-                <div class="speaker-info">
-                    <h3>Dr. Marcus Vance</h3>
-                    <p>Oncología e Inteligencia Artificial</p>
-                    <div class="speaker-institution">Mayo Clinic, EE. UU.</div>
+                <div class="speaker-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Orador 2" class="speaker-photo">
+                    <p class="speaker-name">Arq. Carlos Maza</p>
+                    <p class="speaker-title">Arquitecto Principal, Maza & Asociados</p>
+                    <p class="speaker-desc">Especialista en integración de arquitectura contemporánea en centros históricos de México.</p>
                 </div>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-                <div class="speaker-info">
-                    <h3>Dra. Amara Kante</h3>
-                    <p>Inmunología Quirúrgica</p>
-                    <div class="speaker-institution">Institut Pasteur, Francia</div>
-                </div>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-img" style="background: #e2e8f0 url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80') center/cover;"></div>
-                <div class="speaker-info">
-                    <h3>Dr. Sergio Méndez</h3>
-                    <p>Cardiología Intervencionista</p>
-                    <div class="speaker-institution">Instituto Nacional de Cardiología, MX</div>
+                <div class="speaker-card">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Oradora 3" class="speaker-photo">
+                    <p class="speaker-name">Dra. Isabella Conti</p>
+                    <p class="speaker-title">Urbanista Sostenible, Universidad de Roma</p>
+                    <p class="speaker-desc">Autora de "Ciudades de Piedra, Futuros de Luz", sobre movilidad suave en cascos antiguos.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="registro" class="registration-section">
-        <div class="reg-info-side">
-            <h2>Sede Oficial del Congreso</h2>
-            <p>Disfruta de ponencias magistrales en un entorno cómodo y equipado con la máxima infraestructura tecnológica de la región sur-sureste de México.</p>
-            
-            <div class="venue-detail">
-                <strong style="color: var(--c-orange); display: block; margin-bottom: 0.25rem;">Centro de Convenciones Campeche XXI</strong>
-                <p style="font-size: 0.9rem; opacity: 0.9;">Av. Pedro Sáinz de Baranda, Centro Histórico, Campeche, México.</p>
+    <section id="venue" class="venue">
+        <div class="container">
+            <h2>El Escenario Perfecto</h2>
+            <div class="venue-content">
+                <div class="venue-map-placeholder">
+                    </div>
+                <div class="venue-text-content">
+                    <h3>Campeche: Una Ciudad Fortificada</h3>
+                    <p>La conferencia se celebrará en la histórica ciudad fortificada de San Francisco de Campeche, declarada Patrimonio de la Humanidad por la UNESCO. Nuestras sedes principales, ubicadas dentro y alrededor de los imponentes fuertes coloniales (como el Fuerte de San Miguel), ofrecerán una experiencia inmersiva única que encarna el tema de CIAC 2026. Los participantes disfrutarán de la rica gastronomía, la calidez de su gente y la belleza de la costa del Golfo.</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="reg-form-side">
-            <span class="meta-tag" style="width: fit-content;">Formulario Oficial</span>
-            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 2rem;">Asegura tu Acceso Académico</h2>
-            
-            <form action="#" onsubmit="event.preventDefault(); alert('¡Simulación de registro exitosa!');">
-                <div class="form-group">
-                    <label for="name">Nombre Completo</label>
-                    <input type="text" id="name" placeholder="Ej. Dr. Carlos Gómez" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo Electrónico Profesional</label>
-                    <input type="email" id="email" placeholder="carlos.gomez@hospital.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="specialty">Especialidad Médica</label>
-                    <select id="specialty">
-                        <option>Medicina General</option>
-                        <option>Cardiología</option>
-                        <option>Oncología</option>
-                        <option>Pediatría</option>
-                        <option>Otra Especialidad</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn-primary" style="border: none; width: 100%; justify-content: center; margin-top: 1rem; cursor: pointer;">
-                    Completar Prerregistro Científico
-                </button>
-            </form>
         </div>
     </section>
 
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-logo-container">
+                <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC Logo Footer" class="navbar-logo" style="filter: brightness(0) invert(1) opacity(0.6);">
+            </div>
+            <ul class="footer-links">
+                <li><a href="#">Privacidad</a></li>
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Prensa</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <p>&copy; CIAC 2026 Campeche México. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px;">Diseñado con excelencia por [Tu Nombre / Empresa]</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animaciones sutiles al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Un sutil efecto de "pulso" en la linterna del fuerte en el logo
+            const logo = document.querySelector('.navbar-logo');
+            if (logo) {
+                let initialOpacity = 1;
+                setInterval(() => {
+                    initialOpacity = initialOpacity === 1 ? 0.8 : 1;
+                    logo.style.transition = 'opacity 1s ease';
+                    logo.style.opacity = initialOpacity;
+                }, 2000); // Pulso cada 2 segundos
+            }
+        });
+    </script>
 </body>
 </html>
