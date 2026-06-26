@@ -51,38 +51,60 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px; /* Más delgada para el menú */
+            height: 90px; /* Le damos una altura fija clara para notar el centrado */
             display: flex;
-            align-items: center;
+            align-items: center; /* Centrado vertical del contenedor principal */
             padding: 0 5vw;
-            z-index: 200; /* Asegurar que esté sobre todo */
-            opacity: 0;
-            transform: translateY(-10px);
-            animation: initFadeDown 1s var(--bezier-premium) forwards;
-            mix-blend-mode: difference; /* Menú blanco sobre fondo oscuro, oscuro sobre fondo claro */
+            z-index: 200;
+            mix-blend-mode: difference;
         }
 
         .nav-content {
             width: 100%;
+            height: 100%; /* Ocupa todo el alto de la navbar */
             display: flex;
-            justify-content: flex-end; /* Enlaces a la derecha */
+            align-items: center; /* Centrado vertical exacto de los hijos */
+            justify-content: flex-end; /* Todo alineado a la derecha */
+            gap: 3rem; /* Espacio entre la lista de enlaces y el botón de idioma */
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            align-items: center; /* Centrado vertical interno de los textos */
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #FFFFFF;
+            color: #fff; /* El mix-blend-mode lo volverá oscuro o claro según el fondo */
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            position: relative;
-            padding-bottom: 4px;
+            display: block;
+            line-height: 1; /* Evita que el interlineado por defecto rompa el centrado */
+        }
+
+        /* Botón de Idioma Estilo Semi-Flat */
+        .btn-lang {
+            background: transparent;
+            border: 2px solid #fff; /* Línea limpia flat */
+            color: #fff;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 0.9rem;
+            border-radius: 0; /* Cuadrado arquitectónico */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .btn-lang:hover {
+            background-color: #fff;
+            color: #000; /* Efecto inverso flat al pasar el cursor */
         }
 
         /* --- BLOQUE DE BRANDING FIJO (LOGO GRANDE) --- */
@@ -391,6 +413,7 @@
                 <li><a href="#">Sede</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
+            <button class="btn-lang" onclick="toggleLanguage()">EN</button>
         </div>
     </nav>
 
