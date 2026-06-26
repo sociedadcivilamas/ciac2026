@@ -88,23 +88,25 @@
 
         /* Botón de Idioma Estilo Semi-Flat */
        .btn-lang {
-            background: transparent;
-            border: 1px solid #fff; /* Línea ultra fina editorial */
+            background: linear-gradient(90deg, var(--teal), var(--pink), var(--teal));
+            background-size: 200% 100%; /* Duplica el tamaño para el desplazamiento */
+            background-position: left center;
+            border: none;
             color: #fff !important;
             font-family: var(--font-main);
             font-weight: 700;
             font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            padding: 0.6rem 1.3rem;
+            letter-spacing: 0.12em;
+            padding: 0.6rem 1.4rem;
             border-radius: 0;
             text-decoration: none;
             text-transform: uppercase;
-            transition: background 0.4s var(--bezier-premium), border-color 0.4s ease;
+            transition: background-position 0.5s var(--bezier-premium), transform 0.3s ease;
         }
         
         .btn-lang:hover {
-            background: linear-gradient(90deg, var(--teal), var(--pink));
-            border-color: transparent;
+            background-position: right center; /* Desplaza el color */
+            transform: translateY(-2px);
         }
 
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
