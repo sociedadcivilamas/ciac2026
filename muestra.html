@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIAC 2026 — Campeche, México</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CONFIGURACIÓN DE COLOR E IDENTIDAD --- */
+        :root {
+            --center-blue: #002244; /* El azul profundo central de tu captura */
+            --text-dark: #0f172a;
+            --text-light: #f8fafc;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            background-color: var(--text-light);
+            font-family: var(--font-sans);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN MINIMALISTA --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5vw;
+            z-index: 1000;
+            mix-blend-mode: difference; /* Permite que sea blanca sobre fondo oscuro y oscura sobre fondo claro automáticamente */
+        }
+
+        .navbar-logo {
+            height: 45px;
+            width: auto;
+            filter: invert(1) brightness(2); /* Ajuste dinámico por el mix-blend-mode */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTENEDOR HERO: EL TÚNEL DE COLOR --- */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--center-blue);
+        }
+
+        /* Recreación exacta de los anillos concéntricos multicolor mediante CSS avanzado */
+        .color-tunnel {
+            position: absolute;
+            width: 200vmax;
+            height: 200vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                var(--center-blue) 0%, var(--center-blue) 18%, 
+                #14b8a6 18%, #14b8a6 21%, /* Teal */
+                #06b6d4 21%, #06b6d4 24%, /* Cyan */
+                #3b82f6 24%, #3b82f6 28%, /* Azul */
+                #6366f1 28%, #6366f1 32%, /* Indigo */
+                #a855f7 32%, #a855f7 36%, /* Purpura */
+                #ec4899 36%, #ec4899 41%, /* Rosa */
+                #f43f5e 41%, #f43f5e 46%, /* Rojo-Rosa */
+                #f97316 46%, #f97316 52%, /* Naranja */
+                #eab308 52%, #eab308 59%, /* Dorado/Amarillo */
+                #22c55e 59%, #22c55e 100% /* Verde exterior */
+            );
+            transform: scale(1);
+            transition: transform 0.1s linear;
+            z-index: 1;
+        }
+
+        /* Círculo de máscara central para controlar la nitidez del texto */
+        .center-mask {
+            position: absolute;
+            width: 40vmax;
+            height: 40vmax;
+            background-color: var(--center-blue);
+            border-radius: 50%;
+            z-index: 2;
+            transition: transform 0.1s linear;
+        }
+
+        .hero-text-wrapper {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            color: var(--text-light);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-title i {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* --- SECCIONES DE CONTENIDO (CON MÁXIMO AIRE Y DETALLE) --- */
+        .content-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 25vh 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--text-light);
+            z-index: 10;
+        }
+
+        /* Alternancia de color de fondo para mantener el dinamismo sofisticado */
+        .content-section.alt-bg {
+            background-color: #f1f5f9;
+        }
+
+        .section-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .meta-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #64748b;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--text-dark);
+            margin-bottom: 3rem;
+            max-width: 850px;
+        }
+
+        .section-title strong {
+            font-weight: 600;
+        }
+
+        .grid-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5rem;
+            margin-top: 4rem;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 4rem;
+        }
+
+        .detail-block h3 {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .detail-block p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #475569;
+            font-weight: 300;
+        }
+
+        /* --- PIE DE PÁGINA EDITORIAL --- */
+        .footer-editorial {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 10vh 5vw 5vh 5vw;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 4rem;
+        }
+
+        .footer-logo-placeholder {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* --- ANIMACIONES POR SCROLL (REVEAL EFFECT) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                        transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ajustes responsivos para cuidar el aire en móviles */
+        @media (max-width: 768px) {
+            .navbar { height: 70px; }
+            .nav-links { display: none; } /* En una experiencia puramente visual, menos es más */
+            .content-section { padding: 15vh 6vw; }
+            .grid-details { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#">
+            <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026 Logo" class="navbar-logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#concepto">Concepto</a></li>
+            <li><a href="#ejes">Ejes</a></li>
+            <li><a href="#sede">Sede</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-container">
+        <div class="color-tunnel" id="tunnel"></div>
+        <div class="center-mask" id="mask"></div>
+        
+        <div class="hero-text-wrapper">
+            <h1 class="hero-title">Dale color a<br><i>tu propia historia</i></h1>
+        </div>
+    </div>
+
+    <section id="concepto" class="content-section">
+        <div class="section-wrapper reveal">
+            <span class="meta-tag">01 / El Manifiesto</span>
+            <h2 class="section-title">CIAC 2026 es el punto de encuentro donde las <strong>ciudades coloniales</strong> redefinen su futuro a través de la innovación, el color y el diseño sostenible.</h2>
+        </div>
+    </section>
+
+    <section id="ejes" class="content-section alt-bg">
+        <div class="section-wrapper reveal">
+            <span class="meta-tag">02 / Áreas de Impacto</span>
+            <h2 class="section-title">Un laboratorio de preservación evolutiva diseñado para impactar el entorno urbano global.</h2>
+            
+            <div class="grid-details">
+                <div class="detail-block">
+                    <h3>Arquitectura Viva</h3>
+                    <p>Integración de tecnologías de bajo impacto ambiental en fachadas históricas, respetando la herencia cromática de la época colonial.</p>
+                </div>
+                <div class="detail-block">
+                    <h3>Urbanismo de Vanguardia</h3>
+                    <p>Rediseño de flujos peatonales y dinámicas sociales para devolverle el protagonismo a los habitantes de los centros históricos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sede" class="content-section">
+        <div class="section-wrapper reveal">
+            <span class="meta-tag">03 / El Escenario</span>
+            <h2 class="section-title">San Francisco de Campeche, la <strong>joya fortificada</strong> del Golfo, se transforma en nuestro lienzo de discusión arquitectónica.</h2>
+        </div>
+    </section>
+
+    <footer class="footer-editorial">
+        <div class="footer-content">
+            <div class="footer-logo-placeholder">CIAC 2026</div>
+            <div class="footer-copy">
+                <p>&copy; 2026 Conferencia Internacional sobre Ciudades y Arquitectura Colonial.</p>
+                <p style="margin-top: 5px; opacity: 0.5;">Campeche, México. Desarrollado con estándar profesional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const tunnel = document.getElementById('tunnel');
+        const mask = document.getElementById('mask');
+
+        // 1. Efecto de zoom interactivo en los círculos concéntricos basados en el scroll
+        window.addEventListener('scroll', () => {
+            let scrollPercent = window.scrollY / window.innerHeight;
+            
+            if (scrollPercent <= 1) {
+                // Modifica el tamaño de los anillos de forma exponencial para un efecto inmersivo tipo "túnel"
+                let scaleValue = 1 + (scrollPercent * 3.5);
+                let maskScale = 1 + (scrollPercent * 8); 
+                
+                tunnel.style.transform = `scale(${scaleValue})`;
+                mask.style.transform = `scale(${maskScale})`;
+            }
+        });
+
+        // 2. Intersection Observer para revelar el texto suavemente cuando entra en pantalla (Aparición progresiva)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15, // Se activa cuando el 15% del elemento es visible
+            rootMargin: "0px 0px -100px 0px"
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
