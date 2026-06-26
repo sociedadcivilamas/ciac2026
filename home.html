@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 — Mobile Hero Design Lab</title>
+    <title>CIMC 2026 — Bento-Muralla Variations</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
             --gold: #facc15;
             --pink: #ec4899;
             --dark-surface: #0b132b;
-            --bg-light: #f8fafc;
+            --bg-light: #f1f5f9;
             --font-main: 'Plus Jakarta Sans', sans-serif;
             --bezier-premium: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -27,277 +27,214 @@
             font-family: var(--font-main);
             background-color: #000;
             color: var(--dark-surface);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- CONTENEDOR MAESTRO DE VARIANTES --- */
-        .variant-section {
+        /* --- CONTENEDOR MAESTRO --- */
+        .variant-container {
             position: relative;
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
+            background-color: var(--bg-light);
             display: flex;
             flex-direction: column;
-            background-color: var(--bg-light);
+            padding: 20px;
+            gap: 12px;
             border-bottom: 4px solid #000;
+            overflow: hidden;
         }
 
-        .label-style {
+        .label-pill {
             position: absolute;
-            top: 20px;
+            top: 15px;
             right: 20px;
             background: var(--dark-surface);
             color: #fff;
-            padding: 5px 12px;
-            font-size: 10px;
+            padding: 4px 10px;
+            font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            border-radius: 20px;
             z-index: 100;
-            border-radius: 4px;
         }
 
-        /* --- ELEMENTOS COMUNES --- */
-        .logo-small { width: 120px; height: auto; display: block; }
-        .tagline-flow {
-            font-size: 11px;
+        /* --- ELEMENTOS DE DISEÑO --- */
+        .bento-box {
+            background: #fff;
+            border-radius: 24px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .logo-box { height: 80px; align-items: center; }
+        .logo-img { width: 140px; height: auto; }
+
+        .tagline-small {
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             color: var(--cimc-blue);
             line-height: 1.3;
         }
 
-        /* -----------------------------------------------------
-           1. ESTILO SUIZO ESTÁNDAR (Grilla Rígida, Títulos Gigantes)
-           ----------------------------------------------------- */
-        .hero-swiss {
-            padding: 60px 8vw;
-            justify-content: flex-start;
-        }
-        .hero-swiss .title {
-            font-size: 64px;
-            font-weight: 800;
-            line-height: 0.9;
-            letter-spacing: -0.04em;
-            margin-top: 40px;
-            color: var(--cimc-blue);
-        }
-        .hero-swiss .desc {
-            margin-top: auto;
-            font-size: 18px;
-            line-height: 1.4;
-            max-width: 80%;
-            font-weight: 400;
-        }
-
-        /* -----------------------------------------------------
-           2. SUIZO ASIMÉTRICO (Peso Visual y Tensión)
-           ----------------------------------------------------- */
-        .hero-asymmetric {
-            padding: 0;
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-        }
-        .asym-top {
-            padding: 40px 8vw;
-            background: var(--cimc-blue);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .asym-bottom {
-            padding: 40px 8vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-        .hero-asymmetric .title {
-            font-size: 42px;
+        .main-title {
+            font-size: 32px;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 10px;
-        }
-        .hero-asymmetric .sub {
-            font-size: 14px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            letter-spacing: -0.02em;
         }
 
         /* -----------------------------------------------------
-           3. SEMI-FLAT MURALLAS (Inspiración Arquitectónica)
+           OPCIÓN A: "EL BALUARTE" (Solidez y bordes marcados)
+           Estructura inspirada en la firmeza de los fuertes.
            ----------------------------------------------------- */
-        .hero-walls {
-            padding: 40px;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .wall-frame {
-            position: absolute;
-            inset: 20px;
-            border: 8px solid var(--teal);
-            border-bottom: 25px solid var(--cimc-blue); /* Base de muralla */
-            pointer-events: none;
-            z-index: 1;
-        }
-        .hero-walls .title {
-            font-size: 38px;
-            font-weight: 800;
-            color: var(--dark-surface);
-            z-index: 2;
-        }
-        .hero-walls .title span {
-            display: block;
-            background: linear-gradient(90deg, var(--pink), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* -----------------------------------------------------
-           4. BRUTALISTA (Impacto Central, Crudo)
-           ----------------------------------------------------- */
-        .hero-brutalist {
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            background: var(--gold);
-        }
-        .brutalist-box {
-            border: 4px solid var(--dark-surface);
-            padding: 30px 20px;
-            background: white;
-            box-shadow: 12px 12px 0px var(--dark-surface);
-            text-align: center;
-        }
-        .hero-brutalist .title {
-            font-size: 34px;
-            font-weight: 800;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        /* -----------------------------------------------------
-           5. NEO-MINIMALISMO (Construcción Tipográfica)
-           ----------------------------------------------------- */
-        .hero-neo {
-            justify-content: center;
-            padding: 40px 10vw;
-        }
-        .construct-line {
-            height: 2px;
-            background: var(--teal);
-            width: 0;
-            animation: growLine 1.5s var(--bezier-premium) forwards;
-            margin-bottom: 20px;
-        }
-        .hero-neo .title {
-            font-size: 40px;
-            font-weight: 300;
-            color: var(--cimc-blue);
-            opacity: 0;
-            transform: translateY(10px);
-            animation: revealText 1s ease 0.5s forwards;
-        }
-        .hero-neo .title b { font-weight: 800; }
-
-        @keyframes growLine { to { width: 100%; } }
-        @keyframes revealText { to { opacity: 1; transform: translateY(0); } }
-
-        /* -----------------------------------------------------
-           6. BENTO (Estructura Modular Semi-flat)
-           ----------------------------------------------------- */
-        .hero-bento {
-            padding: 20px;
+        .v1-grid {
             display: grid;
             grid-template-rows: auto 1fr auto;
-            gap: 15px;
+            height: 100%;
+            gap: 12px;
         }
-        .bento-box {
-            border-radius: 24px;
-            padding: 25px;
-            background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        .v1-header { background: #fff; }
+        .v1-hero { 
+            background: linear-gradient(135deg, var(--cimc-blue), var(--dark-surface));
+            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
-        .bento-title {
-            background: var(--cimc-blue);
-            color: white;
+        /* Detalle de muralla sutil en el fondo */
+        .v1-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            border: 15px solid rgba(56, 189, 248, 0.1);
+            border-radius: 50%;
         }
-        .bento-title h1 {
-            font-size: 32px;
-            line-height: 1.1;
-            background: linear-gradient(90deg, var(--teal), #fff);
+        .v1-hero h1 span { color: var(--teal); }
+
+        /* -----------------------------------------------------
+           OPCIÓN B: "ARCO MODERNO" (Curvas asimétricas y elegancia)
+           Usa el arco del logo como elemento de construcción.
+           ----------------------------------------------------- */
+        .v2-grid {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 12px;
+        }
+        .v2-top {
+            flex: 1.2;
+            background: #fff;
+            border-radius: 24px 24px 24px 100px; /* El "arco" asimétrico */
+            justify-content: flex-end;
+            padding-bottom: 40px;
+        }
+        .v2-bottom {
+            flex: 0.8;
+            background: linear-gradient(90deg, var(--teal), var(--cimc-blue));
+            color: #fff;
+            border-radius: 100px 24px 24px 24px; /* Arco invertido */
+        }
+        .v2-grid .main-title { color: var(--cimc-blue); }
+        .v2-grid .tagline-small { color: #fff; opacity: 0.9; }
+
+        /* -----------------------------------------------------
+           OPCIÓN C: "BENTO DINÁMICO" (Módulos flotantes y profundidad)
+           Estilo Apple puro: cajas independientes con jerarquía visual clara.
+           ----------------------------------------------------- */
+        .v3-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto auto;
+            gap: 12px;
+            height: 100%;
+        }
+        .v3-box-logo { grid-column: span 2; }
+        .v3-box-title { 
+            grid-column: span 2; 
+            background: linear-gradient(135deg, #fff 0%, var(--bg-light) 100%);
+            padding: 30px 20px;
+        }
+        .v3-box-accent {
+            background: var(--pink);
+            color: #fff;
+            grid-column: span 1;
+        }
+        .v3-box-teal {
+            background: var(--teal);
+            color: var(--cimc-blue);
+            grid-column: span 1;
+        }
+        .v3-box-footer { grid-column: span 2; }
+
+        .v3-grid .main-title {
+            background: linear-gradient(90deg, var(--cimc-blue), var(--pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .bento-desc {
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.05);
         }
 
     </style>
 </head>
 <body>
 
-    <section class="variant-section hero-swiss">
-        <div class="label-style">Swiss Standard</div>
-        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-small" alt="Logo">
-        <h1 class="title">Retos<br>Médicos<br>2026.</h1>
-        <p class="desc"><b>Congreso Internacional</b><br>Medicina del futuro cercano en Campeche.</p>
-    </section>
-
-    <section class="variant-section hero-asymmetric">
-        <div class="label-style">Swiss Asymmetric</div>
-        <div class="asym-top">
-            <span class="sub">CIMC 2026</span>
-            <h1 class="title">Retos de la Medicina</h1>
-        </div>
-        <div class="asym-bottom">
-            <p class="tagline-flow">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE 2026</p>
-            <h2 style="font-size: 28px; margin-top: 15px; font-weight: 300;">En el <b>futuro cercano</b></h2>
-            <p style="margin-top: 20px; font-size: 14px; color: #64748b;">Fusionando herencia estructural y vanguardia tecnológica.</p>
+    <section class="variant-container">
+        <div class="label-pill">Opción A: El Baluarte</div>
+        <div class="v1-grid">
+            <div class="bento-box logo-box">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-img">
+            </div>
+            <div class="bento-box v1-hero">
+                <h1 class="main-title">Retos de la Medicina <span>en el futuro cercano</span></h1>
+            </div>
+            <div class="bento-box">
+                <p class="tagline-small">Congreso Internacional Médico de Campeche 2026</p>
+                <p style="font-size: 14px; margin-top: 10px; color: #64748b;">Fusionando herencia estructural y vanguardia tecnológica.</p>
+            </div>
         </div>
     </section>
 
-    <section class="variant-section hero-walls">
-        <div class="label-style">Semi-Flat Walls</div>
-        <div class="wall-frame"></div>
-        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-small" style="margin: 0 auto 30px auto;">
-        <p class="tagline-flow">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE 2026</p>
-        <h1 class="title">Retos de la Medicina <span>en el futuro cercano</span></h1>
-    </section>
-
-    <section class="variant-section hero-brutalist">
-        <div class="label-style">Brutalist Centered</div>
-        <div class="brutalist-box">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" width="100" style="margin-bottom: 20px;">
-            <p class="tagline-flow" style="margin-bottom: 10px;">CAMPECHE 2026</p>
-            <h1 class="title">Medicina del<br>Futuro</h1>
+    <section class="variant-container">
+        <div class="label-pill">Opción B: Arco Moderno</div>
+        <div class="v2-grid">
+            <div class="bento-box logo-box" style="background: transparent; box-shadow: none; border: none;">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-img">
+            </div>
+            <div class="bento-box v2-top">
+                <h1 class="main-title">Retos de la Medicina en el futuro cercano</h1>
+            </div>
+            <div class="bento-box v2-bottom">
+                <p class="tagline-small">Congreso Internacional Médico de Campeche 2026</p>
+                <p style="font-size: 15px; font-weight: 500; margin-top: 12px;">Estrategias innovadoras aplicadas globalmente.</p>
+            </div>
         </div>
     </section>
 
-    <section class="variant-section hero-neo">
-        <div class="label-style">Neo-Minimalism</div>
-        <div class="construct-line"></div>
-        <h1 class="title">Retos de la <b>Medicina</b> en el futuro cercano.</h1>
-        <p style="margin-top: 30px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">CIMC • 2026</p>
-    </section>
-
-    <section class="variant-section hero-bento">
-        <div class="label-style">Bento Modular</div>
-        <div class="bento-box" style="display: flex; justify-content: center; padding: 15px;">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-small">
-        </div>
-        <div class="bento-box bento-title">
-            <h1>Retos de la Medicina en el futuro cercano</h1>
-        </div>
-        <div class="bento-box bento-desc">
-            <p class="tagline-flow" style="margin-bottom: 10px;">CONGRESO INTERNACIONAL MÉDICO</p>
-            <p style="font-size: 14px; color: #475569;">Estrategias innovadoras para el área de la salud aplicadas globalmente.</p>
+    <section class="variant-container">
+        <div class="label-pill">Opción C: Bento Dinámico</div>
+        <div class="v3-grid">
+            <div class="bento-box v3-box-logo">
+                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" class="logo-img">
+            </div>
+            <div class="bento-box v3-box-title">
+                <h1 class="main-title">Retos de la Medicina en el futuro cercano</h1>
+            </div>
+            <div class="bento-box v3-box-accent">
+                <span style="font-weight: 800; font-size: 20px;">2026</span>
+                <span style="font-size: 10px; font-weight: 700; text-transform: uppercase;">Octubre</span>
+            </div>
+            <div class="bento-box v3-box-teal">
+                <span style="font-weight: 800; font-size: 12px; text-transform: uppercase;">Campeche</span>
+                <span style="font-size: 9px;">México</span>
+            </div>
+            <div class="bento-box v3-box-footer">
+                <p class="tagline-small">Congreso Internacional Médico de Campeche</p>
+            </div>
         </div>
     </section>
 
