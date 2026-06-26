@@ -45,7 +45,7 @@
             width: 100%;
         }
 
-        /* --- BARRA DE NAVEGACIÓN DEL MENÚ --- */
+        /* --- BARRA DE NAVEGACIÓN DEL MENÚ (DESKTOP) --- */
         .navbar {
             position: absolute;
             top: 0;
@@ -88,11 +88,11 @@
         }
         
         .nav-links a:hover {
-            color: var(--pink); /* Destello rosa al pasar el cursor */
+            color: var(--pink);
         }
 
         /* Botón de Idioma Estilo Semi-Flat */
-     .btn-lang {
+        .btn-lang {
             background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%); 
             border: none;
             color: #fff !important; 
@@ -116,6 +116,15 @@
             filter: brightness(1.15);
             transform: translateY(-2px) scale(1.03);
         }
+
+        /* Elementos del menú ocultos por defecto en Desktop */
+        .menu-btn {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
         
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
         .branding-block {
@@ -137,14 +146,14 @@
             display: block;
         }
 
-        /* --- SECCIÓN 1: OPENER HERO --- */
+        /* --- SECCIÓN 1: OPENER HERO (DESKTOP) --- */
         .opener-hero {
             position: relative;
             width: 100vw;
             height: 100vh;
             display: flex;
             align-items: center;
-            padding: 12vh 5vw 0 5vw; /* Control de aire superior en Desktop */
+            padding: 12vh 5vw 0 5vw;
             overflow: hidden;
             background: linear-gradient(-45deg, #f1f5f9, #e2e8f0, #e0f2fe, #fef9c3);
             background-size: 400% 400%;
@@ -198,7 +207,7 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             color: var(--cimc-blue);
-            margin-bottom: 2rem; /* Más espacio con el título en Desktop */
+            margin-bottom: 2rem;
             display: inline-block;
             animation: initFadeUp 1s var(--bezier-premium) 0.4s forwards;
         }
@@ -209,7 +218,7 @@
             line-height: 1.1;
             color: var(--dark-surface);
             letter-spacing: -0.02em;
-            margin-bottom: 2.5rem; /* Corregido espacio sintaxis inválida */
+            margin-bottom: 2.5rem;
             animation: initFadeUp 1s var(--bezier-premium) 0.6s forwards;
         }
 
@@ -221,7 +230,7 @@
 
         .hero-description {
             font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-            line-height: 1.6; /* Subido de 1.2 para dar aire fluido de lectura */
+            line-height: 1.6;
             color: #475569;
             font-weight: 400;
             letter-spacing: 0.02em;
@@ -329,18 +338,10 @@
         }
 
         /* --- KEYFRAMES --- */
-        @keyframes initFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes initFadeDown {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes initScaleUp {
-            to { transform: scale(1); }
-        }
-        @keyframes initCanvas {
-            to { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
+        @keyframes initFadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes initFadeDown { to { opacity: 1; transform: translateY(0); } }
+        @keyframes initScaleUp { to { transform: scale(1); } }
+        @keyframes initCanvas { to { opacity: 1; transform: scale(1) rotate(0deg); } }
         @keyframes fluidGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -351,97 +352,197 @@
             50% { transform: translate(3vw, -2vh) rotate(45deg) scale(1.02); }
             100% { transform: translate(-2vw, 3vh) rotate(90deg) scale(0.98); }
         }
-        @keyframes rotateData {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes rotateData { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- REDISEÑO RADICAL RESPONSIVO MÓVIL --- */
+        /* --- REDISEÑO EXCLUSIVO RESPONSIVO MÓVIL --- */
         @media (max-width: 968px) {
-            /* Desactivamos mix-blend-mode en móvil para evitar artefactos visuales raros */
+            /* Navbar alineada en formato flex flat */
             .navbar { 
-                position: fixed;
-                top: 100px; /* Mandamos el menú DEBAJO del logotipo */
-                height: auto;
-                padding: 1rem 0;
-                mix-blend-mode: normal; 
+                position: absolute;
+                top: 0;
+                height: 80px; 
+                padding: 0 5vw;
+                display: flex;
+                justify-content: flex-end; /* Alinea la hamburguesa a la derecha */
+                align-items: center;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             }
             
             .nav-content { 
-                justify-content: center; 
-                flex-direction: column;
-                gap: 1rem; 
+                display: none; /* Desactivar contenedor de enlaces desktop */
             }
 
-            .nav-links { 
-                gap: 1.2rem; 
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .nav-links a { 
-                color: var(--cimc-blue); /* Texto oscuro legible en móvil */
-                font-size: 0.75rem; 
-            }
-
-            .btn-lang { 
-                border-color: var(--cimc-blue); 
-                color: var(--cimc-blue);
-                padding: 0.3rem 0.7rem; 
-                font-size: 0.7rem; 
-            }
-
-            /* Logotipo centrado perfectamente arriba */
+            /* Logotipo flotado de forma segura a la izquierda en la cabecera */
             .branding-block { 
                 position: absolute;
-                top: 25px;
-                left: 50%; 
-                transform: translateX(-50%); 
-                width: 100%;
-                justify-content: center;
+                top: 15px;
+                left: 5vw;
+                z-index: 220;
                 opacity: 1;
+                transform: none;
                 animation: none;
             }
 
             .full-logo { 
-                width: 200px; /* Tamaño controlado para pantallas verticales */
+                width: 145px; 
             }
 
-            /* Espaciado del contenido para evitar choques con la cabecera */
+            /* Botón Hamburguesa Estilizado */
+            .menu-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                border: 1px solid rgba(30, 58, 138, 0.15);
+                background: #f8fafc;
+                color: var(--cimc-blue);
+                font-size: 22px;
+                cursor: pointer;
+                z-index: 220;
+                line-height: 1;
+                transition: background 0.2s ease;
+            }
+
+            /* Menú desplegable funcional tipo cortina */
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                padding: 10px 5vw 25px 5vw;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+                z-index: 190;
+                border-top: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .mobile-menu.open {
+                display: block;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 14px 0;
+                border-bottom: 1px solid rgba(30, 58, 138, 0.06);
+                font-weight: 700;
+                color: var(--cimc-blue);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-size: 0.85rem;
+                text-decoration: none;
+            }
+
+            /* Adaptación del Botón de Idioma al menú colapsable */
+            .mobile-menu .mobile-lang-btn {
+                margin-top: 15px;
+                background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%);
+                border: none;
+                color: #fff !important;
+                font-weight: 800;
+                font-size: 0.8rem;
+                text-align: center;
+                border-radius: 4px;
+                padding: 0.7rem 0;
+                box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+                border-bottom: none;
+                display: block;
+            }
+
+            /* REESTRUCTURACIÓN DE CINÉTICA OSCURA EN MÓVIL (Fiel a tu especificación) */
             .opener-hero {
-                padding-top: 180px; /* Suficiente colchón de aire para el logo y el menú apilados */
+                padding: 140px 6vw 60px 6vw; /* Colchón superior para dar aire debajo del header */
                 height: auto;
                 min-height: 100vh;
-                align-items: flex-start;
+                align-items: center;
+                /* Fusión exacta de gradientes del código suministrado */
+                background:
+                    radial-gradient(circle at 85% 20%, rgba(255,255,255,0.14), transparent 18%),
+                    radial-gradient(circle at 18% 82%, rgba(56, 189, 248, 0.15), transparent 20%),
+                    linear-gradient(135deg, #160f4b 0%, #1e3a8a 50%, #3320a8 100%);
+                background-size: auto;
+                animation: none; /* Desactivar gradiente fluido en móvil por rendimiento gráfico */
             }
 
-            .hero-grid, .scroll-grid { 
-                grid-template-columns: 1fr; 
-                text-align: center; 
+            /* Inyección de Malla de Puntos Repetitiva Vectorial */
+            .opener-hero::before {
+                content: "";
+                position: absolute;
+                width: 480px;
+                height: 480px;
+                border-radius: 50%;
+                right: -150px;
+                top: -100px;
+                background: repeating-radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.16) 0 1px,
+                    transparent 1px 9px
+                );
+                opacity: 0.55;
+                pointer-events: none;
+                z-index: 1;
             }
 
-            .hero-text-container { 
-                width: 100%; 
+            /* Inyección de Anillos y Ajustes de Brillo Central */
+            .opener-hero::after {
+                content: "";
+                position: absolute;
+                width: 320px;
+                height: 320px;
+                border-radius: 50%;
+                right: -90px;
+                bottom: -120px;
+                background: radial-gradient(circle, rgba(255,255,255,0.06), rgba(255,255,255,0.01) 60%, transparent 72%);
+                border: 28px solid rgba(255,255,255,0.08);
+                pointer-events: none;
+                z-index: 1;
             }
 
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                width: 100%;
+            }
+
+            .hero-text-container {
+                width: 100%;
+                z-index: 2;
+            }
+
+            /* Cambios tipográficos cromáticos automáticos a claro para el fondo oscuro */
             .hero-tagline {
                 font-size: 0.9rem;
+                color: var(--teal);
                 margin-bottom: 1.5rem;
+                font-weight: 800;
             }
 
             .hero-title {
-                font-size: 2.3rem;
-                line-height: 1.2;
-                margin-bottom: 1.5rem;
+                font-size: clamp(2.2rem, 8vw, 3.2rem);
+                line-height: 1.15;
+                color: #ffffff;
+                margin-bottom: 1.8rem;
             }
 
-            .hero-description { 
-                margin: 0 auto 3rem auto; 
-                font-size: 1rem;
+            .hero-title span {
+                background: linear-gradient(90deg, #ffffff, var(--teal));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
-            .canvas-container, .scroll-geo-block { 
-                display: none; 
+            .hero-description {
+                font-size: 1.05rem;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.85);
+                margin-bottom: 0;
+                margin: 0 auto;
+            }
+
+            /* Ocultar canvas 3D y polígonos de fondo desktop */
+            .geo-shape, .canvas-container {
+                display: none;
             }
         }
     </style>
@@ -459,7 +560,17 @@
             </ul>
             <a href="en.html" class="btn-lang">English</a>
         </div>
+        <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#">Inicio</a>
+        <a href="#ejes-foro">Ciudad anfitriona</a>
+        <a href="#">Programa</a>
+        <a href="#">Organizadores</a>
+        <a href="#">Inscríbete</a>
+        <a href="en.html" class="mobile-lang-btn">English</a>
+    </div>
 
     <div class="branding-block">
         <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026 Campeche México Logo" class="full-logo">
@@ -498,11 +609,27 @@
     </section>
 
     <script>
-        function toggleLanguage() {
-            const btn = document.querySelector('.btn-lang');
-            btn.innerText = btn.innerText === 'EN' ? 'ES' : 'EN';
+        // Controlador interactivo nativo para el Menú Hamburguesa Móvil
+        const menuBtn = document.getElementById("menuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener("click", () => {
+                mobileMenu.classList.toggle("open");
+                // Alterna el ícono de hamburguesa a una cruz al abrirse
+                menuBtn.textContent = mobileMenu.classList.contains("open") ? "×" : "☰";
+            });
+
+            // Cerrar el menú automáticamente si se hace click en una sección indexada
+            mobileMenu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("open");
+                    menuBtn.textContent = "☰";
+                });
+            });
         }
 
+        // Observador de intersección por scroll para la sección 2
         const scrollSection = document.getElementById('ejes-foro');
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
