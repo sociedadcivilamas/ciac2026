@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 — Mobile Hero Showroom</title>
+    <title>CIMC 2026 — Mobile Hero Showroom: Estructuras Únicas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- COLORES OFICIALES GRADIENT SEMI-FLAT --- */
+        /* --- COLORES OFICIALES Y VARIABLES GLOBALES --- */
         :root {
             --cimc-blue: #1e3a8a;
             --teal: #38bdf8;
@@ -63,12 +63,12 @@
             z-index: 50;
         }
 
-        /* --- ESTILOS COMPARTIDOS CORREGIDOS DE TEXTO --- */
+        /* --- ESTILOS COMPARTIDOS CORREGIDOS DE TEXTO (Ajustados para Mobile) --- */
         .tagline-base {
-            font-size: 0.75rem; /* Reducido para lectura fluida corrida */
+            font-size: 0.75rem; /* Reducido para lectura fluida corrida en Mobile */
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.14em; /* Aire entre letras */
+            letter-spacing: 0.14em; /* Aire entre letras para legibilidad */
             color: var(--cimc-blue);
             line-height: 1.4;
             margin-bottom: 1.5rem;
@@ -90,8 +90,16 @@
             font-weight: 400;
         }
 
+        /* --- ESTILO DE LOGO UNIFICADO PARA MOBILE --- */
+        .cimc-logo-mobile {
+            width: 160px;
+            height: auto;
+            display: block;
+            margin-bottom: 2rem; /* Espacio base */
+        }
+
         /* -----------------------------------------------------
-           OPCIÓN 1: ASYMMETRIC OVERLAP (Corte diagonal geométrico)
+           OPCIÓN 1: ASYMMETRIC OVERLAP (Superposición Geométrica Oblicua)
            ----------------------------------------------------- */
         .v1-shape {
             position: absolute;
@@ -104,9 +112,10 @@
             z-index: 1;
             opacity: 0.15;
         }
+        .hero-v1 .cimc-logo-mobile { margin-bottom: 1.5rem; }
 
         /* -----------------------------------------------------
-           OPCIÓN 2: THE COLONIAL ARCH MASK (Arco del logo como silueta)
+           OPCIÓN 2: THE COLONIAL ARCH (Arco del logo como silueta asimétrica)
            ----------------------------------------------------- */
         .v2-arch {
             position: absolute;
@@ -119,9 +128,15 @@
             opacity: 0.4;
             transform: rotate(15deg);
         }
+        .hero-v2 .hero-text-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
         /* -----------------------------------------------------
-           OPCIÓN 3: NEON BLOCK STACK (Cajas minimalistas de color vivo)
+           OPCIÓN 3: NEON BLOCK STACK (Pila de bloques geométricos neón)
            ----------------------------------------------------- */
         .v3-accent-bar {
             width: 60px;
@@ -136,9 +151,12 @@
         .hero-v4 {
             background: radial-gradient(circle at 90% 80%, rgba(236,72,153,0.15) 0%, #f8fafc 60%);
         }
+        .hero-v4 .hero-text-container {
+            align-self: flex-start;
+        }
 
         /* -----------------------------------------------------
-           OPCIÓN 5: TYPOGRAPHIC FOCUS (El texto es el arte)
+           OPCIÓN 5: TYPOGRAPHIC CROMATIC (El texto es el arte, asimétrico)
            ----------------------------------------------------- */
         .hero-v5 .title-base span {
             background: linear-gradient(90deg, var(--teal), var(--pink));
@@ -148,7 +166,7 @@
         }
 
         /* -----------------------------------------------------
-           OPCIÓN 6: FLOATING FLAT SHEETS (Hojas geométricas superpuestas)
+           OPCIÓN 6: FLOATING FLAT SHEETS (Hojas geométricas planas flotantes)
            ----------------------------------------------------- */
         .v6-circle {
             position: absolute;
@@ -172,10 +190,13 @@
         }
 
         /* -----------------------------------------------------
-           OPCIÓN 7: THE BENTO FRAME (Bordes editoriales rígidos)
+           OPCIÓN 7: THE BENTO FRAME (Bordes editoriales estructurados)
            ----------------------------------------------------- */
         .hero-v7 {
             padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .v7-inner-border {
             position: absolute;
@@ -183,14 +204,20 @@
             border: 2px solid rgba(30, 58, 138, 0.08);
             pointer-events: none;
         }
+        .hero-v7 .hero-text-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
         /* -----------------------------------------------------
-           OPCIÓN 8: THE LIQUID CHROMATIC (Fluidez abstracta)
+           OPCIÓN 8: THE CHROMATIC WAVE (Fluidez abstracta asimétrica)
            ----------------------------------------------------- */
         .hero-v8 {
             background: linear-gradient(-45deg, #f1f5f9, #e0f2fe, #fef9c3, #fce7f3);
             background-size: 300% 300%;
-            animation: fluidSample 10s ease infinite;
+            animation: fluidGradient 10s ease infinite;
         }
         @keyframes fluidGradient {
             0% { background-position: 0% 50%; }
@@ -198,7 +225,18 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* --- OPCIÓN 9: MINIMAL MAXIMALISM (Mucho aire, caja de color abajo) --- */
+        /* -----------------------------------------------------
+           OPCIÓN 9: MINIMAL MAXIMALISM (Mucho aire, caja de color abajo)
+           ----------------------------------------------------- */
+        .hero-v9 {
+            justify-content: space-between;
+            padding-top: 6vh;
+            padding-bottom: 12vh;
+        }
+        .hero-v9 .cimc-logo-mobile {
+            margin: 0 auto 3rem auto;
+            width: 200px;
+        }
         .v9-bottom-block {
             position: absolute;
             bottom: 0;
@@ -208,7 +246,9 @@
             background: linear-gradient(90deg, var(--teal), var(--gold), var(--pink));
         }
 
-        /* --- OPCIÓN 10: DUAL TONE SPLIT (Corte de rejilla asimétrico) --- */
+        /* -----------------------------------------------------
+           OPCIÓN 10: DUAL TONE SPLIT (Corte de rejilla asimétrico)
+           ----------------------------------------------------- */
         .hero-v10::before {
             content: '';
             position: absolute;
@@ -225,6 +265,7 @@
     <section class="variant-hero hero-v1">
         <div class="variant-label">OPCIÓN 01: ASYMMETRIC OVERLAP</div>
         <div class="v1-shape"></div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base" style="color: var(--cimc-blue);">Retos de la Medicina en el futuro cercano</h1>
@@ -235,6 +276,7 @@
     <section class="variant-hero hero-v2">
         <div class="variant-label">OPCIÓN 02: THE COLONIAL ARCH</div>
         <div class="v2-arch"></div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile" style="margin: 0 auto 3rem auto;">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base">Retos de la Medicina en el <i>futuro cercano</i></h1>
@@ -244,6 +286,7 @@
 
     <section class="variant-hero hero-v3">
         <div class="variant-label">OPCIÓN 03: NEON BLOCK STACK</div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile" style="margin: 0 auto 3rem auto; width: 220px;">
         <div class="hero-text-container">
             <div class="v3-accent-bar"></div>
             <span class="tagline-base" style="color: var(--pink);">Congreso Internacional Médico de Campeche 2026</span>
@@ -254,6 +297,7 @@
 
     <section class="variant-hero hero-v4">
         <div class="variant-label">OPCIÓN 04: RADIANT LIGHTBURST</div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base" style="color: var(--dark-surface);">Retos de la Medicina en el futuro cercano</h1>
@@ -263,6 +307,7 @@
 
     <section class="variant-hero hero-v5">
         <div class="variant-label">OPCIÓN 05: TYPOGRAPHIC CROMATIC</div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile" style="width: 140px;">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base">Retos de la Medicina en el <span>futuro cercano</span></h1>
@@ -274,6 +319,7 @@
         <div class="variant-label">OPCIÓN 06: FLOATING FLAT SHEETS</div>
         <div class="v6-circle"></div>
         <div class="v6-square"></div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base">Retos de la Medicina en el futuro cercano</h1>
@@ -285,6 +331,7 @@
         <div class="variant-label">OPCIÓN 07: EDITORIAL BENTO FRAME</div>
         <div class="v7-inner-border"></div>
         <div class="hero-text-container">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
             <span class="tagline-base" style="letter-spacing: 0.2em;">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base" style="font-weight: 700;">Retos de la Medicina en el futuro cercano</h1>
             <p class="desc-base">CIMC 2026 fusiona la herencia estructural de los centros históricos con la vanguardia del diseño sostenible y las tecnologías globales.</p>
@@ -293,6 +340,7 @@
 
     <section class="variant-hero hero-v8">
         <div class="variant-label">OPCIÓN 08: CHROMATIC FLUID WAVE</div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base">Retos de la Medicina en el futuro cercano</h1>
@@ -303,6 +351,7 @@
     <section class="variant-hero hero-v9">
         <div class="variant-label">OPCIÓN 09: MINIMAL MAXIMALISM</div>
         <div class="v9-bottom-block"></div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base" style="color: #64748b;">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base" style="font-weight: 400; color: var(--cimc-blue);">Retos de la Medicina en el <b>futuro cercano</b></h1>
@@ -312,6 +361,7 @@
 
     <section class="variant-hero hero-v10">
         <div class="variant-label">OPCIÓN 10: DUAL TONE REJILLA</div>
+        <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="cimc-logo-mobile">
         <div class="hero-text-container">
             <span class="tagline-base">Congreso Internacional Médico de Campeche 2026</span>
             <h1 class="title-base">Retos de la Medicina en el futuro cercano</h1>
