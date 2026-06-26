@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAC 2026 — Campeche, México</title>
+    <title>CIAC 2026 — Experiencia Cinética</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CONFIGURACIÓN DE COLOR E IDENTIDAD --- */
+        /* --- VARIABLES CROMÁTICAS POP (VIBRANTES) --- */
         :root {
-            --center-blue: #002244; /* El azul profundo central de tu captura */
-            --text-dark: #0f172a;
-            --text-light: #f8fafc;
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --bg-base: #030307;
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff007f;
+            --neon-violet: #7000ff;
+            --neon-yellow: #facc15;
+            
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
 
+        /* --- OCULTAR SCROLLBAR TRADICIONAL PARA ROMPER LA ILUSIÓN --- */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -26,337 +30,315 @@
         }
 
         html, body {
-            background-color: var(--text-light);
-            font-family: var(--font-sans);
-            color: var(--text-dark);
-            overflow-x: hidden;
+            background-color: var(--bg-base);
+            color: #fff;
+            font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
+            /* Forzamos altura para capturar el scroll, pero bloqueamos el movimiento visual */
+            height: 400vh; 
+            scrollbar-width: none; /* Firefox */
         }
 
-        /* --- BARRA DE NAVEGACIÓN MINIMALISTA --- */
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* --- CONTENEDOR MAESTRO FIJO --- */
+        .viewport-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- NAV BAR (CRISP & CLEAN) --- */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 90px;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 5vw;
+            padding: 0 4vw;
             z-index: 1000;
-            mix-blend-mode: difference; /* Permite que sea blanca sobre fondo oscuro y oscura sobre fondo claro automáticamente */
         }
 
         .navbar-logo {
-            height: 45px;
+            height: 40px;
             width: auto;
-            filter: invert(1) brightness(2); /* Ajuste dinámico por el mix-blend-mode */
         }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 3rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
+        .nav-status {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--neon-cyan);
         }
 
-        /* --- CONTENEDOR HERO: EL TÚNEL DE COLOR --- */
-        .hero-container {
-            position: relative;
+        /* --- LIENZO DE ESCENARIOS (SCENES) --- */
+        .scene {
+            position: absolute;
+            inset: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background-color: var(--center-blue);
+            padding: 0 8vw;
+            opacity: 0;
+            visibility: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        /* Recreación exacta de los anillos concéntricos multicolor mediante CSS avanzado */
-        .color-tunnel {
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* --- ESCENARIO 1: LA APERTURA GEOMÉTRICA MÓVIL --- */
+        .sc1-bg-block {
             position: absolute;
-            width: 200vmax;
-            height: 200vmax;
-            border-radius: 50%;
-            background: radial-gradient(circle, 
-                var(--center-blue) 0%, var(--center-blue) 18%, 
-                #14b8a6 18%, #14b8a6 21%, /* Teal */
-                #06b6d4 21%, #06b6d4 24%, /* Cyan */
-                #3b82f6 24%, #3b82f6 28%, /* Azul */
-                #6366f1 28%, #6366f1 32%, /* Indigo */
-                #a855f7 32%, #a855f7 36%, /* Purpura */
-                #ec4899 36%, #ec4899 41%, /* Rosa */
-                #f43f5e 41%, #f43f5e 46%, /* Rojo-Rosa */
-                #f97316 46%, #f97316 52%, /* Naranja */
-                #eab308 52%, #eab308 59%, /* Dorado/Amarillo */
-                #22c55e 59%, #22c55e 100% /* Verde exterior */
-            );
-            transform: scale(1);
-            transition: transform 0.1s linear;
-            z-index: 1;
+            width: 45vw;
+            height: 45vw;
+            background: linear-gradient(135deg, var(--neon-violet), var(--neon-magenta));
+            border-radius: 40px;
+            z-index: -1;
+            transform: rotate(0deg) scale(1);
         }
 
-        /* Círculo de máscara central para controlar la nitidez del texto */
-        .center-mask {
-            position: absolute;
-            width: 40vmax;
-            height: 40vmax;
-            background-color: var(--center-blue);
-            border-radius: 50%;
-            z-index: 2;
-            transition: transform 0.1s linear;
-        }
-
-        .hero-text-wrapper {
-            position: relative;
-            z-index: 3;
+        .sc1-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.9;
+            text-transform: uppercase;
             text-align: center;
-            max-width: 600px;
-            padding: 2rem;
         }
 
-        .hero-title {
-            font-family: var(--font-serif);
-            color: var(--text-light);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
+        /* --- ESCENARIO 2: DESESTRUCTURACIÓN EN BLOQUES (BENTO ASIMÉTRICO) --- */
+        .sc2-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            width: 100%;
+            gap: 2rem;
         }
 
-        .hero-title i {
-            font-style: italic;
-            font-weight: 400;
-        }
-
-        /* --- SECCIONES DE CONTENIDO (CON MÁXIMO AIRE Y DETALLE) --- */
-        .content-section {
-            position: relative;
-            min-height: 100vh;
-            padding: 25vh 10vw;
+        .card-kinetic {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 32px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            background-color: var(--text-light);
-            z-index: 10;
+            justify-content: space-between;
+            height: 380px;
         }
 
-        /* Alternancia de color de fondo para mantener el dinamismo sofisticado */
-        .content-section.alt-bg {
-            background-color: #f1f5f9;
-        }
-
-        .section-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .meta-tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: #64748b;
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            line-height: 1.15;
-            color: var(--text-dark);
-            margin-bottom: 3rem;
-            max-width: 850px;
-        }
-
-        .section-title strong {
-            font-weight: 600;
-        }
-
-        .grid-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5rem;
-            margin-top: 4rem;
-            border-top: 1px solid #cbd5e1;
-            padding-top: 4rem;
-        }
-
-        .detail-block h3 {
-            font-family: var(--font-sans);
-            font-size: 1.25rem;
-            font-weight: 600;
+        .card-kinetic h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
             margin-bottom: 1rem;
         }
 
-        .detail-block p {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #475569;
+        .card-kinetic p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+            line-height: 1.5;
             font-weight: 300;
         }
 
-        /* --- PIE DE PÁGINA EDITORIAL --- */
-        .footer-editorial {
-            background-color: var(--text-dark);
-            color: var(--text-light);
-            padding: 10vh 5vw 5vh 5vw;
+        .card-1 { grid-column: 1 / 6; transform: translateY(150px); background: var(--neon-violet); }
+        .card-2 { grid-column: 6 / 13; transform: translateY(-150px); background: #111; border-top: 4px solid var(--neon-cyan); }
+
+        /* --- ESCENARIO 3: CONCLUSIÓN CINEMÁTICA --- */
+        .sc3-iris {
+            position: absolute;
+            width: 10vw;
+            height: 10vw;
+            background-color: var(--neon-cyan);
+            border-radius: 50%;
+            z-index: -1;
+            transform: scale(1);
         }
 
-        .footer-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 4rem;
+        .sc3-content {
+            text-align: center;
+            max-width: 900px;
         }
 
-        .footer-logo-placeholder {
-            font-family: var(--font-serif);
-            font-size: 2rem;
+        .sc3-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 2rem;
+            color: var(--bg-base); /* Resalta cuando el círculo cubre el fondo */
         }
 
-        .footer-copy {
-            font-size: 0.85rem;
-            color: #94a3b8;
+        /* --- INDICADOR DE PROGRESO INTEGRADO MICRO --- */
+        .progress-bar-container {
+            position: fixed;
+            bottom: 40px;
+            left: 4vw;
+            width: 92vw;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
         }
 
-        /* --- ANIMACIONES POR SCROLL (REVEAL EFFECT) --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1.2s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                        transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Ajustes responsivos para cuidar el aire en móviles */
-        @media (max-width: 768px) {
-            .navbar { height: 70px; }
-            .nav-links { display: none; } /* En una experiencia puramente visual, menos es más */
-            .content-section { padding: 15vh 6vw; }
-            .grid-details { grid-template-columns: 1fr; gap: 3rem; }
-            .footer-content { flex-direction: column; align-items: flex-start; gap: 2rem; }
-        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#">
-            <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026 Logo" class="navbar-logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="#concepto">Concepto</a></li>
-            <li><a href="#ejes">Ejes</a></li>
-            <li><a href="#sede">Sede</a></li>
-        </ul>
+        <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026" class="navbar-logo">
+        <div class="nav-status" id="scroll-status">FASE 01 // ORB</div>
     </nav>
 
-    <div class="hero-container">
-        <div class="color-tunnel" id="tunnel"></div>
-        <div class="center-mask" id="mask"></div>
-        
-        <div class="hero-text-wrapper">
-            <h1 class="hero-title">Dale color a<br><i>tu propia historia</i></h1>
-        </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="mini-progress"></div>
     </div>
 
-    <section id="concepto" class="content-section">
-        <div class="section-wrapper reveal">
-            <span class="meta-tag">01 / El Manifiesto</span>
-            <h2 class="section-title">CIAC 2026 es el punto de encuentro donde las <strong>ciudades coloniales</strong> redefinen su futuro a través de la innovación, el color y el diseño sostenible.</h2>
-        </div>
-    </section>
+    <div class="viewport-canvas">
 
-    <section id="ejes" class="content-section alt-bg">
-        <div class="section-wrapper reveal">
-            <span class="meta-tag">02 / Áreas de Impacto</span>
-            <h2 class="section-title">Un laboratorio de preservación evolutiva diseñado para impactar el entorno urbano global.</h2>
-            
-            <div class="grid-details">
-                <div class="detail-block">
-                    <h3>Arquitectura Viva</h3>
-                    <p>Integración de tecnologías de bajo impacto ambiental en fachadas históricas, respetando la herencia cromática de la época colonial.</p>
+        <section class="scene active" id="scene-1">
+            <div class="sc1-bg-block" id="sc1-mesh"></div>
+            <h1 class="sc1-title" id="sc1-text">CIAC<br>2026</h1>
+        </section>
+
+        <section class="scene" id="scene-2">
+            <div class="sc2-grid">
+                <div class="card-kinetic card-1" id="sc2-c1">
+                    <h3>01 / Espacio</h3>
+                    <p>Las ciudades coloniales no pertenecen al pasado. Mutan, absorben tecnología y reconfiguran su materia.</p>
                 </div>
-                <div class="detail-block">
-                    <h3>Urbanismo de Vanguardia</h3>
-                    <p>Rediseño de flujos peatonales y dinámicas sociales para devolverle el protagonismo a los habitantes de los centros históricos.</p>
+                <div class="card-kinetic card-2" id="sc2-c2">
+                    <h3>02 / Evolución</h3>
+                    <p>Foro internacional sobre dinámicas arquitectónicas disruptivas en entornos patrimoniales protegidos por la UNESCO. Sede: Campeche.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="sede" class="content-section">
-        <div class="section-wrapper reveal">
-            <span class="meta-tag">03 / El Escenario</span>
-            <h2 class="section-title">San Francisco de Campeche, la <strong>joya fortificada</strong> del Golfo, se transforma en nuestro lienzo de discusión arquitectónica.</h2>
-        </div>
-    </section>
-
-    <footer class="footer-editorial">
-        <div class="footer-content">
-            <div class="footer-logo-placeholder">CIAC 2026</div>
-            <div class="footer-copy">
-                <p>&copy; 2026 Conferencia Internacional sobre Ciudades y Arquitectura Colonial.</p>
-                <p style="margin-top: 5px; opacity: 0.5;">Campeche, México. Desarrollado con estándar profesional.</p>
+        <section class="scene" id="scene-3">
+            <div class="sc3-iris" id="sc3-circle"></div>
+            <div class="sc3-content" id="sc3-text">
+                <h2>Rediseña<br>El Lienzo</h2>
+                <p style="color: var(--bg-base); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.9rem;">Campeche, México — Noviembre 2026</p>
             </div>
-        </div>
-    </footer>
+        </section>
+
+    </div>
 
     <script>
-        const tunnel = document.getElementById('tunnel');
-        const mask = document.getElementById('mask');
+        // Variables de control de movimiento suave (Lerp)
+        let targetScroll = 0;
+        let currentScroll = 0;
+        const ease = 0.07; // Controla la viscosidad del movimiento (menor = más suave)
 
-        // 1. Efecto de zoom interactivo en los círculos concéntricos basados en el scroll
-        window.addEventListener('scroll', () => {
-            let scrollPercent = window.scrollY / window.innerHeight;
-            
-            if (scrollPercent <= 1) {
-                // Modifica el tamaño de los anillos de forma exponencial para un efecto inmersivo tipo "túnel"
-                let scaleValue = 1 + (scrollPercent * 3.5);
-                let maskScale = 1 + (scrollPercent * 8); 
-                
-                tunnel.style.transform = `scale(${scaleValue})`;
-                mask.style.transform = `scale(${maskScale})`;
-            }
-        });
-
-        // 2. Intersection Observer para revelar el texto suavemente cuando entra en pantalla (Aparición progresiva)
-        const revealElements = document.querySelectorAll('.reveal');
+        // Elementos del DOM
+        const statusText = document.getElementById('scroll-status');
+        const progressBar = document.getElementById('mini-progress');
         
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.15, // Se activa cuando el 15% del elemento es visible
-            rootMargin: "0px 0px -100px 0px"
+        // Elementos de Escenarios
+        const s1 = document.getElementById('scene-1');
+        const s2 = document.getElementById('scene-2');
+        const s3 = document.getElementById('scene-3');
+
+        const sc1Mesh = document.getElementById('sc1-mesh');
+        const sc1Text = document.getElementById('sc1-text');
+        const sc2C1 = document.getElementById('sc2-c1');
+        const sc2C2 = document.getElementById('sc2-c2');
+        const sc3Circle = document.getElementById('sc3-circle');
+        const sc3Text = document.getElementById('sc3-text');
+
+        // Captura el scroll real del navegador
+        window.addEventListener('scroll', () => {
+            targetScroll = window.scrollY;
         });
 
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
+        // Bucle de renderizado matemático continuo
+        function animateEngine() {
+            // Fórmula Lerp: interpolación lineal para suavizado perfecto
+            currentScroll += (targetScroll - currentScroll) * ease;
+            
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const progress = Math.min(Math.max(currentScroll / maxScroll, 0), 1);
+
+            // Actualizar barra de progreso sutil
+            progressBar.style.width = `${progress * 100}%`;
+
+            // MÁQUINA DE ESTADOS / GESTIÓN DE ESCENARIOS
+            if (progress <= 0.33) {
+                // FASE 1 ACTIVA
+                s1.classList.add('active');
+                s2.classList.remove('active');
+                s3.classList.remove('active');
+                statusText.innerText = "FASE 01 // COMPRESIÓN";
+
+                // Comportamiento cinético Escenario 1
+                let localProgress = progress / 0.33; // Normalizado de 0 a 1
+                
+                // El bloque de color gira violentamente y se encoge hacia el fondo (Eje Z simulado)
+                sc1Mesh.style.transform = `rotate(${localProgress * 180}deg) scale(${1 - localProgress * 0.4})`;
+                // El texto se separa horizontalmente de forma masiva (Control de aire)
+                sc1Text.style.letterSpacing = `${localProgress * 50}px`;
+                sc1Text.style.opacity = `${1 - localProgress}`;
+
+            } else if (progress > 0.33 && progress <= 0.66) {
+                // FASE 2 ACTIVA
+                s1.classList.remove('active');
+                s2.classList.add('active');
+                s3.classList.remove('active');
+                statusText.innerText = "FASE 02 // GRIDS EN MOVIMIENTO";
+
+                let localProgress = (progress - 0.33) / 0.33; // Normalizado de 0 a 1
+
+                // Las tarjetas Bento se desplazan verticalmente cruzándose en el centro sin simetría tradicional
+                let t1 = 150 - (localProgress * 150);
+                let t2 = -150 + (localProgress * 150);
+                sc2C1.style.transform = `translateY(${t1}px) rotate(${(1 - localProgress) * -5}deg)`;
+                sc2C2.style.transform = `translateY(${t2}px) rotate(${(1 - localProgress) * 5}deg)`;
+
+            } else if (progress > 0.66) {
+                // FASE 3 ACTIVA
+                s1.classList.remove('active');
+                s2.classList.remove('active');
+                s3.classList.add('active');
+                statusText.innerText = "FASE 03 // EXPANSIÓN CROMÁTICA";
+
+                let localProgress = (progress - 0.66) / 0.34; // Normalizado de 0 a 1
+
+                // Un círculo perfecto de color explota e invade toda la pantalla (Iris shot)
+                // Usamos vmin para garantizar cobertura completa en cualquier pantalla
+                let circleScale = localProgress * 30; 
+                sc3Circle.style.transform = `scale(${circleScale})`;
+                
+                // El texto aparece escalando desde el centro absoluto
+                sc3Text.style.transform = `scale(${0.7 + (localProgress * 0.3)})`;
+                sc3Text.style.opacity = `${localProgress}`;
+            }
+
+            // Solicita el siguiente frame del procesador gráfico (GPU)
+            requestAnimationFrame(animateEngine);
+        }
+
+        // Encendido del motor de animación
+        requestAnimationFrame(animateEngine);
     </script>
 </body>
 </html>
