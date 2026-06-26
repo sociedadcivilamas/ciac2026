@@ -3,601 +3,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIAC 2026 Campeche México - Website GitHub Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>CIAC 2026 — Campeche, México</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- ESTILOS GLOBALES --- */
+        /* --- CONFIGURACIÓN Y VARIABLES PREMIUM --- */
         :root {
-            --primary-blue: #1e3a8a; /* Azul oscuro del texto de CIAC */
-            --teal: #38bdf8; /* Azul verdoso del fuerte */
-            --gold: #facc15; /* Naranja dorado del fuerte */
-            --gradient-1-start: #38bdf8;
-            --gradient-1-end: #facc15;
-            --gradient-bar: linear-gradient(90deg, #ec4899 0%, #38bdf8 50%, #4ade80 100%);
-            --background-light: #f9fafb;
-            --text-dark: #1f2937;
-            --spacing-unit: 1rem;
-            --navbar-height: 80px;
+            --bg-dark: #070a12;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.07);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            /* Colores extraídos e inspirados en el logotipo */
+            --color-ciac-blue: #1e3a8a;
+            --color-teal: #38bdf8;
+            --color-gold: #facc15;
+            --color-pink: #ec4899;
+            
+            --gradient-logo-bar: linear-gradient(90deg, var(--color-pink) 0%, var(--color-teal) 50%, #4ade80 100%);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --section-padding: clamp(6rem, 10vw, 12rem);
         }
 
+        /* --- RESET & ESTILOS BASE --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            cursor: none; /* Ocultamos cursor default para el personalizado */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
-            line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        h1, h2, h3 {
-            color: var(--primary-blue);
-            font-weight: 700;
-        }
-
-        p {
-            color: var(--text-dark);
-            font-weight: 300;
-            font-size: 1.1rem;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 var(--spacing-unit);
+            padding: 0 clamp(1.5rem, 5vw, 5rem);
         }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
-        .navbar {
+        /* --- CURSOR PERSONALIZADO --- */
+        #custom-cursor {
+            width: 8px;
+            height: 8px;
             background-color: #fff;
+            border-radius: 50%;
             position: fixed;
-            top: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        #custom-cursor-blur {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background-color 0.3s;
+        }
+
+        .hover-active #custom-cursor {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 1);
+            mix-blend-mode: difference;
+        }
+        .hover-active #custom-cursor-blur {
+            width: 70px;
+            height: 70px;
+            border-color: transparent;
+        }
+
+        /* --- ORBES DE LUZ DE FONDO (MESH GRADIENTS) --- */
+        .ambient-glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(0,0,0,0) 70%);
+            top: -10vw;
+            right: -10vw;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.07) 0%, rgba(0,0,0,0) 70%);
+            top: 60vh;
+            left: -20vw;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatGlow 18s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5vw, 5vh) scale(1.1); }
+        }
+
+        /* --- BARRA DE NAVEGACIÓN (GLASSMORPHISM) --- */
+        .navbar {
+            position: fixed;
+            top: 2rem;
             left: 0;
             width: 100%;
-            height: var(--navbar-height);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             z-index: 1000;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .navbar-content {
-            width: 100%;
-            max-width: 1200px;
+        .navbar-blur {
+            background: rgba(7, 10, 18, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 100px;
+            padding: 0.75rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 calc(var(--spacing-unit) * 2);
+            transition: all 0.4s ease;
         }
 
-        .navbar-logo-container {
+        .navbar-logo-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            height: 100%;
         }
 
         .navbar-logo {
-            height: calc(var(--navbar-height) * 0.7);
+            height: 42px;
             width: auto;
-            /* El logotipo solo se usa aquí */
+            object-fit: contain;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
-        .nav-links li a {
+        .nav-links a {
             text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 400;
-            font-size: 0.9rem;
-            transition: color 0.3s ease, font-weight 0.3s ease;
-            position: relative;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
         }
 
-        .nav-links li a:hover {
-            color: var(--primary-blue);
+        .nav-links a:hover {
+            color: var(--text-main);
         }
 
-        .nav-links li a::after {
-            content: '';
-            display: block;
-            width: 0%;
-            height: 2px;
-            background: var(--gradient-bar);
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links li a:hover::after {
-            width: 100%;
-        }
-
-        /* Barra de gradiente multicolor sutil arriba de la navbar */
-        .navbar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-bar);
-            z-index: 1001;
-        }
-
-        /* --- SECCIÓN HERO --- */
+        /* --- INTERFAZ HERO (MAXIMALISMO EDITORIAL) --- */
         .hero {
-            height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
-            justify-content: center;
             position: relative;
-            background-color: #fff;
-            padding-top: calc(var(--navbar-height) + 2rem); /* Aire para la navbar */
+            padding-top: 120px;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(250, 204, 21, 0.1));
-            z-index: 1;
-        }
-
-        .hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.5s;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--teal), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto calc(var(--spacing-unit) * 3) auto;
-            color: var(--primary-blue);
-        }
-
-        .hero-btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--gradient-bar);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-decoration: none;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hero-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
-        }
-
-        /* --- SECCIÓN SOBRE LA CONFERENCIA (ABOUT) --- */
-        .about {
-            padding: calc(var(--spacing-unit) * 8) 0;
-            background-color: var(--background-light);
-            text-align: center;
-            margin-top: -10vh; /* Para ocupar la pantalla */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
             position: relative;
             z-index: 10;
         }
 
-        .about::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-bar);
+        .hero-tag {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--color-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .about-text-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 8vw, 7.5rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .about h2 {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
+        .hero-title span {
+            background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .about h2::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--teal), var(--gold));
+        .hero-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 3rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- SECCIÓN DE ORADORES (SPEAKERS) --- */
-        .speakers {
-            padding: calc(var(--spacing-unit) * 8) 0;
-            background-color: #fff;
-        }
-
-        .speakers h2 {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: calc(var(--spacing-unit) * 5);
-        }
-
-        .speaker-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: calc(var(--spacing-unit) * 3);
-            margin-top: calc(var(--spacing-unit) * 5);
-        }
-
-        .speaker-card {
-            background-color: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            padding: calc(var(--spacing-unit) * 2);
-            position: relative;
-        }
-
-        .speaker-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-        }
-
-        .speaker-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto calc(var(--spacing-unit) * 1.5) auto;
-            border: 4px solid var(--teal);
-        }
-
-        .speaker-name {
-            font-weight: 600;
-            color: var(--primary-blue);
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .speaker-title {
-            color: var(--text-dark);
+        .hero-description {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 600px;
+            color: var(--text-muted);
             font-weight: 300;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .speaker-desc {
-            font-size: 0.9rem;
-            color: #6b7280;
             line-height: 1.5;
         }
 
-        .speaker-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal), var(--gold));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .speaker-card:hover::after {
-            opacity: 1;
-        }
-
-        /* --- SECCIÓN DEL LUGAR (VENUE) --- */
-        .venue {
-            padding: calc(var(--spacing-unit) * 8) 0;
-            background-color: var(--background-light);
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .venue h2 {
-            font-size: 3rem;
-            margin-bottom: calc(var(--spacing-unit) * 5);
-        }
-
-        .venue-content {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 5);
-        }
-
-        .venue-map-placeholder {
-            flex: 1;
-            height: 400px;
-            background-image: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(250, 204, 21, 0.2)), url('https://img.freepik.com/foto-gratis/vista-aerea-fortaleza-puerto-marino_1048-18151.jpg');
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
+        .cta-button {
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .venue-map-placeholder::after {
-            content: 'Mapa de Campeche - Fuerte San Miguel';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            font-weight: 600;
+            padding: 1.2rem 2.5rem;
+            background: #fff;
+            color: var(--bg-dark);
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            background-color: rgba(30, 58, 138, 0.7);
-            border-radius: 50px;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            overflow: hidden;
+            display: inline-block;
+            white-space: nowrap;
+            transition: transform 0.3s;
         }
 
-        .venue-text-content {
-            flex: 1;
-            text-align: left;
+        .cta-button:hover {
+            transform: scale(1.03);
         }
 
-        .venue-text-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* --- PIE DE PÁGINA (FOOTER) --- */
-        .footer {
-            padding: calc(var(--spacing-unit) * 4) 0;
-            background-color: var(--primary-blue);
-            color: #fff;
-            text-align: center;
+        /* --- SECCIÓN MANIFIESTO / AIRE ASIMÉTRICO --- */
+        .manifesto {
+            padding: var(--section-padding) 0;
             position: relative;
         }
 
-        .footer p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
+        .manifesto-grid {
+            display: grid;
+            grid-template-columns: clamp(5rem, 15vw, 20rem) 1fr;
+            gap: 3rem;
         }
 
-        .footer-logo-container {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
+        .section-number {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+            position: sticky;
+            top: 150px;
+            height: fit-content;
         }
 
-        .footer-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+        .manifesto-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.8rem);
+            line-height: 1.1;
+            margin-bottom: 3rem;
+            font-weight: 400;
         }
 
-        .footer-links li a {
-            text-decoration: none;
-            color: #cbd5e1;
-            font-size: 0.8rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links li a:hover {
+        .manifesto-content h2 strong {
             color: #fff;
+            font-weight: 700;
         }
 
-        .footer::after {
+        /* --- SECCIÓN PROGRAMA / BENTO GRID --- */
+        .program {
+            padding: var(--section-padding) 0;
+            background: rgba(255, 255, 255, 0.01);
+            border-y: 1px solid var(--card-border);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .bento-card.col-2 { grid-column: span 2; }
+        .bento-card.row-2 { grid-row: span 2; }
+
+        .bento-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-teal);
+            font-weight: 600;
+        }
+
+        .bento-card h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            line-height: 1.2;
+        }
+
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+
+        /* Línea multicolor decorativa sutil inspirada en el logo dentro de un Bento Card destacado */
+        .bento-card.highlight::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: var(--gradient-bar);
+            background: var(--gradient-logo-bar);
         }
 
-        /* --- ANIMACIONES --- */
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        /* --- SECCIÓN LUGAR (EXPERIENCIA VISUAL COGNITIVA) --- */
+        .venue-premium {
+            padding: var(--section-padding) 0;
+        }
+
+        .venue-hero-image {
+            width: 100%;
+            height: 65vh;
+            border-radius: 32px;
+            background: linear-gradient(rgba(7, 10, 18, 0.2), rgba(7, 10, 18, 0.8)), 
+                        url('https://images.unsplash.com/photo-1512813583145-baaa340ef29f?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 4rem;
+            box-sizing: border-box;
+            border: 1px solid var(--card-border);
+            margin-bottom: 4rem;
+        }
+
+        .venue-title-inside {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            line-height: 1;
+        }
+
+        /* --- PIE DE PÁGINA (MINIMALISTA DE ALTA GAMA) --- */
+        .footer-premium {
+            padding: 6rem 0 3rem 0;
+            border-top: 1px solid var(--card-border);
+            position: relative;
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-credits {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ANIMACIONES SCROLL JS --- */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- RESPONSIVIDAD --- */
-        @media (max-width: 900px) {
-            .navbar-content {
-                flex-direction: column;
-                height: auto;
-                padding: 1rem;
-            }
-
-            .navbar-logo-container {
-                height: 50px;
-            }
-
-            .navbar-logo {
-                height: 40px;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                margin-top: 10px;
-            }
-
-            .hero {
-                padding-top: calc(var(--navbar-height) + 6rem);
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .about h2, .speakers h2, .venue h2 {
-                font-size: 2rem;
-            }
-
-            .venue-content {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .venue-map-placeholder {
-                height: 250px;
-            }
-
-            .venue-text-content {
-                text-align: center;
-            }
+        /* --- RESPONSIVIDAD QUERIES --- */
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.col-2 { grid-column: span 1; }
+            .manifesto-grid { grid-template-columns: 1fr; }
+            .section-number { position: relative; top: 0; }
+            .hero-meta { flex-direction: column; align-items: flex-start; gap: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-content container">
-            <a href="#" class="navbar-logo-container">
-                <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026 Campeche México Logo" class="navbar-logo">
+    <div id="custom-cursor"></div>
+    <div id="custom-cursor-blur"></div>
+
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <nav class="navbar container">
+        <div class="navbar-blur" style="width: 100%;">
+            <a href="#" class="navbar-logo-link interactable">
+                <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC 2026 Logo" class="navbar-logo">
             </a>
             <ul class="nav-links">
-                <li><a href="#hero">Inicio</a></li>
-                <li><a href="#about">Sobre CIAC</a></li>
-                <li><a href="#speakers">Oradores</a></li>
-                <li><a href="#venue">Lugar</a></li>
-                <li><a href="#registro">Registro</a></li>
+                <li><a href="#about" class="interactable">Concepto</a></li>
+                <li><a href="#programa" class="interactable">Ejes</a></li>
+                <li><a href="#lugar" class="interactable">Sede</a></li>
+                <li><a href="#registro" class="cta-button interactable" style="padding: 0.6rem 1.5rem; font-size: 0.75rem;">Tickets</a></li>
             </ul>
         </div>
     </nav>
 
-    <section id="hero" class="hero">
-        <div class="hero-content container">
-            <h1 class="hero-title">CIAC 2026</h1>
-            <p class="hero-subtitle">Conferencia Internacional sobre Ciudades y Arquitectura Colonial. Innovación en el Patrimonio.</p>
-            <a href="#registro" class="hero-btn">Registrarse Ahora</a>
+    <main class="hero container">
+        <div class="hero-grid">
+            <div>
+                <span class="hero-tag">Conferencia Internacional</span>
+                <h1 class="hero-title">Ciudades & <br>Arquitectura <span>Colonial</span></h1>
+            </div>
+            <div class="hero-meta">
+                <p class="hero-description">CIAC 2026 une la vanguardia tecnológica global con la memoria de los centros históricos. Un laboratorio de preservación evolutiva en Campeche, México.</p>
+                <a href="#about" class="cta-button interactable">Explorar Foro</a>
+            </div>
         </div>
-    </section>
+    </main>
 
-    <section id="about" class="about">
-        <div class="container about-text-content">
-            <h2>Innovación y Patrimonio</h2>
-            <p>CIAC 2026 Campeche es un foro global donde arquitectos, urbanistas y expertos en patrimonio se reúnen para explorar la convergencia de la tecnología moderna y la preservación de ciudades históricas coloniales. Acompáñanos a descubrir soluciones sostenibles y visionarias para los desafíos urbanos del mañana, en el marco incomparable de la ciudad fortificada de Campeche.</p>
-        </div>
-    </section>
-
-    <section id="speakers" class="speakers">
-        <div class="container">
-            <h2>Oradores Destacados</h2>
-            <div class="speaker-grid">
-                <div class="speaker-card">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Oradora 1" class="speaker-photo">
-                    <p class="speaker-name">Dr. Elena Rodríguez</p>
-                    <p class="speaker-title">Directora de Preservación Digital, UNESCO</p>
-                    <p class="speaker-desc">Líder en escaneo láser y modelado 3D para la documentación de sitios históricos coloniales.</p>
-                </div>
-                <div class="speaker-card">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Orador 2" class="speaker-photo">
-                    <p class="speaker-name">Arq. Carlos Maza</p>
-                    <p class="speaker-title">Arquitecto Principal, Maza & Asociados</p>
-                    <p class="speaker-desc">Especialista en integración de arquitectura contemporánea en centros históricos de México.</p>
-                </div>
-                <div class="speaker-card">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Oradora 3" class="speaker-photo">
-                    <p class="speaker-name">Dra. Isabella Conti</p>
-                    <p class="speaker-title">Urbanista Sostenible, Universidad de Roma</p>
-                    <p class="speaker-desc">Autora de "Ciudades de Piedra, Futuros de Luz", sobre movilidad suave en cascos antiguos.</p>
-                </div>
+    <section id="about" class="manifesto container scroll-reveal">
+        <div class="manifesto-grid">
+            <div class="section-number">01 /</div>
+            <div class="manifesto-content">
+                <h2>El mañana necesita de las bases de ayer. CIAC es el punto de inflexión donde el <strong>patrimonio fortificado</strong> dialoga con el <strong>urbanismo sostenible</strong> y la IA aplicada al diseño.</h2>
             </div>
         </div>
     </section>
 
-    <section id="venue" class="venue">
+    <section id="programa" class="program scroll-reveal">
         <div class="container">
-            <h2>El Escenario Perfecto</h2>
-            <div class="venue-content">
-                <div class="venue-map-placeholder">
+            <div class="manifesto-grid">
+                <div class="section-number">02 /</div>
+                <div>
+                    <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);">Ejes Académicos & Innovación</h2>
+                    
+                    <div class="bento-grid">
+                        <div class="bento-card col-2 highlight">
+                            <span class="bento-tag">Keynote Principal</span>
+                            <h3>Preservación Digital Predictiva</h3>
+                            <p>Modelado generativo e inteligencia artificial aplicada al análisis de fatiga estructural en murallas coloniales y baluartes del Caribe.</p>
+                        </div>
+                        
+                        <div class="bento-card">
+                            <span class="bento-tag">Panel</span>
+                            <h3>Materiales Bio-Sintéticos</h3>
+                            <p>Evolución de aglutinantes ancestrales combinados con nano-tecnología de aislamiento.</p>
+                        </div>
+
+                        <div class="bento-card">
+                            <span class="bento-tag">Taller</span>
+                            <h3>Cartografía Háptica</h3>
+                            <p>Experiencias inmersivas para la accesibilidad universal en centros declarados por la UNESCO.</p>
+                        </div>
+
+                        <div class="bento-card col-2">
+                            <span class="bento-tag">Conferencia</span>
+                            <h3>Movilidad Fluida en Cascos Antiguos</h3>
+                            <p>Re-diseño del flujo de tráfico sin intrusión visual mediante pavimentos inteligentes y transporte autónomo micro-escala.</p>
+                        </div>
                     </div>
-                <div class="venue-text-content">
-                    <h3>Campeche: Una Ciudad Fortificada</h3>
-                    <p>La conferencia se celebrará en la histórica ciudad fortificada de San Francisco de Campeche, declarada Patrimonio de la Humanidad por la UNESCO. Nuestras sedes principales, ubicadas dentro y alrededor de los imponentes fuertes coloniales (como el Fuerte de San Miguel), ofrecerán una experiencia inmersiva única que encarna el tema de CIAC 2026. Los participantes disfrutarán de la rica gastronomía, la calidez de su gente y la belleza de la costa del Golfo.</p>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="footer" class="footer">
-        <div class="container">
-            <div class="footer-logo-container">
-                <img src="https://i.ibb.co/3WkXh4f/CIAC-Logo.png" alt="CIAC Logo Footer" class="navbar-logo" style="filter: brightness(0) invert(1) opacity(0.6);">
+    <section id="lugar" class="venue-premium container scroll-reveal">
+        <div class="manifesto-grid">
+            <div class="section-number">03 /</div>
+            <div>
+                <div class="venue-hero-image">
+                    <h2 class="venue-title-inside">San Francisco de<br>Campeche, México.</h2>
+                </div>
+                <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 800px; line-height: 1.6; font-weight: 300;">
+                    Una fortaleza viva frente al Golfo de México. Declarada Patrimonio Cultural de la Humanidad, sus murallas coloniales albergarán las mesas de debate, convirtiendo a toda la ciudad en un lienzo dinámico de interacción arquitectónica.
+                </p>
             </div>
-            <ul class="footer-links">
-                <li><a href="#">Privacidad</a></li>
-                <li><a href="#">Términos y Condiciones</a></li>
-                <li><a href="#">Prensa</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-            <p>&copy; CIAC 2026 Campeche México. Todos los derechos reservados.</p>
-            <p style="margin-top: 10px;">Diseñado con excelencia por [Tu Nombre / Empresa]</p>
+        </div>
+    </section>
+
+    <footer class="footer-premium container">
+        <div class="footer-grid">
+            <h2 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; tracking: -0.02em;">CIAC 2026</h2>
+            <div class="footer-credits">
+                <p>&copy; 2026 CIAC. Todos los derechos reservados.</p>
+                <p style="color: rgba(255,255,255,0.3); margin-top: 4px;">Desarrollado para GitHub Pages</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Animaciones sutiles al cargar
-        document.addEventListener('DOMContentLoaded', () => {
-            // Un sutil efecto de "pulso" en la linterna del fuerte en el logo
-            const logo = document.querySelector('.navbar-logo');
-            if (logo) {
-                let initialOpacity = 1;
-                setInterval(() => {
-                    initialOpacity = initialOpacity === 1 ? 0.8 : 1;
-                    logo.style.transition = 'opacity 1s ease';
-                    logo.style.opacity = initialOpacity;
-                }, 2000); // Pulso cada 2 segundos
-            }
+        // 1. Control Dinámico del Cursor Personalizado
+        const cursor = document.getElementById('custom-cursor');
+        const cursorBlur = document.getElementById('custom-cursor-blur');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Suavizado sutil para el anillo exterior
+            cursorBlur.animate({
+                left: `${e.clientX}px`,
+                top: `${e.clientY}px`
+            }, { duration: 100, fill: "forwards" });
+        });
+
+        // Eventos Hover para Elementos Interactivos
+        const interactables = document.querySelectorAll('.interactable, .bento-card, .cta-button');
+        interactables.forEach(item => {
+            item.addEventListener('mouseenter', () => document.body.classList.add('hover-active'));
+            item.addEventListener('mouseleave', () => document.body.classList.remove('hover-active'));
+        });
+
+        // 2. Animación de Aparición Exponencial (Scroll Reveal usando IntersectionObserver)
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // 3. Efecto Parallax sutil en los Orbes de Luz al mover el Mouse
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.02;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.02;
+            document.querySelector('.ambient-glow').style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
     </script>
 </body>
 </html>
+
+
