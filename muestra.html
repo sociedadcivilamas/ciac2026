@@ -51,11 +51,13 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 90px;
+            height: 110px;
             display: flex;
             align-items: center;
             padding: 0 5vw;
             z-index: 200;
+            background-color: #ffffff;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
         }
 
         .nav-content {
@@ -76,7 +78,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #fff;
+            color: var(--cimc-blue);
             font-weight: 600;
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -84,41 +86,43 @@
             display: block;
             line-height: 1;
         }
+        
+        .nav-links a:hover {
+            color: var(--pink); /* Destello rosa al pasar el cursor */
+        }
 
         /* Botón de Idioma Estilo Semi-Flat */
      .btn-lang {
-            background: transparent;
-            color: #fff !important;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%); 
+            border: none;
+            color: #fff !important; 
             font-family: var(--font-main);
             font-weight: 800;
             font-size: 0.75rem;
             letter-spacing: 0.12em;
-            padding: 0.6rem 1.4rem;
+            padding: 0.7rem 1.6rem; 
+            border-radius: 4px; 
             text-decoration: none;
             text-transform: uppercase;
-            border-radius: 50px; /* Transforma el cuadrado en cápsula */
-            display: inline-block;
-            /* Usamos un truco premium de borde con gradiente */
-            border: 2px solid transparent;
-            border-image: linear-gradient(90deg, var(--teal), var(--pink)) 1;
-            /* Nota: Para que el border-radius funcione con gradiente usamos este ajuste de abajo */
-             box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
-            border: 2px solid;
-            border-color: var(--pink);
-            transition: all 0.3s ease;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); 
+            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
         }
         
         .btn-lang:hover {
-            background: var(--pink);
-            border-color: var(--pink);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5); /* Brillo neón */
+            filter: brightness(1.15);
+            transform: translateY(-2px) scale(1.03);
         }
+        
         /* --- BLOQUE DE BRANDING FIJO (DESKTOP) --- */
         .branding-block {
-            position: fixed;
-            top: 25px;
+            position: absolute;
+            top: 35px;
             left: 5vw;
-            z-index: 150;
+            z-index: 210;
             display: flex;
             align-items: flex-start;
             gap: 15px;
@@ -128,7 +132,7 @@
         }
 
         .full-logo {
-            width: 250px;
+            width: 220px;
             height: auto;
             display: block;
         }
