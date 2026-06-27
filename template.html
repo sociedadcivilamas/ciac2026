@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 | Arquitectura Digital de la Medicina</title>
-
+    <title>CIMC 2026 | Prismatic Glass Experience</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Outfit:wght@500;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Colores extraídos directamente de tu logotipo CIMC */
-            --logo-blue-deep: #3b52a3; /* 'CIMC' */
-            --logo-teal: #1cb5c2; /* 'México' y subrayado */
-            --logo-magenta: #e41b77; /* Subrayado */
-            --logo-gold: #f2aa2a; /* Garita */
-            --logo-purple: #7552a0; /* Subrayado */
+            /* Paleta extraída del logo */
+            --p-blue: #3b52a3;
+            --p-teal: #1cb5c2;
+            --p-magenta: #e41b77;
+            --p-gold: #f2aa2a;
+            --p-purple: #7552a0;
             
-            --bg-deep: #050508;
-            --text-light: #ffffff;
+            --bg-light: #fdfdfd;
+            --text-dark: #0a0c10;
             
-            /* Glassmorphism Experimental */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-blur: blur(35px);
-            --glass-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.9);
+            /* Glassmorphism de "Prisma Claro" */
+            --glass-white: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.7);
+            --glass-blur: blur(25px) saturate(180%);
+            --glass-shadow: 0 40px 100px rgba(15, 23, 42, 0.08);
             
-            --font-main: 'Inter', sans-serif;
-            --font-display: 'Space Grotesk', sans-serif;
-            --bezier: cubic-bezier(0.16, 1, 0.3, 1);
+            --bezier-flow: cubic-bezier(0.2, 1, 0.3, 1);
         }
 
         * {
@@ -38,397 +36,399 @@
             padding: 0;
         }
 
-        body, html {
-            height: 100%;
-            background-color: var(--bg-deep);
-            color: var(--text-light);
-            font-family: var(--font-main);
-            overflow: hidden; /* Congelado en el Hero */
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            position: relative;
         }
 
-        /* --- 1. FONDO DE RUIDO Y AURORA (CON COLORES DE LOGO) --- */
-        .noise-overlay {
+        /* --- FONDO PRISMÁTICO (EXPERIMENTAL Y COLORIDO) --- */
+        .prism-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.3;
-            /* Textura de ruido SVG generada en CSS */
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        .aurora-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            z-index: -1;
+            background: #fff;
             overflow: hidden;
-            z-index: 1;
         }
 
-        .orb {
+        /* Formas de gradiente afiladas y coloridas */
+        .prism-shape {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.6;
-            animation: breathe 18s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: movePrism 25s infinite alternate ease-in-out;
         }
 
-        /* Nube Turquesa-Naranja (Muralla del Logo) */
-        .orb-teal-gold {
-            width: 60vw; height: 60vw;
-            background: linear-gradient(135deg, var(--logo-teal), var(--logo-gold));
-            top: -30%; right: -10%;
+        .shape-1 { width: 60vw; height: 40vh; background: var(--p-magenta); top: -10%; left: -10%; transform: rotate(-15deg); }
+        .shape-2 { width: 50vw; height: 50vh; background: var(--p-teal); bottom: -10%; right: -5%; transform: rotate(10deg); animation-delay: -5s;}
+        .shape-3 { width: 30vw; height: 30vw; background: var(--p-gold); top: 20%; left: 40%; border-radius: 50%; opacity: 0.3; }
+
+        @keyframes movePrism {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(4vw, 3vh) rotate(10deg) scale(1.1); }
         }
 
-        /* Nube Fucsia-Turquesa (Texto 2026 del Logo) */
-        .orb-magenta-teal {
-            width: 70vw; height: 70vw;
-            background: linear-gradient(135deg, var(--logo-magenta), var(--logo-purple));
-            bottom: -40%; left: -25%;
-            animation-delay: -5s;
-        }
-
-        /* Nube Azul Profundo central (CIMC del Logo) */
-        .orb-blue {
-            width: 45vw; height: 45vw;
-            background: var(--logo-blue-deep);
-            top: 35%; left: 35%;
-            opacity: 0.3;
-            animation-delay: -10s;
-            mix-blend-mode: screen;
-        }
-
-        @keyframes breathe {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.15) translate(-4vw, 3vh); }
-        }
-
-        /* --- 2. ELEMENTOS 3D FLOTANTES (FUSIÓN COLONIAL Y TECH) --- */
-        .geometry {
-            position: absolute;
-            z-index: 2;
-            background: linear-gradient(135deg, var(--logo-teal), var(--logo-purple));
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            animation: floatShape 25s infinite linear;
-        }
-
-        /* Gran orbe de garita colonial (detrás del cristal) */
-        .geo-colonial {
-            width: 250px; height: 250px;
-            border-radius: 50%;
-            top: 10%; right: 20%;
-            background: linear-gradient(135deg, var(--logo-gold), #ff8a00);
-            opacity: 0.8;
-            filter: blur(5px);
-        }
-
-        /* Fragmentos orbitantes (rosa fucsia) */
-        .geo-fragment {
-            width: 60px; height: 60px;
-            border-radius: 12px;
-            bottom: 20%; left: 35%;
-            transform: rotate(30deg);
-            background: var(--logo-magenta);
-            animation-delay: -3s;
-        }
-
-        @keyframes floatShape {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
-        }
-
-        /* --- 3. NAVEGACIÓN SUSPENDIDA EXPERIMENTAL --- */
-        .nav-island {
+        /* --- NAVEGACIÓN (FLAT MINIMAL SOBRE GLASS) --- */
+        .navbar {
             position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 35px;
-            padding: 18px 45px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border);
-            border-radius: 100px;
-            z-index: 200;
-            box-shadow: var(--glass-shadow);
+            justify-content: space-between;
+            padding: 0 5vw;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .nav-island a {
-            color: var(--text-light);
+        .logo-img { height: 45px; width: auto; }
+
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a {
             text-decoration: none;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
+            color: var(--text-dark);
             font-weight: 700;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: color 0.3s ease;
         }
+        .nav-links a:hover { color: var(--p-magenta); }
 
-        .nav-island a:hover { color: var(--logo-magenta); }
-        
-        .nav-brand {
-            font-size: 1.3rem !important;
-            color: var(--text-light) !important;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .btn-cta-nav {
+            background: var(--text-dark);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.3s var(--bezier-flow);
         }
-        .nav-brand span { font-weight: 900; }
-        .nav-lang { font-size: 0.7rem !important; color: rgba(255,255,255,0.6) !important; }
+        .btn-cta-nav:hover { transform: scale(1.05); background: var(--p-blue); }
 
-        /* --- 4. HERO SECTION ARQUITECTÓNICO EXPERIMENTAL --- */
-        .hero-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+        .menu-btn { display: none; }
+
+        /* --- HERO: COMPOSICIÓN MODULAR (TOTALMENTE DIFERENTE) --- */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            padding: 120px 5vw 60px 5vw;
+            position: relative;
         }
 
-        /* La arquitectura de cristal es asimétrica y forma un arco colonial */
-        .glass-arch {
-            width: 92%;
+        /* Grid modular asimétrico */
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
             max-width: 1300px;
-            padding: 70px;
-            background: rgba(255, 255, 255, 0.02);
+            width: 100%;
+        }
+
+        /* Bloque 1: El Título Principal */
+        .glass-block-title {
+            grid-column: 1 / 3;
+            padding: 80px 60px;
+            text-align: center;
+            background: var(--glass-white);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
-            border-radius: 35px;
+            border-radius: 40px;
             box-shadow: var(--glass-shadow);
-            
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 70px;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            border-top-left-radius: 150px; /* Arquitectura asimétrica */
-            border-top-right-radius: 150px;
-        }
-
-        /* Brillo de garita sutil grabado en el cristal */
-        .glass-arch::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px; height: 100px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 60%);
-            border: 2px solid rgba(255,255,255,0.08);
-            border-radius: 20px 20px 0 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .hero-content { position: relative; z-index: 2; }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 9px 20px;
-            background: rgba(117, 82, 160, 0.1);
-            border: 1px solid rgba(117, 82, 160, 0.3);
-            border-radius: 100px;
-            font-family: var(--font-display);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            color: var(--logo-purple);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
         }
 
         .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 7vw, 6.5rem);
             font-weight: 900;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            margin-bottom: 2.5rem;
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 30px;
         }
 
-        .text-gradient {
-            background: linear-gradient(to right, #fff, rgba(255,255,255,0.4));
+        .hero-title span {
+            background: linear-gradient(90deg, var(--p-magenta), var(--p-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-desc {
-            font-size: 1.15rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.7);
-            max-width: 480px;
-            margin-bottom: 3.5rem;
-        }
-
-        /* Botón Experimental Glassmorphism con resplandor fucsia */
-        .btn-experimental {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.3rem 3.5rem;
-            font-family: var(--font-display);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: #fff;
-            text-transform: uppercase;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 100px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 0px var(--logo-magenta);
-        }
-
-        .btn-experimental:hover {
-            border-color: rgba(255,255,255,0.4);
-            box-shadow: 0 10px 40px var(--logo-magenta);
-            transform: translateY(-4px);
-        }
-
-        /* Visual Derecho (Arquitectura y Datos orbitantes) */
-        .hero-visual {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .colonial-arch-structure {
-            width: 320px; height: 320px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.08);
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .colonial-arch-structure::after {
-            content: '';
-            width: 270px; height: 270px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255,255,255,0.15);
-            animation: spin Colonial 40s linear infinite;
-        }
-
-        .data-fragment {
-            position: absolute;
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(15px);
+        /* Bloque 2: Información Secundaria */
+        .glass-block-info {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 40px;
             border: 1px solid var(--glass-border);
-            padding: 18px 28px;
-            border-radius: 14px;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            animation: floatShape 10s infinite ease-in-out;
+            box-shadow: var(--glass-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .data-1 { top: 15%; right: 10%; color: var(--logo-magenta); animation-delay: -2s; }
-        .data-2 { bottom: 20%; right: 45%; color: var(--logo-teal); animation-delay: -5s; }
+        .hero-desc {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
 
-        @keyframes spin Colonial { 100% { transform: rotate(360deg); } }
+        /* Bloque 3: Imagen / Visual con Refracción */
+        .glass-block-visual {
+            height: 350px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, var(--p-gold), var(--p-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(28, 181, 194, 0.2);
+        }
 
-        /* --- RESPONSIVO --- */
+        .visual-circle {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: #fff;
+            transform: rotate(-10deg);
+            animation: rotateVisual 10s infinite linear;
+        }
+
+        @keyframes rotateVisual { 100% { transform: rotate(350deg); } }
+
+        /* --- SECCIÓN 2: ¿QUÉ ES? (SCROLL HORIZONTAL SIMULADO) --- */
+        .section-about { padding: 100px 5vw; }
+
+        .about-glass-pane {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .about-image {
+            background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80') center;
+            background-size: cover;
+            min-height: 400px;
+        }
+
+        .about-content {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-label {
+            color: var(--p-magenta);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .about-title { font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 30px; letter-spacing: -0.02em; }
+
+        /* --- SECCIÓN 3: PONENTES (TARJETAS DE "HOJA DE CRISTAL") --- */
+        .section-speakers { padding: 100px 5vw; }
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .speaker-blade {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            transition: all 0.4s var(--bezier-flow);
+            text-align: left;
+            position: relative;
+        }
+
+        .speaker-blade:hover { transform: translateY(-15px) scale(1.02); background: #fff; }
+
+        .speaker-blade::after {
+            content: '';
+            position: absolute;
+            top: 20px; right: 20px;
+            width: 40px; height: 40px;
+            background: var(--p-teal);
+            border-radius: 50%;
+            opacity: 0.2;
+        }
+
+        .speaker-name { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+        .speaker-role { color: var(--p-blue); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+
+        /* --- SECCIÓN 4: HERO FINAL (VIBRANTE) --- */
+        .section-final { padding: 100px 5vw 150px 5vw; }
+        .final-glass {
+            padding: 100px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+            backdrop-filter: blur(40px);
+            border-radius: 60px;
+            text-align: center;
+            border: 1px solid #fff;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .btn-final {
+            margin-top: 40px;
+            display: inline-block;
+            background: var(--p-magenta);
+            color: #fff;
+            padding: 20px 50px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 20px 40px rgba(228, 27, 119, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .btn-final:hover { transform: translateY(-5px) scale(1.05); }
+
+        /* --- MOBILE RE-DESIGN --- */
         @media (max-width: 968px) {
-            body, html { overflow-y: auto; height: auto; }
-            .nav-island { display: none; }
-            .glass-arch {
-                grid-template-columns: 1fr;
-                padding: 40px 25px 50px 25px;
-                margin-top: 90px;
-                margin-bottom: 40px;
-                border-top-left-radius: 50px;
-                border-top-right-radius: 50px;
+            .nav-links, .btn-cta-nav { display: none; }
+            .menu-btn {
+                display: flex;
+                background: #fff;
+                border: none;
+                width: 45px; height: 45px;
+                border-radius: 12px;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
-            .hero-title { font-size: 2.8rem; }
-            .hero-badge { margin-bottom: 1.5rem; }
-            .hero-desc { margin-bottom: 2.5rem; }
-            .btn-experimental { width: 100%; text-align: center; }
-            .hero-visual { height: 280px; justify-content: center; margin-top: 30px; }
-            .colonial-arch-structure { width: 230px; height: 230px; }
-            .colonial-arch-structure::after { width: 190px; height: 190px; }
-            .data-fragment { padding: 15px 22px; font-size: 0.75rem; }
-            .data-1 { right: -5%; }
+
+            .hero-layout { grid-template-columns: 1fr; }
+            .glass-block-title { grid-column: 1; padding: 60px 30px; }
+            .hero-title { font-size: 3.5rem; }
+            .glass-block-visual { height: 250px; }
+
+            .about-glass-pane { grid-template-columns: 1fr; }
+            .about-content { padding: 40px 30px; }
+            .about-title { font-size: 2.5rem; }
+
+            .final-glass { padding: 60px 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
-
-    <div class="aurora-container">
-        <div class="orb orb-teal-gold"></div>
-        <div class="orb orb-magenta-teal"></div>
-        <div class="orb orb-blue"></div>
+    <div class="prism-background">
+        <div class="prism-shape shape-1"></div>
+        <div class="prism-shape shape-2"></div>
+        <div class="prism-shape shape-3"></div>
     </div>
 
-    <div class="geometry geo-colonial"></div>
-    <div class="geometry geo-fragment"></div>
-
-    <nav class="nav-island">
-        <a href="#" class="nav-brand"><span>CIMC</span></a>
-        <a href="#">Inicio</a>
-        <a href="#">Programa</a>
-        <a href="#">Sede</a>
-        <a href="#">Registro</a>
-        <a href="#" class="nav-lang">ENGLISH</a>
+    <nav class="navbar">
+        <div class="branding">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#about">¿Qué es?</a></li>
+            <li><a href="#ponentes">Ponentes</a></li>
+        </ul>
+        <a href="#" class="btn-cta-nav">Inscríbete</a>
+        <button class="menu-btn">☰</button>
     </nav>
 
-    <div class="hero-wrapper container">
-        <div class="glass-arch container">
+    <section class="hero">
+        <div class="hero-layout">
+            <div class="glass-block-title">
+                <span class="section-label">CAMPECHE MÉXICO • 2026</span>
+                <h1 class="hero-title">Medicina del <span>Futuro.</span></h1>
+            </div>
             
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE</span>
-                </div>
-                
-                <h1 class="hero-title">
-                    Innovación.<br>
-                    Humanismo.<br>
-                    <span class="text-gradient">Historia.</span>
-                </h1>
-                
-                <p class="hero-desc">
-                    El epicentro global donde la convergencia de la tecnología médica más avanzada y la herencia colonial de Campeche trazan el futuro de la salud.
-                </p>
-                
-                <a href="#" class="btn-experimental">Inicia tu Registro</a>
+            <div class="glass-block-info">
+                <p class="hero-desc">Una convergencia única entre la vanguardia tecnológica y el humanismo médico, enmarcada en el patrimonio histórico de Campeche.</p>
             </div>
 
-            <div class="hero-visual">
-                <div class="colonial-arch-structure">
-                    <div class="data-fragment data-1">BIOTECH // 20.26</div>
-                    <div class="data-fragment data-2">COLONIAL PATHWAY</div>
-                </div>
+            <div class="glass-block-visual">
+                <div class="visual-circle">CIMC</div>
             </div>
-
         </div>
-    </div>
+    </section>
+
+    <section id="about" class="section-about">
+        <div class="about-glass-pane">
+            <div class="about-image"></div>
+            <div class="about-content">
+                <span class="section-label">CONGRESO INTERNACIONAL</span>
+                <h2 class="about-title">Intercambio de Vanguardia.</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #475569;">
+                    El CIMC 2026 es el punto de encuentro para especialistas, investigadores y estudiantes que buscan redefinir los límites de la salud global a través de la innovación disruptiva.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ponentes" class="section-speakers">
+        <span class="section-label" style="text-align: center;">Ponentes Magistrales</span>
+        <div class="speakers-grid">
+            <div class="speaker-blade">
+                <div class="speaker-role">Cardiología Digital</div>
+                <h3 class="speaker-name">Dr. Adrián Velázquez</h3>
+                <p>Pionero en algoritmos de predicción cardiovascular.</p>
+            </div>
+            <div class="speaker-blade">
+                <div class="speaker-role">Bioética Global</div>
+                <h3 class="speaker-name">Dra. Mónica Rosetti</h3>
+                <p>Líder en humanismo y equidad en salud tecnológica.</p>
+            </div>
+            <div class="speaker-blade">
+                <div class="speaker-role">Genómica Aplicada</div>
+                <h3 class="speaker-name">Dra. Sofía Chen</h3>
+                <p>Experta en terapias personalizadas de precisión.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-final">
+        <div class="final-glass">
+            <h2 class="about-title">¿Listo para ser parte?</h2>
+            <p>Únete al evento médico más innovador del 2026.</p>
+            <a href="#" class="btn-final">Asegurar mi lugar</a>
+        </div>
+    </section>
 
 </body>
 </html>
