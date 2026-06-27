@@ -126,6 +126,33 @@
             100% { transform: translate(-5vw, 5vh) scale(1.1); }
         }
 
+        /* Botón de Idioma Estilo Semi-Flat */
+        .btn-lang {
+            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%); 
+            border: none;
+            color: #fff !important; 
+            font-family: var(--font-main);
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            padding: 0.7rem 1.6rem; 
+            border-radius: 4px; 
+            text-decoration: none;
+            text-transform: uppercase;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); 
+            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
+        }
+        
+        .btn-lang:hover {
+            filter: brightness(1.15);
+            transform: translateY(-2px) scale(1.03);
+        }
+
+
         /* --- HERO SECTION --- */
         .hero-container {
             min-height: 100vh;
@@ -305,6 +332,7 @@
             <li><a href="#">Programa</a></li>
             <li><a href="#">Sede</a></li>
             <li><a href="#">Contacto</a></li>
+             <a href="en.html" class="btn-lang">English</a>
         </ul>
     </nav>
 
