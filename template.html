@@ -128,30 +128,36 @@
 
         /* Botón de Idioma Estilo Semi-Flat */
         .btn-lang {
-            background: linear-gradient(90deg, var(--teal) 0%, var(--pink) 100%); 
-            border: none;
-            color: #fff !important; 
-            font-family: var(--font-main);
-            font-weight: 800;
+            /* Fondo de cristal claro */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            
+            color: var(--text-main); /* Usamos el texto oscuro de la paleta actual */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
             font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            padding: 0.7rem 1.6rem; 
-            border-radius: 4px; 
+            letter-spacing: 0.1em;
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px; /* Forma de píldora moderna */
             text-decoration: none;
             text-transform: uppercase;
             line-height: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); 
-            transition: transform 0.3s var(--bezier-premium), filter 0.3s ease;
-        }
-        
-        .btn-lang:hover {
-            filter: brightness(1.15);
-            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Sombra ultra suave */
+            transition: all 0.3s ease;
         }
 
+        .btn-lang:hover {
+            background: #ffffff;
+            border-color: var(--glow-cyan); /* Toque de color del logo/ilustración */
+            color: var(--glow-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(53, 196, 214, 0.15); /* Resplandor cyan sutil */
+        }
 
         /* --- HERO SECTION --- */
         .hero-container {
