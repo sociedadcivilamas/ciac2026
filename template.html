@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 - Dark Glassmorphism Hero</title>
+    <title>CIMC 2026 - Light Glassmorphism Hero Perfeccionado</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,19 +11,20 @@
 
     <style>
         :root {
-            /* Colores basados en la nueva ilustración */
+            /* Colores de la ilustración y el logo CIMC */
             --glow-cyan: #35c4d6;
             --glow-orange: #f29c38;
-            --bg-deep: #07090f; /* Fondo súper oscuro para resaltar la imagen */
+            --primary-blue: #093c71;
+            --bg-light: #fcfdfe; /* Fondo claro y limpio */
             
-            /* Dark Glassmorphism */
-            --glass-bg: rgba(20, 25, 40, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(24px);
-            --glass-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            /* Light Glassmorphism (Más luminoso para light-mode) */
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-blur: blur(16px);
+            --glass-shadow: 0 20px 40px rgba(9, 60, 113, 0.08);
             
-            --text-main: #ffffff;
-            --text-muted: #a0aec0;
+            --text-main: #000000;
+            --text-muted: #475569;
         }
 
         * {
@@ -34,29 +35,40 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-deep);
+            background-color: var(--bg-light);
             color: var(--text-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- NAVEGACIÓN MINIMALISTA --- */
-        .navbar {
-            position: absolute;
-            top: 0;
+        /* --- NAVEGACIÓN --- */
+        .navbar-wrapper {
+            background-color: #ffffff;
             width: 100%;
-            padding: 30px 5vw;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            position: relative;
             z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
         }
 
         .nav-logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: 0.1em;
-            color: var(--text-main);
+            color: var(--primary-blue);
             text-decoration: none;
         }
         
@@ -66,262 +78,361 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
+            margin: 0 auto;
         }
 
         .nav-links a {
-            color: var(--text-muted);
             text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: 700;
             font-size: 0.85rem;
-            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: color 0.3s ease;
         }
-
+        
         .nav-links a:hover {
             color: var(--glow-orange);
         }
 
-        /* --- LUCES AMBIENTALES DEL FONDO --- */
-        .ambient-lights {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+        /* Pill de Idiomas */
+        .lang-switch {
+            display: flex;
+            background: #9bc0e5;
+            border-radius: 20px;
             overflow: hidden;
+            padding: 2px;
+        }
+
+        .lang-switch a {
+            text-decoration: none;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            border-radius: 18px;
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        .lang-switch a.active {
+            background-color: var(--primary-blue);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- FONDOS DE COLOR SUTIL (Para alimentar el Glassmorphism) --- */
+        .ambient-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
+            overflow: hidden;
             pointer-events: none;
         }
 
-        .light-orb {
+        .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.4;
-            animation: drift 15s infinite alternate ease-in-out;
+            filter: blur(100px);
+            opacity: 0.15; /* Súper sutil en light mode */
+            mix-blend-mode: multiply;
+            animation: orbFloat 20s infinite alternate ease-in-out;
         }
 
-        .orb-cyan {
+        .orb-1 {
             width: 50vw; height: 50vw;
             background: var(--glow-cyan);
-            top: -10%; right: -10%;
+            top: -10%; left: -10%;
         }
 
-        .orb-orange {
-            width: 40vw; height: 40vw;
+        .orb-2 {
+            width: 60vw; height: 60vw;
             background: var(--glow-orange);
-            bottom: -20%; left: -10%;
+            bottom: -20%; right: -10%;
             animation-delay: -5s;
         }
 
-        @keyframes drift {
+        @keyframes orbFloat {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-5vw, 5vh) scale(1.2); }
+            100% { transform: translate(5vw, 5vh) scale(1.15); }
         }
 
-        /* --- HERO SECTION --- */
-        .hero-container {
-            min-height: 100vh;
+        /* --- CONTENEDOR PRINCIPAL HERO --- */
+        .main-container {
+            padding: 25px 2vw;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 100px 5vw 40px 5vw;
+        }
+
+        .hero-card {
             position: relative;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1300px;
             width: 100%;
-            align-items: center;
+            max-width: 1400px;
+            height: 85vh;
+            min-height: 650px;
+            border-radius: 40px;
+            overflow: hidden;
+            background-image: url('https://res.cloudinary.com/dh3cjks1a/image/upload/v1782525612/Ilustraci%C3%B3n_-_WEPM_a8qwrd.webp');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        /* Lado Izquierdo: Tarjeta Glassmorphism */
+        /* --- CONTENIDO DEL HERO (Reorganizado para Desktop) --- */
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Apila elementos verticalmente */
+            padding: 60px 6%; /* Aire arriba/abajo y a los lados */
+        }
+
+        /* Títulos Superior Izquierda */
+        .hero-title-group {
+            text-align: left;
+            align-self: flex-start; /* Obliga a alinearse a la izquierda */
+            color: #fff;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+        }
+
+        .hero-title-group h1 {
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 5px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title-group h2 {
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+        }
+
+        /* Tarjetas Inferior Derecha (Reorganizadas) */
+        .glass-cards-container {
+            display: flex;
+            gap: 20px;
+            align-self: flex-end; /* Obliga a alinearse a la derecha */
+            margin-top: auto; /* Empuja el contenedor hasta abajo */
+        }
+
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
+            border: 2px solid var(--glass-border);
             border-radius: 30px;
-            padding: 60px 50px;
+            padding: 35px 25px;
+            width: 280px;
+            text-align: center;
             box-shadow: var(--glass-shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Brillo sutil dentro de la tarjeta */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .tagline {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--glow-orange);
-            margin-bottom: 25px;
-            border-left: 2px solid var(--glow-orange);
-            padding-left: 15px;
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 4vw, 3.8rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 25px;
-        }
-
-        .hero-title span {
-            background: linear-gradient(90deg, var(--glow-cyan), var(--glow-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        .btn-glow {
-            display: inline-flex;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 16px 36px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glow-cyan);
-            border-radius: 100px;
-            color: #fff;
-            font-weight: 700;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .glass-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .glass-card p {
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+        }
+
+        .glass-btn {
+            background: transparent;
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(53, 196, 214, 0.2);
+            margin-top: auto;
         }
 
-        .btn-glow:hover {
-            background: var(--glow-cyan);
-            color: var(--bg-deep);
-            box-shadow: 0 0 30px rgba(53, 196, 214, 0.6);
-            transform: translateY(-3px);
+        .glass-btn:hover {
+            background: var(--primary-blue);
+            color: #fff;
         }
 
-        /* Lado Derecho: La Ilustración */
-        .hero-illustration {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .hero-illustration img {
-            width: 100%;
-            max-width: 550px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
-            animation: floatImage 6s infinite ease-in-out;
-        }
-
-        /* Reflejo/Brillo detrás de la imagen */
-        .illustration-glow {
-            position: absolute;
-            width: 300px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(242,156,56,0.15) 0%, transparent 70%);
-            z-index: -1;
-            filter: blur(20px);
-        }
-
-        @keyframes floatImage {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* --- RESPONSIVO MÓVIL --- */
+        /* --- RESPONSIVO MÓVIL (COMPACTO Y VISIBLE) --- */
         @media (max-width: 968px) {
-            .navbar { padding: 20px 5vw; }
-            .nav-links { display: none; }
-            
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .navbar-wrapper {
+                border-radius: 0;
+            }
+
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .lang-switch {
+                margin-left: auto;
+            }
+
+            .main-container {
+                padding: 0;
+            }
+
+            .hero-card {
+                border-radius: 0;
+                /* svh para garantizar encaje en una sola pantalla */
+                height: 100svh; 
+                min-height: auto;
+                /* AQUÍ CAMBIAS LA POSICIÓN DE LA IMAGEN EN MÓVIL */
+                background-position: 35% center; 
+            }
+
+            .hero-content {
+                padding: 80px 15px 30px 15px; 
+                justify-content: center;
+                align-items: center; /* Centra todo horizontalmente */
+            }
+
+            .hero-title-group {
                 text-align: center;
+                align-self: center; /* Sobrescribe la alineación izquierda de desktop */
+                margin-bottom: 25px;
             }
 
-            /* Cambiamos el orden para que la ilustración se vea primero en móvil */
-            .hero-illustration {
-                order: 1;
+            .hero-title-group h1 {
+                font-size: 3rem; 
             }
+            
+            .hero-title-group h2 {
+                font-size: 1.3rem;
+            }
+
+            .glass-cards-container {
+                flex-direction: column;
+                align-self: center; /* Sobrescribe la alineación derecha de desktop */
+                margin-top: 0; /* Anula el margin-top: auto; */
+                width: 100%;
+                gap: 15px; /* Tarjetas más juntas */
+                align-items: center;
+            }
+
             .glass-card {
-                order: 2;
-                padding: 40px 25px;
+                width: 100%;
+                max-width: 320px;
+                padding: 20px 20px; /* Reducción de padding interior */
+                height: auto;
             }
 
-            .tagline {
-                border-left: none;
-                border-bottom: 2px solid var(--glow-orange);
-                padding-left: 0;
-                padding-bottom: 5px;
+            .card-icon {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
             }
 
-            .hero-title { font-size: 2.5rem; }
-            .hero-illustration img { max-width: 80%; }
+            .glass-card h3 {
+                font-size: 1.5rem; 
+                margin-bottom: 5px;
+            }
+
+            .glass-card p {
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+            }
+            
+            .glass-btn {
+                padding: 8px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-lights">
-        <div class="light-orb orb-cyan"></div>
-        <div class="light-orb orb-orange"></div>
+    <div class="ambient-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
 
-    <nav class="navbar">
-        <a href="#" class="nav-logo">CIMC<span>2026</span></a>
-        <ul class="nav-links">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Programa</a></li>
-            <li><a href="#">Sede</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-    </nav>
+    <div class="navbar-wrapper">
+        <nav class="navbar">
+            <div class="branding">
+                <a href="#" class="nav-logo">CIMC<span>2026</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Programa</a></li>
+                <li><a href="#">Sede</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <div class="lang-switch">
+                <a href="#" class="active">EN</a>
+                <a href="#">ES</a>
+            </div>
+            <button class="menu-btn">☰</button>
+        </nav>
+    </div>
 
-    <div class="hero-container">
-        <div class="hero-grid">
+    <main class="main-container">
+        <section class="hero-card">
             
-            <div class="glass-card">
-                <span class="tagline">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE 2026</span>
-                <h1 class="hero-title">Retos de la Medicina en el <span>futuro cercano</span></h1>
-                <p class="hero-description">
-                    CIMC 2026 fusiona la herencia estructural de los centros históricos con la vanguardia del diseño sostenible y las tecnologías globales.
-                </p>
-                <a href="#" class="btn-glow">Inscríbete Hoy</a>
+            <div class="hero-content">
+                
+                <div class="hero-title-group">
+                    <h1>CIMC 2026<br>CONGRESS</h1>
+                    <h2>17–20 September</h2>
+                </div>
+
+                <div class="glass-cards-container">
+                    
+                    <div class="glass-card">
+                        <div class="card-icon">🍷</div>
+                        <h3>Opening</h3>
+                        <p>Thursday, 17 September<br>15:00</p>
+                        <a href="#" class="glass-btn">Navigate me there</a>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-icon">🧭</div>
+                        <h3>Venue</h3>
+                        <p>Clarion Hotel® Helsinki</p>
+                        <a href="#" class="glass-btn">Open website</a>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="hero-illustration">
-                <div class="illustration-glow"></div>
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782525305/Ilustraci%C3%B3n_-_WEPM_wv3mfk.webp" alt="Ilustración CIMC 2026">
-            </div>
-
-        </div>
-    </div>
+        </section>
+    </main>
 
 </body>
 </html>
