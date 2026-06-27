@@ -7,24 +7,24 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2 family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Colores de la ilustración y el logo CIMC */
-            --glow-cyan: #35c4d6;
-            --glow-orange: #f29c38;
-            --primary-blue: #093c71;
-            --bg-light: #fcfdfe; 
+            /* --- PALETA PURIFICADA (Cero tonos cafesosos) --- */
+            --glow-cyan: #00f0ff;      /* Turquesa neón ultra brillante */
+            --glow-orange: #ff9e00;    /* Naranja dorado puro y eléctrico */
+            --primary-blue: #0a2540;   /* Azul marino premium (Estilo Stripe) */
+            --bg-light: #f8fafc;       /* Blanco azulado muy limpio */
             
             /* Light Glassmorphism */
-            --glass-bg: rgba(255, 255, 255, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --glass-blur: blur(16px);
-            --glass-shadow: 0 20px 40px rgba(9, 60, 113, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --glass-blur: blur(20px);
+            --glass-shadow: 0 20px 40px rgba(10, 37, 64, 0.05);
             
-            --text-main: #000000;
-            --text-muted: #475569;
+            --text-main: #0a2540;
+            --text-muted: #425466;
 
             /* Variables Sección 2 (Cathedral) */
             --cathedral-glass: rgba(255, 255, 255, 0.55);
@@ -61,7 +61,7 @@
             position: absolute;
             top: 0;
             z-index: 200;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(10, 37, 64, 0.03);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
@@ -109,7 +109,7 @@
         .nav-links a:hover { color: var(--glow-orange); }
 
         .btn-lang {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.9);
@@ -126,7 +126,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             transition: all 0.3s ease;
         }
 
@@ -135,7 +135,7 @@
             border-color: var(--glow-cyan);
             color: var(--glow-cyan) !important;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(53, 196, 214, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.15);
         }
 
         .menu-btn {
@@ -148,10 +148,10 @@
         }
 
         /* =========================================
-           FONDO EXPANSIVO CORREGIDO (POSITION: FIXED)
+           FONDO DE LUCES VIBRANTES CONTINUO (FIXED)
         ========================================= */
         .ambient-lights {
-            position: fixed; /* <-- ESTO ELIMINA LA LÍNEA DE CORTE */
+            position: fixed; 
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             overflow: hidden;
@@ -162,37 +162,36 @@
         .light-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px); 
-            opacity: 0.15; 
+            filter: blur(130px); /* Desenfoque mayor para máxima suavidad */
+            opacity: 0.12; /* Súper sutil, evita el aspecto sucio */
             mix-blend-mode: multiply;
-            animation: orbFloat 20s infinite alternate ease-in-out;
+            animation: orbFloat 18s infinite alternate ease-in-out;
         }
 
         .orb-cyan {
-            width: 70vw; height: 70vw; 
+            width: 75vw; height: 75vw; 
             background: var(--glow-cyan);
-            top: -15%; left: -15%; 
+            top: -20%; left: -15%; 
         }
 
         .orb-orange {
-            width: 80vw; height: 80vw; 
+            width: 85vw; height: 85vw; 
             background: var(--glow-orange);
             bottom: -25%; left: -15%; 
             animation-delay: -5s;
         }
 
         .orb-3 {
-            width: 40vw; height: 40vw;
-            background: #e41b77; 
-            top: 30%; right: 10%;
-            opacity: 0.1; 
-            filter: blur(150px); 
-            animation-delay: -10s;
+            width: 45vw; height: 45vw;
+            background: #ff007b; /* Acento magenta puro para alimentar el cristal */
+            top: 25%; right: 5%;
+            opacity: 0.08; 
+            animation-delay: -9s;
         }
 
         @keyframes orbFloat {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5vw, 5vh) scale(1.1); }
+            100% { transform: translate(4vw, 4vh) scale(1.1); }
         }
 
         /* =========================================
@@ -203,7 +202,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 160px 5vw 40px 5vw; 
+            padding: 170px 5vw 40px 5vw; /* Más aire respecto al menú */
             position: relative;
         }
 
@@ -221,7 +220,7 @@
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 2px solid var(--glass-border);
-            border-radius: 30px;
+            border-radius: 32px;
             padding: 60px 50px;
             box-shadow: var(--glass-shadow);
             position: relative;
@@ -280,13 +279,13 @@
             letter-spacing: 0.1em;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(53, 196, 214, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.1);
         }
 
         .btn-glow:hover {
             background: var(--glow-cyan);
             color: #ffffff;
-            box-shadow: 0 15px 30px rgba(53, 196, 214, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.25);
             transform: translateY(-3px);
         }
 
@@ -305,7 +304,7 @@
             max-width: 590px;
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 20px 30px rgba(10,37,64,0.1));
             animation: floatImage 6s infinite ease-in-out;
         }
 
@@ -313,7 +312,7 @@
             position: absolute;
             width: 300px;
             height: 400px;
-            background: radial-gradient(circle, rgba(242,156,56,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0,240,255,0.08) 0%, transparent 70%);
             z-index: -1;
             filter: blur(20px);
         }
@@ -328,7 +327,7 @@
            SECCIÓN 2: CATEDRAL HERO
         ========================================= */
         .cathedral-wrapper {
-            padding: 50px 2vw;
+            padding: 60px 2vw;
             display: flex;
             justify-content: center;
             font-family: 'Montserrat', sans-serif; 
@@ -345,7 +344,7 @@
             background-image: url('https://res.cloudinary.com/dh3cjks1a/image/upload/v1781295548/5f33f12c1fd4ac34e715c02c_cq9tlc.jpg');
             background-size: cover;
             background-position: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(10,37,64,0.15);
         }
 
         .cathedral-content {
@@ -445,7 +444,7 @@
             .nav-links { display: none; }
             .menu-btn { display: block; margin-left: auto; margin-right: 20px;}
             
-            .hero-container { padding-top: 150px; justify-content: center; align-items: center;}
+            .hero-container { padding-top: 140px; justify-content: center; align-items: center;}
             .hero-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
             
             .glass-card-main { order: 1; padding: 40px 25px; align-self: center;} 
@@ -512,35 +511,30 @@
         </div>
     </div>
 
-    <section class="cathedral-wrapper">
+    <div class="cathedral-wrapper">
         <div class="cathedral-banner">
             <div class="cathedral-content">
-                
                 <div class="cathedral-title-group">
                     <h2>CIMC 2026<br>CONGRESS</h2>
                     <h3>17–20 September</h3>
                 </div>
-
                 <div class="cathedral-cards-container">
-                    
                     <div class="cathedral-card">
                         <div class="card-icon">🍷</div>
                         <h4>Opening</h4>
                         <p>Thursday, 17 September<br>15:00</p>
                         <a href="#" class="cathedral-btn">Navigate me there</a>
                     </div>
-
                     <div class="cathedral-card">
                         <div class="card-icon">🧭</div>
                         <h4>Venue</h4>
                         <p>Clarion Hotel® Helsinki</p>
                         <a href="#" class="cathedral-btn">Open website</a>
                     </div>
-
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
 </body>
 </html>
