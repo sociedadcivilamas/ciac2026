@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 — Swiss Typographic Experience</title>
+    <title>CIMC 2026 — Luminous Glass Experience</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- SISTEMA DE DISEÑO SUIZO (COLORFUL LIGHT) --- */
         :root {
-            /* Colores extraídos directamente del logotipo */
-            --swiss-bg: #f8fafc;
-            --logo-blue: #1e3a8a;
-            --logo-orange: #facc15;
-            --logo-teal: #38bdf8;
-            --logo-pink: #ec4899;
-            --logo-purple: #7c3aed;
+            /* Colores extraídos directamente de tu logotipo */
+            --logo-blue: #3b52a3;
+            --logo-teal: #1cb5c2;
+            --logo-magenta: #e41b77;
+            --logo-gold: #f2aa2a;
+            --logo-purple: #7552a0;
             --dark-text: #0f172a;
             
-            --grid-color: rgba(15, 23, 42, 0.08);
             --font-main: 'Plus Jakarta Sans', sans-serif;
-            --transition-sharp: 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+            --bezier: cubic-bezier(0.16, 1, 0.3, 1);
+            
+            /* Ajuste base de Glassmorphism Claro */
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.55);
+            --glass-blur: blur(16px);
         }
 
         * {
@@ -32,55 +34,95 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-main);
-            background-color: var(--swiss-bg);
             color: var(--dark-text);
+            background: #f1f5f9;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
-        /* --- CUADRÍCULA ESTRUCTURAL SUIZA (LÍNEAS VISIBLES) --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border-left: 1px solid var(--grid-color);
-            border-right: 1px solid var(--grid-color);
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* --- NAVBAR RADICALMENTE PLANA --- */
-        .navbar {
-            position: sticky;
+        /* --- FONDO VIVO MULTICOLOR (NO OSCURO) --- */
+        /* Crea una atmósfera vibrante detrás de los cristales */
+        .ambient-background {
+            position: fixed;
             top: 0;
-            width: 100%;
-            height: 100px;
-            background: #ffffff;
-            z-index: 200;
-            border-bottom: 2px solid var(--dark-text);
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(135deg, #e0f2fe 0%, #fef9c3 50%, #fce7f3 100%);
+            overflow: hidden;
         }
 
-        .nav-layout {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-            padding: 0 4vw;
-            max-width: 1400px;
+        .blur-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            mix-blend-mode: multiply;
+            animation: orbFloat 20s infinite alternate ease-in-out;
+        }
+
+        .orb-1 { width: 50vw; height: 50vw; background: var(--logo-teal); top: -10%; left: -10%; }
+        .orb-2 { width: 60vw; height: 60vw; background: var(--logo-gold); bottom: -20%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 45vw; height: 45vw; background: var(--logo-magenta); top: 30%; right: 20%; animation-delay: -10s; }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5vw, 5vh) scale(1.15); }
+        }
+
+        .container {
+            max-width: 1300px;
             margin: 0 auto;
+            width: 100%;
+            padding: 0 6vw;
         }
 
-        .branding-zone img {
-            height: 50px;
+        /* --- ESTILIZACIÓN DE CRISTALES --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.04);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 5%;
+            width: 90%;
+            height: 80px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .branding-block img {
+            height: 45px;
             width: auto;
             display: block;
         }
 
-        .nav-links {
+        .nav-content {
             display: flex;
             align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
             gap: 2rem;
             list-style: none;
         }
@@ -92,365 +134,416 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: var(--transition-sharp);
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--logo-pink);
+            color: var(--logo-magenta);
         }
 
         .btn-lang {
-            background: var(--dark-text);
+            background: linear-gradient(90deg, var(--logo-blue), var(--logo-purple));
             color: #fff;
-            padding: 0.6rem 1.2rem;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 12px;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             text-decoration: none;
-            transition: var(--transition-sharp);
+            box-shadow: 0 4px 15px rgba(117, 82, 160, 0.2);
+            transition: transform 0.3s var(--bezier);
         }
-        .btn-lang:hover {
-            background: var(--logo-purple);
-        }
+        .btn-lang:hover { transform: translateY(-2px); }
 
-        .menu-btn {
-            display: none;
-        }
+        .menu-btn { display: none; }
+        .mobile-menu { display: none; }
 
-        /* --- HERO SECCIÓN: ASIMETRÍA Y BLOQUES DE COLOR --- */
-        .hero-swiss {
-            border-bottom: 1px solid var(--grid-color);
-            position: relative;
-        }
-
-        /* Bloques de color geométricos característicos del Estilo Suizo */
-        .swiss-color-block {
-            grid-column: span 1;
-            height: 100%;
-            min-height: 80vh;
-            border-right: 1px solid var(--grid-color);
-            padding: 3rem 2rem;
+        /* --- SECCIÓN 1: INICIO (HERO) --- */
+        .section-hero {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
+            align-items: center;
+            padding-top: 120px;
+            padding-bottom: 60px;
         }
 
-        .block-text-heavy {
-            grid-column: span 3;
-            background: #ffffff;
-            border-right: 1px solid var(--grid-color);
-            padding: 6rem 4vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .swiss-accent-patch {
-            width: 100%;
-            height: 180px;
-            margin-top: auto;
-            background: var(--logo-orange);
-            mix-blend-mode: multiply;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
         }
 
         .hero-tagline {
-            font-size: 1rem;
+            display: inline-block;
+            font-size: 0.9rem;
             font-weight: 800;
+            color: var(--logo-blue);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--logo-blue);
-            margin-bottom: 2rem;
-            display: block;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--logo-gold);
+            padding-left: 12px;
         }
 
         .hero-title {
-            font-size: clamp(3.5rem, 6.5vw, 7rem);
-            font-weight: 900;
-            line-height: 0.85;
-            letter-spacing: -0.04em;
-            color: var(--dark-text);
-            text-transform: uppercase;
+            font-size: clamp(3rem, 5vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
         }
 
         .hero-title span {
-            color: var(--logo-purple);
-            display: block;
+            background: linear-gradient(90deg, var(--logo-magenta), var(--logo-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-meta-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 4rem;
-            border-top: 2px solid var(--dark-text);
-            padding-top: 2rem;
-        }
-
-        .meta-desc {
-            font-size: 1.1rem;
-            line-height: 1.5;
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
             color: #475569;
-            font-weight: 500;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
         }
 
-        .meta-action {
+        .cta-container {
             display: flex;
-            align-items: flex-start;
-            justify-content: flex-end;
+            gap: 15px;
         }
 
-        .swiss-cta {
-            background: var(--logo-pink);
-            color: white;
-            padding: 1.5rem 3rem;
-            font-size: 1rem;
-            font-weight: 900;
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
             text-transform: uppercase;
             text-decoration: none;
-            letter-spacing: 0.05em;
-            display: inline-block;
-            transition: var(--transition-sharp);
-            box-shadow: 4px 4px 0px var(--dark-text);
+            transition: all 0.3s var(--bezier);
         }
 
-        .swiss-cta:hover {
+        .btn-primary {
             background: var(--dark-text);
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--logo-pink);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+        }
+        .btn-primary:hover { background: var(--logo-blue); transform: translateY(-2px); }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--dark-text);
+            border: 1px solid var(--glass-border);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.8); transform: translateY(-2px); }
+
+        /* Ilustración de cristal para el Hero */
+        .hero-lens {
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
-        /* --- SECCIÓN 2: ESTRUCTURA DE CONTENIDO --- */
-        .content-swiss {
-            border-bottom: 1px solid var(--grid-color);
+        .lens-art {
+            width: 280px;
+            height: 280px;
+            border-radius: 40px;
+            transform: rotate(15deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2));
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+            position: relative;
         }
 
-        .content-col-left {
-            grid-column: span 2;
-            padding: 6rem 4vw;
-            border-right: 1px solid var(--grid-color);
-            background: var(--swiss-bg);
+        .lens-art::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--logo-teal), var(--logo-magenta));
+            top: -30px;
+            right: -30px;
+            z-index: -1;
         }
 
-        .content-col-right {
-            grid-column: span 2;
-            padding: 6rem 4vw;
-            background: #ffffff;
+        /* --- SECCIÓN 2: ¿QUÉ ES CIMC 2026? --- */
+        .section-about {
+            padding: 100px 0;
         }
 
-        .huge-number {
-            font-size: 6rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--logo-teal);
-            margin-bottom: 1.5rem;
+        .about-box {
+            padding: 60px;
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
             letter-spacing: -0.02em;
-            text-transform: uppercase;
         }
 
-        .body-text-swiss {
-            font-size: 1.25rem;
-            line-height: 1.6;
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .about-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
             color: #334155;
         }
 
-        /* --- RESPONSIVE / MOBILE DESIGN (ESTILO SUIZO CON BURGER) --- */
+        /* --- SECCIÓN 3: PONENTES --- */
+        .section-speakers {
+            padding: 100px 0;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .speaker-card {
+            padding: 24px;
+            text-align: center;
+            transition: transform 0.4s var(--bezier);
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .speaker-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            margin: 0 auto 20px auto;
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .speaker-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .speaker-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--logo-purple);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* --- SECCIÓN 4: HERO FINAL (CTA) --- */
+        .section-footer-hero {
+            padding: 100px 0 140px 0;
+        }
+
+        .footer-cta-box {
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-cta-box h2 {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* --- RESPONSIVO MÓVIL (ESTILO EDITORIAL ASIMÉTRICO) --- */
         @media (max-width: 968px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-                border: none;
-            }
-
             .navbar {
-                height: 80px;
+                left: 4%;
+                width: 92%;
+                height: 70px;
+                padding: 0 20px;
+                border-radius: 18px;
             }
 
-            .nav-links, .nav-layout .btn-lang {
-                display: none;
-            }
+            .branding-block img { height: 35px; }
+            .nav-content { display: none; }
 
-            /* Burger Menu */
+            /* Botón Burger Premium */
             .menu-btn {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: 50px;
-                height: 50px;
-                border: 2px solid var(--dark-text);
-                background: #ffffff;
+                width: 42px;
+                height: 42px;
+                border-radius: 10px;
+                border: 1px solid var(--glass-border);
+                background: rgba(255,255,255,0.5);
                 color: var(--dark-text);
-                font-size: 28px;
-                font-weight: 900;
+                font-size: 22px;
                 cursor: pointer;
-                z-index: 220;
+                z-index: 1100;
             }
 
+            /* Menú desplegable completo en Glassmorphism */
             .mobile-menu {
                 display: none;
                 position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: #ffffff;
-                padding: 2rem 6vw;
-                z-index: 190;
-                border-top: 2px solid var(--dark-text);
+                top: 100px;
+                left: 4%;
+                width: 92%;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                padding: 20px 30px;
+                border-radius: 20px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+                z-index: 999;
             }
 
-            .mobile-menu.open {
-                display: block;
-            }
+            .mobile-menu.open { display: block; }
 
             .mobile-menu a {
                 display: block;
-                padding: 1.2rem 0;
-                font-size: 1.5rem;
-                font-weight: 900;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(0,0,0,0.04);
+                font-weight: 700;
                 color: var(--dark-text);
                 text-transform: uppercase;
+                font-size: 0.9rem;
                 text-decoration: none;
-                border-bottom: 1px solid var(--grid-color);
             }
 
             .mobile-menu .mobile-lang-btn {
-                margin-top: 2rem;
-                background: var(--logo-purple);
-                color: white !important;
+                margin-top: 15px;
+                background: linear-gradient(90deg, var(--logo-blue), var(--logo-purple));
+                color: #fff !important;
                 text-align: center;
-                border: none;
-                padding: 1rem 0;
+                border-radius: 12px;
+                border-bottom: none;
             }
 
-            /* Hero adaptado a Bloques Suizos en Mobile */
-            .swiss-color-block {
-                grid-column: span 1;
-                min-height: auto;
-                height: 120px;
-                flex-direction: row;
-                align-items: center;
-                background: var(--logo-teal);
-                padding: 1.5rem 6vw;
-                border-right: none;
-                border-bottom: 1px solid var(--grid-color);
-            }
-
-            .swiss-accent-patch {
-                width: 80px;
-                height: 80px;
-                margin-top: 0;
-                background: var(--logo-orange);
-            }
-
-            .block-text-heavy {
-                grid-column: span 1;
-                padding: 4rem 6vw;
-                border-right: none;
-            }
-
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .hero-meta-grid {
+            /* Reajustes de Grillas */
+            .hero-grid, .about-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                text-align: left;
             }
 
-            .meta-action {
-                justify-content: flex-start;
-            }
+            .section-hero { padding-top: 140px; }
+            .hero-lens { display: none; } /* Quitamos peso visual innecesario */
 
-            .swiss-cta {
+            .cta-container {
+                flex-direction: column;
                 width: 100%;
-                text-align: center;
             }
+            .btn-primary, .btn-secondary { text-align: center; width: 100%; }
 
-            /* Secciones de contenido inferiores en Mobile */
-            .content-col-left, .content-col-right {
-                grid-column: span 1;
-                padding: 4rem 6vw;
-                border-right: none;
-            }
-            
-            .content-col-left {
-                border-bottom: 1px solid var(--grid-color);
-            }
+            .about-box { padding: 40px 24px; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-layout">
-            <div class="branding-zone">
-                <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026">
-            </div>
+    <div class="ambient-background">
+        <div class="blur-orb orb-1"></div>
+        <div class="blur-orb orb-2"></div>
+        <div class="blur-orb orb-3"></div>
+    </div>
+
+    <nav class="navbar glass-panel">
+        <div class="branding-block">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026">
+        </div>
+        <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#ejes-foro">Ciudad</a></li>
-                <li><a href="#">Programa</a></li>
-                <li><a href="#">Inscríbete</a></li>
+                <li><a href="#que-es">¿Qué es?</a></li>
+                <li><a href="#ponentes">Ponentes</a></li>
+                <li><a href="#registro">Inscripción</a></li>
             </ul>
-            <a href="en.html" class="btn-lang">EN</a>
-            <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
+            <a href="#" class="btn-lang">English</a>
         </div>
+        <button class="menu-btn" id="menuBtn" aria-label="Menú">☰</button>
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="#">Inicio</a>
-        <a href="#ejes-foro">Ciudad</a>
-        <a href="#">Programa</a>
-        <a href="#">Inscríbete</a>
-        <a href="en.html" class="mobile-lang-btn">English</a>
+        <a href="#que-es">¿Qué es?</a>
+        <a href="#ponentes">Ponentes</a>
+        <a href="#registro">Inscripción</a>
+        <a href="#" class="mobile-lang-btn">English</a>
     </div>
 
-    <main class="grid-container hero-swiss">
-        
-        <div class="swiss-color-block">
-            <div style="font-weight: 900; font-size: 1.5rem; color: var(--logo-blue);">2026</div>
-            <div class="swiss-accent-patch"></div>
-        </div>
-
-        <div class="block-text-heavy">
-            <span class="hero-tagline">CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE</span>
-            <h1 class="hero-title">Retos de la <span>Medicina</span> moderna</h1>
-            
-            <div class="hero-meta-grid">
-                <p class="meta-desc">
-                    Una experiencia arquitectónica e intelectual donde la tradición colonial y la vanguardia médica global colisionan en soluciones tangibles.
-                </p>
-                <div class="meta-action">
-                    <a href="#" class="swiss-cta">Registrarse</a>
+    <section class="section-hero container">
+        <div class="hero-grid">
+            <div class="hero-text-container">
+                <span class="hero-tagline">Congreso Internacional Médico de Campeche</span>
+                <h1 class="hero-title">Avanzando hacia los <span>Retos Médicos</span> del futuro.</h1>
+                <p class="hero-description">Una experiencia inmersiva donde la vanguardia de la tecnología global de la salud converge con la riqueza patrimonial de Campeche.</p>
+                <div class="cta-container">
+                    <a href="#registro" class="btn-primary">Registrarse ahora</a>
+                    <a href="#que-es" class="btn-secondary">Saber más</a>
                 </div>
             </div>
+            <div class="hero-lens">
+                <div class="lens-art"></div>
+            </div>
         </div>
+    </section>
 
-    </main>
-
-    <section id="ejes-foro" class="grid-container content-swiss">
-        
-        <div class="content-col-left">
-            <div class="huge-number">01</div>
-            <h2 class="section-title">El Congreso</h2>
+    <section id="que-es" class="section-about container">
+        <div class="about-box glass-panel">
+            <h2 class="section-title">¿Qué es el CIMC 2026?</h2>
+            <div class="about-grid">
+                <p class="about-text">El Congreso Internacional Médico de Campeche se consolida como el epicentro de actualización científica en la región. En esta edición 2026, nos enfocamos en soluciones disruptivas y algoritmos aplicados a la medicina predictiva y adaptativa, sin perder de vista la bioética y el entorno sostenible global.</p>
+                <p class="about-text">Médicos de talla internacional, investigadores clínicos y profesionales de la salud se reunirán entre murallas históricas para trazar la hoja de ruta de los próximos pasos de la medicina moderna.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="content-col-right">
-            <p class="body-text-swiss">
-                Al adentrarte en el foro, la estructura rígida del pasado se abre ante soluciones cinéticas. Analizaremos algoritmos aplicados a la conservación de materiales coloniales, movilidad adaptativa en zonas amuralladas y la inserción del color como eje de identidad urbana moderna.
-            </p>
+    <section id="ponentes" class="section-speakers container">
+        <h2 class="section-title" style="text-align: center;">Ponentes Magistrales</h2>
+        <div class="speakers-grid">
+            <div class="speaker-card glass-panel">
+                <div class="speaker-img">🩺</div>
+                <h3 class="speaker-name">Dra. Elena Rostova</h3>
+                <p class="speaker-tag">Nanotecnología Aplicada</p>
+            </div>
+            <div class="speaker-card glass-panel">
+                <div class="speaker-img">🧬</div>
+                <h3 class="speaker-name">Dr. Marcus Vance</h3>
+                <p class="speaker-tag">Genómica y Cardiología</p>
+            </div>
+            <div class="speaker-card glass-panel">
+                <div class="speaker-img">🧠</div>
+                <h3 class="speaker-name">Dra. Amara Patel</h3>
+                <p class="speaker-tag">Neurociencia Computacional</p>
+            </div>
         </div>
+    </section>
 
+    <section id="registro" class="section-footer-hero container">
+        <div class="footer-cta-box glass-panel">
+            <h2>Forma parte del futuro de la medicina</h2>
+            <p class="hero-description" style="margin: 0 auto 2.5rem auto;">Asegura tu lugar en el evento médico más esperado del año. Cupos limitados.</p>
+            <a href="#" class="btn-primary" style="background: linear-gradient(90deg, var(--logo-magenta), var(--logo-purple));">Adquirir Accesos</a>
+        </div>
     </section>
 
     <script>
-        // Controlador interactivo nativo del menú Hamburguesa
         const menuBtn = document.getElementById("menuBtn");
         const mobileMenu = document.getElementById("mobileMenu");
 
