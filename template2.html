@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 - Bento Grid Experience</title>
+    <title>CIMC 2026 - Accesibilidad y Claridad</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Paleta extraída estrictamente del Logo */
+            /* Paleta extraída del Logo */
             --logo-cyan: #1cb5c2;
             --logo-magenta: #e41b77;
             --logo-gold: #f2aa2a;
-            --logo-blue: #3b52a3;
-
-            /* Base Dark Mode */
-            --bg-dark: #050914;
-            --card-bg: #0b1120;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            
+            /* Colores de fondo de alto contraste (Azul Marino Profundo) */
+            --bg-page: #070d1f;      /* Fondo de la página */
+            --bg-card: #111d3b;      /* Fondo de las tarjetas */
+            --bg-card-hover: #17264d;
+            
+            /* Textos Claros */
+            --text-white: #ffffff;
+            --text-gray: #cbd5e1;    /* Gris claro fácil de leer en fondo oscuro */
         }
 
         * {
@@ -32,63 +34,66 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
+            background-color: var(--bg-page);
+            color: var(--text-white);
             -webkit-font-smoothing: antialiased;
-            /* Patrón de cuadrícula de fondo muy sutil */
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            /* Tamaño de fuente base más grande para mejor lectura general */
+            font-size: 18px; 
         }
 
-        /* --- NAVBAR & HAMBURGER MENU --- */
+        /* --- NAVBAR & MENÚ HAMBURGUESA --- */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            height: 80px;
+            height: 90px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 4vw;
-            background: rgba(5, 9, 20, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            padding: 0 5vw;
+            background-color: var(--bg-page);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .nav-logo img {
-            height: 45px;
+            height: 50px;
             width: auto;
             display: block;
         }
 
         .menu-btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            font-size: 32px;
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 1001;
-            transition: color 0.3s;
+            transition: background 0.3s;
         }
-        
-        .menu-btn:hover { color: var(--logo-cyan); }
 
-        /* Overlay del Menú */
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Menú Desplegable Pantalla Completa */
         .menu-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
-            background: rgba(5, 9, 20, 0.98);
+            background-color: var(--bg-page);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
             z-index: 999;
         }
 
@@ -98,247 +103,192 @@
         }
 
         .menu-overlay a {
-            font-family: 'Syne', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--text-main);
+            color: var(--text-white);
             text-decoration: none;
-            text-transform: uppercase;
             transition: color 0.3s;
         }
 
-        .menu-overlay a:hover { color: var(--logo-magenta); }
+        .menu-overlay a:hover { color: var(--logo-cyan); }
 
-        /* --- BENTO GRID LAYOUT --- */
+        /* --- BENTO GRID: JERARQUÍA CLARA --- */
         .bento-container {
             max-width: 1400px;
-            margin: 120px auto 60px auto;
-            padding: 0 4vw;
+            margin: 130px auto 60px auto;
+            padding: 0 5vw;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(280px, auto);
-            gap: 20px;
+            /* 3 Columnas para que las tarjetas sean anchas y fáciles de leer */
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
         }
 
-        /* Diseño base de la tarjeta Bento */
-        .bento-card {
-            background: var(--card-bg);
-            border-radius: 30px;
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
             padding: 40px;
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            /* Borde sutil */
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.3s;
+            border: 2px solid transparent;
         }
 
-        .bento-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.15);
+        .card:hover {
+            background-color: var(--bg-card-hover);
         }
 
-        /* --- ESPECÍFICOS DE LAS TARJETAS --- */
-
-        /* 1. Hero Principal (Ocupa 2x2) */
-        .card-hero {
+        /* 1. TARJETA PRINCIPAL (HERO) - LA MÁS GRANDE */
+        .card-main {
             grid-column: span 2;
             grid-row: span 2;
-            justify-content: flex-end;
-            background: linear-gradient(180deg, rgba(11, 17, 32, 0) 0%, rgba(11, 17, 32, 1) 100%), 
-                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80') center/cover;
-            border: 1px solid rgba(28, 181, 194, 0.3); /* Borde Cian */
+            justify-content: center;
+            border-left: 8px solid var(--logo-cyan); /* Acento visual claro */
         }
 
-        .badge {
-            align-self: flex-start;
-            background: rgba(28, 181, 194, 0.2);
-            color: var(--logo-cyan);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: auto;
-            border: 1px solid rgba(28, 181, 194, 0.4);
-        }
-
-        .card-hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 4vw, 4.5rem);
-            line-height: 1;
-            margin-bottom: 20px;
-        }
-
-        .card-hero h1 span {
-            background: linear-gradient(90deg, var(--logo-cyan), var(--logo-magenta));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 2. Sede (Ocupa 1x2 vertical) */
-        .card-location {
-            grid-column: span 1;
-            grid-row: span 2;
-            background: var(--logo-blue);
-            justify-content: space-between;
-        }
-
-        .card-location h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 2.5rem;
+        .card-main h1 {
+            font-size: clamp(3rem, 4.5vw, 4.5rem);
+            font-weight: 900;
             line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
 
-        .icon-circle {
-            width: 60px; height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+        .card-main p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--text-gray);
+            max-width: 90%;
         }
 
-        /* 3. Fechas (Ocupa 1x1) */
-        .card-date {
-            grid-column: span 1;
-            grid-row: span 1;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border: 1px solid rgba(242, 170, 42, 0.3); /* Borde Oro */
-        }
-
-        .card-date h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            color: var(--logo-gold);
-            line-height: 1;
-        }
-
-        .card-date p {
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
-            margin-top: 10px;
-        }
-
-        /* 4. Llamado a la acción (Ocupa 1x1) */
+        /* 2. TARJETA DE ACCIÓN (REGISTRO) - COLORES LLAMATIVOS */
         .card-cta {
             grid-column: span 1;
             grid-row: span 1;
-            background: linear-gradient(135deg, var(--logo-magenta), #ff4d94);
+            background: linear-gradient(135deg, var(--logo-magenta), #b3105a);
+            color: var(--text-white);
+            text-decoration: none;
             justify-content: center;
             align-items: center;
             text-align: center;
-            text-decoration: none;
-            color: #fff;
+            box-shadow: 0 10px 30px rgba(228, 27, 119, 0.3);
         }
 
-        .card-cta h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
+        .card-cta:hover {
+            background: linear-gradient(135deg, #f02582, #c71566);
+        }
+
+        .card-cta h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 10px;
         }
-        
-        .card-cta span {
-            font-size: 2rem;
+
+        .card-cta .icon-large {
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
 
-        /* 5. Ejes Temáticos (Ocupa 2x1 ancho) */
-        .card-tracks {
-            grid-column: span 2;
+        /* 3. TARJETAS SECUNDARIAS (FECHA Y LUGAR) */
+        .card-secondary {
+            grid-column: span 1;
             grid-row: span 1;
-            display: flex;
+            justify-content: center;
+            border-top: 4px solid var(--logo-gold);
+        }
+
+        .card-secondary.location {
+            border-top-color: var(--logo-cyan);
+        }
+
+        .icon-medium {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card-secondary h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-white);
+        }
+
+        .card-secondary p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* 4. TARJETA DE INFORMACIÓN (PROGRAMA) */
+        .card-info {
+            grid-column: span 3;
+            grid-row: span 1;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
-        .track-info h3 {
-            font-family: 'Syne', sans-serif;
+        .info-text h3 {
             font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 10px;
         }
-        
-        .track-info p {
-            color: var(--text-muted);
-            max-width: 300px;
+
+        .info-text p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
         }
 
-        .track-tags {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .track-tags span {
-            background: rgba(255,255,255,0.05);
-            padding: 10px 20px;
+        .btn-outline {
+            display: inline-block;
+            padding: 18px 36px;
+            border: 3px solid var(--logo-cyan);
             border-radius: 12px;
-            font-size: 0.85rem;
             color: var(--logo-cyan);
-            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s;
         }
 
-        /* 6. Abstracts (Ocupa 2x1 ancho) */
-        .card-abstracts {
-            grid-column: span 2;
-            grid-row: span 1;
-            background: url('https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80') center/cover;
-            position: relative;
+        .btn-outline:hover {
+            background-color: var(--logo-cyan);
+            color: var(--bg-page);
         }
 
-        .card-abstracts::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 9, 20, 0.7);
-        }
-
-        .abstracts-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .abstracts-content h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- RESPONSIVE DESIGN --- */
+        /* --- RESPONSIVO MÓVIL --- */
         @media (max-width: 1024px) {
             .bento-container {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
             }
-            .card-hero { grid-column: span 2; }
-            .card-location { grid-column: span 2; grid-row: span 1; flex-direction: row; align-items: center;}
-            .card-tracks { grid-column: span 2; flex-direction: column; align-items: flex-start; gap: 20px;}
-            .track-tags { flex-direction: row; flex-wrap: wrap; }
-            .card-abstracts { grid-column: span 2; }
+            .card-main { grid-column: span 2; }
+            .card-cta { grid-column: span 2; }
+            .card-info { grid-column: span 2; flex-direction: column; text-align: center; gap: 24px;}
         }
 
         @media (max-width: 768px) {
             .bento-container {
                 grid-template-columns: 1fr;
-                margin-top: 100px;
+                margin-top: 110px;
             }
-            .card-hero, .card-location, .card-date, .card-cta, .card-tracks, .card-abstracts {
+            .card-main, .card-secondary, .card-cta, .card-info {
                 grid-column: span 1;
-                grid-row: auto;
             }
-            .card-hero { min-height: 400px; }
-            .card-location { flex-direction: column; align-items: flex-start; min-height: 250px;}
+            .card-main h1 {
+                font-size: 2.8rem;
+            }
+            .card-main p {
+                font-size: 1.2rem;
+                max-width: 100%;
+            }
+            /* Botones más grandes en móvil para facilitar el toque */
+            .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -348,64 +298,48 @@
         <a href="#" class="nav-logo">
             <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="Logo CIMC 2026">
         </a>
-        <button class="menu-btn" id="menuBtn">☰</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
     </nav>
 
     <div class="menu-overlay" id="menuOverlay">
         <a href="#">Inicio</a>
         <a href="#">Programa</a>
         <a href="#">Ponentes</a>
-        <a href="#">Abstracts</a>
-        <a href="#">Registro</a>
-        <a href="#" style="color: var(--logo-cyan); font-size: 1.5rem; margin-top: 2rem;">English</a>
+        <a href="#">Contacto</a>
+        <a href="#" style="color: var(--logo-gold); margin-top: 20px;">Inscribirse</a>
     </div>
 
     <main class="bento-container">
         
-        <div class="bento-card card-hero">
-            <div class="badge">Edición 2026</div>
-            <h1>Retos de la Medicina<br>en el <span>futuro cercano</span></h1>
-            <p style="color: var(--text-muted); max-width: 400px; line-height: 1.6;">
-                La herencia estructural de los centros históricos converge con la vanguardia del diseño sostenible y las tecnologías globales.
-            </p>
+        <div class="card card-main">
+            <h1>Retos de la Medicina en el futuro cercano.</h1>
+            <p>El Congreso Internacional Médico de Campeche 2026 reúne a los mejores especialistas para discutir el futuro de la salud, la tecnología y la investigación sostenible.</p>
         </div>
 
-        <div class="bento-card card-location">
-            <div class="icon-circle">📍</div>
-            <div>
-                <p style="color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; margin-bottom: 5px;">Sede Oficial</p>
-                <h2>Campeche,<br>México</h2>
-            </div>
-        </div>
+        <a href="#" class="card card-cta">
+            <div class="icon-large">🖱️</div>
+            <h2>Inscríbase<br>Aquí</h2>
+            <p style="font-size: 1.2rem; font-weight: 600; margin-top: 10px;">Cupos limitados</p>
+        </a>
 
-        <div class="bento-card card-date">
-            <h3>17 - 20</h3>
+        <div class="card card-secondary">
+            <div class="icon-medium">📅</div>
+            <h3>17 al 20</h3>
             <p>Septiembre 2026</p>
         </div>
 
-        <a href="#" class="bento-card card-cta">
-            <h3>Asegura tu<br>lugar</h3>
-            <span>→</span>
-        </a>
-
-        <div class="bento-card card-tracks">
-            <div class="track-info">
-                <h3>Ejes Académicos</h3>
-                <p>Paneles interactivos con especialistas discutiendo los pilares de la medicina moderna.</p>
-            </div>
-            <div class="track-tags">
-                <span>🧬 Genómica Aplicada</span>
-                <span>🤖 Biotech & IA</span>
-                <span>🌍 Salud Sostenible</span>
-            </div>
+        <div class="card card-secondary location">
+            <div class="icon-medium">📍</div>
+            <h3>Campeche</h3>
+            <p>Sede Principal, México</p>
         </div>
 
-        <div class="bento-card card-abstracts">
-            <div class="abstracts-content">
-                <div class="badge" style="background: rgba(228, 27, 119, 0.2); color: var(--logo-magenta); border-color: rgba(228, 27, 119, 0.4);">Investigación</div>
-                <h3>Concurso de Abstracts</h3>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 10px;">Impulsando el pensamiento crítico y el desarrollo científico en estudiantes.</p>
+        <div class="card card-info">
+            <div class="info-text">
+                <h3>Programa Académico</h3>
+                <p>Consulte los horarios, ponentes y talleres disponibles.</p>
             </div>
+            <a href="#" class="btn-outline">Ver Programa</a>
         </div>
 
     </main>
@@ -420,23 +354,14 @@
             if(menuOpen) {
                 menuOverlay.classList.add('active');
                 menuBtn.textContent = '✕';
-                document.body.style.overflow = 'hidden'; // Evita scroll al abrir menú
+                menuBtn.setAttribute('aria-label', 'Cerrar menú');
+                document.body.style.overflow = 'hidden'; 
             } else {
                 menuOverlay.classList.remove('active');
                 menuBtn.textContent = '☰';
+                menuBtn.setAttribute('aria-label', 'Abrir menú');
                 document.body.style.overflow = 'auto';
             }
-        });
-
-        // Cerrar menú al hacer clic en un enlace
-        const links = menuOverlay.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menuOverlay.classList.remove('active');
-                menuBtn.textContent = '☰';
-                document.body.style.overflow = 'auto';
-                menuOpen = false;
-            });
         });
     </script>
 </body>
