@@ -15,9 +15,9 @@
             --glow-cyan: #35c4d6;
             --glow-orange: #f29c38;
             --primary-blue: #093c71;
-            --bg-light: #fcfdfe; /* Fondo claro y limpio */
+            --bg-light: #fcfdfe; 
             
-            /* Light Glassmorphism (Luminoso para light-mode) */
+            /* Light Glassmorphism */
             --glass-bg: rgba(255, 255, 255, 0.55);
             --glass-border: rgba(255, 255, 255, 0.8);
             --glass-blur: blur(16px);
@@ -26,8 +26,7 @@
             --text-main: #000000;
             --text-muted: #475569;
 
-            /* --- Variables Sección 2 (Cathedral) --- */
-            --primary-blue: #093c71;
+            /* Variables Sección 2 (Cathedral) */
             --cathedral-glass: rgba(255, 255, 255, 0.55);
             --cathedral-blur: blur(15px);
             --cathedral-border: rgba(255, 255, 255, 0.8);
@@ -149,11 +148,10 @@
         }
 
         /* =========================================
-           SECCIÓN 1: HERO ILUSTRACIÓN
+           FONDO EXPANSIVO CORREGIDO (POSITION: FIXED)
         ========================================= */
-        /* --- LUCES AMBIENTALES DEL FONDO (OPTIMIZADAS PARA EXTENSIÓN) --- */
         .ambient-lights {
-            position: absolute;
+            position: fixed; /* <-- ESTO ELIMINA LA LÍNEA DE CORTE */
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             overflow: hidden;
@@ -164,34 +162,31 @@
         .light-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px); /* Desenfoque grande y suave */
-            opacity: 0.15; /* Súper sutil en light mode */
+            filter: blur(100px); 
+            opacity: 0.15; 
             mix-blend-mode: multiply;
             animation: orbFloat 20s infinite alternate ease-in-out;
         }
 
-        /* Orbe Cyan Principal - Superior Izquierda (Detrás del texto) */
         .orb-cyan {
-            width: 70vw; height: 70vw; /* <-- Aumentado a 70vw */
+            width: 70vw; height: 70vw; 
             background: var(--glow-cyan);
-            top: -15%; left: -15%; /* <-- Posición más extrema */
+            top: -15%; left: -15%; 
         }
 
-        /* Orbe Naranja Principal - Inferior Izquierda */
         .orb-orange {
-            width: 80vw; height: 80vw; /* <-- Aumentado a 80vw */
+            width: 80vw; height: 80vw; 
             background: var(--glow-orange);
-            bottom: -25%; left: -15%; /* <-- Posición más extrema */
+            bottom: -25%; left: -15%; 
             animation-delay: -5s;
         }
 
-        /* Orbe Magenta de Profundidad - Central Derecha (Detrás de la ilustración) */
         .orb-3 {
             width: 40vw; height: 40vw;
-            background: #e41b77; /* Un magenta sutil para complementar */
+            background: #e41b77; 
             top: 30%; right: 10%;
-            opacity: 0.1; /* Aún más sutil */
-            filter: blur(150px); /* Un desenfoque mayor */
+            opacity: 0.1; 
+            filter: blur(150px); 
             animation-delay: -10s;
         }
 
@@ -200,12 +195,15 @@
             100% { transform: translate(5vw, 5vh) scale(1.1); }
         }
 
+        /* =========================================
+           SECCIÓN 1: HERO ILUSTRACIÓN
+        ========================================= */
         .hero-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 160px 5vw 40px 5vw; /* <-- Padding superior que ya cambiaste */
+            padding: 160px 5vw 40px 5vw; 
             position: relative;
         }
 
@@ -218,7 +216,6 @@
             align-items: center;
         }
 
-        /* Lado Izquierdo: Tarjeta Glassmorphism (Arriba a la Izquierda en Desktop) */
         .glass-card-main {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
@@ -230,7 +227,7 @@
             position: relative;
             overflow: hidden;
             z-index: 2;
-            align-self: flex-start; /* Alineación izquierda desktop */
+            align-self: flex-start; 
         }
 
         .tagline {
@@ -293,15 +290,14 @@
             transform: translateY(-3px);
         }
 
-        /* Lado Derecho: La Ilustración (Anclada abajo a la derecha) */
         .hero-illustration {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             z-index: 1;
-            align-self: flex-end; /* Alineación derecha desktop */
-            margin-top: auto; /* Empuja hasta abajo desktop */
+            align-self: flex-end; 
+            margin-top: auto; 
         }
 
         .hero-illustration img {
@@ -335,7 +331,7 @@
             padding: 50px 2vw;
             display: flex;
             justify-content: center;
-            font-family: 'Montserrat', sans-serif; /* Tipografía específica */
+            font-family: 'Montserrat', sans-serif; 
         }
 
         .cathedral-banner {
@@ -445,23 +441,20 @@
            RESPONSIVO MÓVIL
         ========================================= */
         @media (max-width: 968px) {
-            /* Navbar Móvil */
             .navbar { padding: 20px 5vw; }
             .nav-links { display: none; }
             .menu-btn { display: block; margin-left: auto; margin-right: 20px;}
             
-            /* Hero Ilustración Móvil (Texto primero y luego imagen) */
-            .hero-container { padding-top: 120px; justify-content: center; align-items: center;}
+            .hero-container { padding-top: 150px; justify-content: center; align-items: center;}
             .hero-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
             
-            .glass-card-main { order: 1; padding: 40px 25px; align-self: center;} /* Primero */
+            .glass-card-main { order: 1; padding: 40px 25px; align-self: center;} 
             .tagline { border-left: none; border-bottom: 2px solid var(--glow-orange); padding-left: 0; padding-bottom: 5px; }
             .hero-title { font-size: 2.3rem; }
 
-            .hero-illustration { order: 2; align-self: center; margin-top: 0;} /* Segundo */
+            .hero-illustration { order: 2; align-self: center; margin-top: 0;} 
             .hero-illustration img { max-width: 50%; max-height: 30vh; }
 
-            /* Cathedral Hero Móvil */
             .cathedral-wrapper { padding: 0; margin-top: 40px;}
             .cathedral-banner { border-radius: 0; height: 100svh; min-height: auto; background-position: 35% center; }
             .cathedral-content { justify-content: center; align-items: center; padding: 60px 15px 30px 15px; }
@@ -481,8 +474,9 @@
 
     <div class="ambient-lights">
         <div class="light-orb orb-cyan"></div>
-        <div class="orb light-orb orb-orange"></div>
-        <div class="light-orb orb-3"></div> </div>
+        <div class="light-orb orb-orange"></div>
+        <div class="light-orb orb-3"></div> 
+    </div>
 
     <nav class="navbar-wrapper">
         <div class="navbar">
