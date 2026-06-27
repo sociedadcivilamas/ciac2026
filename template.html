@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 | Congreso Médico Campeche</title>
+    <title>CIMC 2026 | Arquitectura Digital de la Medicina</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* ADN CROMÁTICO EXTRAÍDO DE TU LOGOTIPO */
-            --logo-teal: #1cb5c2;
-            --logo-gold: #f2aa2a;
-            --logo-indigo: #3b52a3;
-            --logo-magenta: #e41b77;
-            --logo-purple: #7552a0;
+            /* Colores extraídos directamente de tu logotipo CIMC */
+            --logo-blue-deep: #3b52a3; /* 'CIMC' */
+            --logo-teal: #1cb5c2; /* 'México' y subrayado */
+            --logo-magenta: #e41b77; /* Subrayado */
+            --logo-gold: #f2aa2a; /* Garita */
+            --logo-purple: #7552a0; /* Subrayado */
             
-            --bg-deep: #07090f; /* Un índigo casi negro para que el logo resalte */
+            --bg-deep: #050508;
+            --text-light: #ffffff;
             
-            /* Sistema Glassmorphism Premium Adaptado */
-            --glass-bg: rgba(20, 25, 40, 0.4);
+            /* Glassmorphism Experimental */
+            --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            --glass-blur: blur(30px);
-            --glass-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.6);
+            --glass-blur: blur(35px);
+            --glass-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.9);
             
-            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+            --bezier: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -39,253 +41,339 @@
         body, html {
             height: 100%;
             background-color: var(--bg-deep);
-            color: #ffffff;
+            color: var(--text-light);
             font-family: var(--font-main);
-            overflow: hidden;
+            overflow: hidden; /* Congelado en el Hero */
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
-        /* --- 1. RUIDO FOTOGRÁFICO Y ATMÓSFERA --- */
+        /* --- 1. FONDO DE RUIDO Y AURORA (CON COLORES DE LOGO) --- */
         .noise-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 50; opacity: 0.35;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.3;
+            /* Textura de ruido SVG generada en CSS */
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .aurora-container {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-            overflow: hidden; z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        /* Orbes pintados con los colores exactos de tu logo */
         .orb {
-            position: absolute; border-radius: 50%; filter: blur(140px);
-            opacity: 0.6; animation: breathe 18s infinite alternate ease-in-out;
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.6;
+            animation: breathe 18s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .orb-fortress {
-            width: 55vw; height: 55vw;
-            background: linear-gradient(135deg, var(--logo-gold), var(--logo-teal));
-            top: -20%; left: -10%;
-        }
-
-        .orb-medical {
+        /* Nube Turquesa-Naranja (Muralla del Logo) */
+        .orb-teal-gold {
             width: 60vw; height: 60vw;
-            background: linear-gradient(135deg, var(--logo-indigo), var(--logo-magenta));
-            bottom: -30%; right: -15%;
+            background: linear-gradient(135deg, var(--logo-teal), var(--logo-gold));
+            top: -30%; right: -10%;
+        }
+
+        /* Nube Fucsia-Turquesa (Texto 2026 del Logo) */
+        .orb-magenta-teal {
+            width: 70vw; height: 70vw;
+            background: linear-gradient(135deg, var(--logo-magenta), var(--logo-purple));
+            bottom: -40%; left: -25%;
             animation-delay: -5s;
         }
 
-        .orb-accent {
-            width: 40vw; height: 40vw;
-            background: var(--logo-purple);
-            top: 30%; left: 40%;
+        /* Nube Azul Profundo central (CIMC del Logo) */
+        .orb-blue {
+            width: 45vw; height: 45vw;
+            background: var(--logo-blue-deep);
+            top: 35%; left: 35%;
             opacity: 0.3;
-            animation-delay: -9s;
+            animation-delay: -10s;
             mix-blend-mode: screen;
         }
 
         @keyframes breathe {
             0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.15) translate(3vw, 4vh); }
+            100% { transform: scale(1.15) translate(-4vw, 3vh); }
         }
 
-        /* --- 2. GEOMETRÍA TEMÁTICA (ARCO DE BALUARTE + DATA MÉDICA) --- */
+        /* --- 2. ELEMENTOS 3D FLOTANTES (FUSIÓN COLONIAL Y TECH) --- */
         .geometry {
-            position: absolute; z-index: 2;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: absolute;
+            z-index: 2;
+            background: linear-gradient(135deg, var(--logo-teal), var(--logo-purple));
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             animation: floatShape 25s infinite linear;
         }
 
-        /* Representación abstracta del arco de la muralla de Campeche */
-        .geo-arch {
-            width: 220px; height: 320px;
-            border-radius: 110px 110px 0 0; /* Forma de arco */
-            bottom: -50px; left: 15%;
-            background: linear-gradient(180deg, rgba(242, 170, 42, 0.15), transparent);
-            border-top: 1px solid rgba(242, 170, 42, 0.4);
-            transform: rotate(-15deg);
+        /* Gran orbe de garita colonial (detrás del cristal) */
+        .geo-colonial {
+            width: 250px; height: 250px;
+            border-radius: 50%;
+            top: 10%; right: 20%;
+            background: linear-gradient(135deg, var(--logo-gold), #ff8a00);
+            opacity: 0.8;
+            filter: blur(5px);
         }
 
-        .geo-circle {
-            width: 140px; height: 140px; border-radius: 50%;
-            top: 20%; right: 20%;
-            background: linear-gradient(135deg, rgba(28, 181, 194, 0.2), rgba(59, 82, 163, 0.2));
-            border: 1px solid rgba(28, 181, 194, 0.4);
-            animation: floatShapeReverse 20s infinite linear;
+        /* Fragmentos orbitantes (rosa fucsia) */
+        .geo-fragment {
+            width: 60px; height: 60px;
+            border-radius: 12px;
+            bottom: 20%; left: 35%;
+            transform: rotate(30deg);
+            background: var(--logo-magenta);
+            animation-delay: -3s;
         }
 
         @keyframes floatShape {
-            0% { transform: translateY(0) rotate(-15deg); }
-            50% { transform: translateY(-40px) rotate(-5deg); }
-            100% { transform: translateY(0) rotate(-15deg); }
-        }
-        @keyframes floatShapeReverse {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(30px) scale(1.05); }
-            100% { transform: translateY(0) scale(1); }
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
 
-        /* --- 3. NAVEGACIÓN (CON EL LOGO) --- */
-        .navbar {
-            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1300px;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 30px;
-            background: rgba(10, 15, 25, 0.5);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+        /* --- 3. NAVEGACIÓN SUSPENDIDA EXPERIMENTAL --- */
+        .nav-island {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            padding: 18px 45px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 20px; z-index: 20;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 100px;
+            z-index: 200;
+            box-shadow: var(--glass-shadow);
         }
 
-        .nav-brand img {
-            height: 45px; width: auto; display: block;
-        }
-
-        .nav-links {
-            display: flex; gap: 35px;
-        }
-
-        .nav-links a {
-            color: #cbd5e1; text-decoration: none;
-            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+        .nav-island a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             transition: color 0.3s ease;
         }
-        .nav-links a:hover { color: var(--logo-gold); }
 
-        .btn-lang {
-            padding: 8px 18px; border-radius: 8px;
-            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none;
-            transition: all 0.3s ease;
+        .nav-island a:hover { color: var(--logo-magenta); }
+        
+        .nav-brand {
+            font-size: 1.3rem !important;
+            color: var(--text-light) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .btn-lang:hover { background: rgba(255,255,255,0.15); border-color: var(--logo-teal); }
+        .nav-brand span { font-weight: 900; }
+        .nav-lang { font-size: 0.7rem !important; color: rgba(255,255,255,0.6) !important; }
 
-        /* --- 4. HERO SECTION CARD --- */
+        /* --- 4. HERO SECTION ARQUITECTÓNICO EXPERIMENTAL --- */
         .hero-wrapper {
-            position: relative; width: 100vw; height: 100vh;
-            display: flex; align-items: center; justify-content: center; z-index: 10;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
         }
 
-        .glass-hero-card {
-            width: 90%; max-width: 1250px; padding: 70px 80px;
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border); border-radius: 32px;
-            box-shadow: var(--glass-shadow), var(--glass-highlight);
-            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
-            align-items: center; position: relative; overflow: hidden;
-            margin-top: 40px;
+        /* La arquitectura de cristal es asimétrica y forma un arco colonial */
+        .glass-arch {
+            width: 92%;
+            max-width: 1300px;
+            padding: 70px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            box-shadow: var(--glass-shadow);
+            
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 70px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-top-left-radius: 150px; /* Arquitectura asimétrica */
+            border-top-right-radius: 150px;
+        }
+
+        /* Brillo de garita sutil grabado en el cristal */
+        .glass-arch::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px; height: 100px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 60%);
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 20px 20px 0 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .hero-content { position: relative; z-index: 2; }
 
-        .hero-tag {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 6px 14px; margin-bottom: 2rem;
-            background: rgba(242, 170, 42, 0.1); border: 1px solid rgba(242, 170, 42, 0.3);
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 20px;
+            background: rgba(117, 82, 160, 0.1);
+            border: 1px solid rgba(117, 82, 160, 0.3);
             border-radius: 100px;
-            font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em;
-            color: var(--logo-gold); text-transform: uppercase;
-        }
-
-        .hero-tag span {
-            width: 6px; height: 6px; background: var(--logo-gold); border-radius: 50%;
-            box-shadow: 0 0 10px var(--logo-gold);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--logo-purple);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
         }
 
         .hero-title {
-            font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.05;
-            letter-spacing: -0.03em; margin-bottom: 1.5rem;
+            font-family: var(--font-display);
+            font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin-bottom: 2.5rem;
         }
 
-        /* Gradiente inspirado en la fusión del fuerte y la medicina */
         .text-gradient {
-            background: linear-gradient(90deg, var(--logo-teal), var(--logo-magenta), var(--logo-purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-desc {
-            font-size: 1.15rem; font-weight: 300; line-height: 1.7; color: #94a3b8;
-            max-width: 500px; margin-bottom: 3rem;
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.7);
+            max-width: 480px;
+            margin-bottom: 3.5rem;
         }
 
-        .cta-group { display: flex; gap: 15px; }
-
-        .btn-primary {
-            padding: 1.1rem 2.2rem; border-radius: 12px;
-            background: linear-gradient(90deg, var(--logo-indigo), var(--logo-purple));
-            color: #fff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-            text-decoration: none; border: none;
-            box-shadow: 0 10px 25px rgba(59, 82, 163, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Botón Experimental Glassmorphism con resplandor fucsia */
+        .btn-experimental {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.3rem 3.5rem;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 0px var(--logo-magenta);
         }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 82, 163, 0.6); }
 
-        .btn-secondary {
-            padding: 1.1rem 2.2rem; border-radius: 12px;
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-            text-decoration: none; transition: all 0.3s ease;
+        .btn-experimental:hover {
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 40px var(--logo-magenta);
+            transform: translateY(-4px);
         }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-        /* Elemento Abstracto Visual (Derecha) */
+        /* Visual Derecho (Arquitectura y Datos orbitantes) */
         .hero-visual {
-            position: relative; height: 100%; display: flex; align-items: center; justify-content: center;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Representación de cruce de datos e historia médica */
-        .medical-ring {
-            width: 320px; height: 320px; border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative; display: flex; align-items: center; justify-content: center;
+        .colonial-arch-structure {
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.08);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .medical-ring::before {
-            content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%;
-            border-top: 2px solid var(--logo-teal); border-right: 2px solid transparent;
-            border-bottom: 2px solid var(--logo-magenta); border-left: 2px solid transparent;
-            animation: spin 15s linear infinite;
+        .colonial-arch-structure::after {
+            content: '';
+            width: 270px; height: 270px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,255,255,0.15);
+            animation: spin Colonial 40s linear infinite;
         }
 
-        .data-card {
-            position: absolute; background: rgba(10, 15, 25, 0.6); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1); padding: 18px 24px; border-radius: 16px;
-            font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; gap: 5px;
+        .data-fragment {
+            position: absolute;
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 18px 28px;
+            border-radius: 14px;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 700;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            animation: floatShape 10s infinite ease-in-out;
         }
 
-        .dc-1 { top: 10%; right: -10%; border-top: 2px solid var(--logo-gold); }
-        .dc-2 { bottom: 15%; left: -10%; border-bottom: 2px solid var(--logo-teal); }
+        .data-1 { top: 15%; right: 10%; color: var(--logo-magenta); animation-delay: -2s; }
+        .data-2 { bottom: 20%; right: 45%; color: var(--logo-teal); animation-delay: -5s; }
 
-        .data-card span { color: #94a3b8; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
-        .data-card strong { color: #fff; font-size: 1rem; }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin Colonial { 100% { transform: rotate(360deg); } }
 
         /* --- RESPONSIVO --- */
         @media (max-width: 968px) {
             body, html { overflow-y: auto; height: auto; }
-            .navbar { padding: 15px 20px; }
-            .nav-links, .btn-lang { display: none; }
-            .glass-hero-card {
-                grid-template-columns: 1fr; padding: 40px 30px;
-                margin-top: 120px; margin-bottom: 40px; text-align: center;
+            .nav-island { display: none; }
+            .glass-arch {
+                grid-template-columns: 1fr;
+                padding: 40px 25px 50px 25px;
+                margin-top: 90px;
+                margin-bottom: 40px;
+                border-top-left-radius: 50px;
+                border-top-right-radius: 50px;
             }
-            .hero-tag { margin: 0 auto 2rem auto; }
             .hero-title { font-size: 2.8rem; }
-            .hero-desc { margin: 0 auto 2.5rem auto; }
-            .cta-group { flex-direction: column; }
-            .hero-visual { height: 280px; margin-top: 30px; }
-            .medical-ring { width: 240px; height: 240px; }
-            .medical-ring::before { width: 200px; height: 200px; }
-            .dc-1 { right: 0; }
-            .dc-2 { left: 0; }
+            .hero-badge { margin-bottom: 1.5rem; }
+            .hero-desc { margin-bottom: 2.5rem; }
+            .btn-experimental { width: 100%; text-align: center; }
+            .hero-visual { height: 280px; justify-content: center; margin-top: 30px; }
+            .colonial-arch-structure { width: 230px; height: 230px; }
+            .colonial-arch-structure::after { width: 190px; height: 190px; }
+            .data-fragment { padding: 15px 22px; font-size: 0.75rem; }
+            .data-1 { right: -5%; }
         }
     </style>
 </head>
@@ -294,60 +382,48 @@
     <div class="noise-overlay"></div>
 
     <div class="aurora-container">
-        <div class="orb orb-fortress"></div>
-        <div class="orb orb-medical"></div>
-        <div class="orb orb-accent"></div>
+        <div class="orb orb-teal-gold"></div>
+        <div class="orb orb-magenta-teal"></div>
+        <div class="orb orb-blue"></div>
     </div>
 
-    <div class="geometry geo-arch"></div>
-    <div class="geometry geo-circle"></div>
+    <div class="geometry geo-colonial"></div>
+    <div class="geometry geo-fragment"></div>
 
-    <nav class="navbar">
-        <a href="#" class="nav-brand">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026 Logo">
-        </a>
-        <div class="nav-links">
-            <a href="#" style="color: #fff;">Inicio</a>
-            <a href="#">Programa</a>
-            <a href="#">Abstracts</a>
-            <a href="#">Sede</a>
-        </div>
-        <a href="#" class="btn-lang">EN</a>
+    <nav class="nav-island">
+        <a href="#" class="nav-brand"><span>CIMC</span></a>
+        <a href="#">Inicio</a>
+        <a href="#">Programa</a>
+        <a href="#">Sede</a>
+        <a href="#">Registro</a>
+        <a href="#" class="nav-lang">ENGLISH</a>
     </nav>
 
-    <div class="hero-wrapper">
-        <div class="glass-hero-card">
+    <div class="hero-wrapper container">
+        <div class="glass-arch container">
             
             <div class="hero-content">
-                <div class="hero-tag">
-                    <span></span> CAMPECHE, MÉXICO
+                <div class="hero-badge">
+                    <span>CONGRESO INTERNACIONAL MÉDICO DE CAMPECHE</span>
                 </div>
                 
                 <h1 class="hero-title">
-                    Medicina del Futuro en la <br>
-                    <span class="text-gradient">Ciudad Amurallada.</span>
+                    Innovación.<br>
+                    Humanismo.<br>
+                    <span class="text-gradient">Historia.</span>
                 </h1>
                 
                 <p class="hero-desc">
-                    El epicentro donde la innovación tecnológica y los nuevos paradigmas de la salud convergen con la historia y riqueza patrimonial del sureste mexicano.
+                    El epicentro global donde la convergencia de la tecnología médica más avanzada y la herencia colonial de Campeche trazan el futuro de la salud.
                 </p>
                 
-                <div class="cta-group">
-                    <a href="#" class="btn-primary">Registrarse ahora</a>
-                    <a href="#" class="btn-secondary">Ver Ponentes</a>
-                </div>
+                <a href="#" class="btn-experimental">Inicia tu Registro</a>
             </div>
 
             <div class="hero-visual">
-                <div class="medical-ring">
-                    <div class="data-card dc-1">
-                        <span>Edición</span>
-                        <strong>37° Congreso</strong>
-                    </div>
-                    <div class="data-card dc-2">
-                        <span>Eje Temático</span>
-                        <strong>Salud Global</strong>
-                    </div>
+                <div class="colonial-arch-structure">
+                    <div class="data-fragment data-1">BIOTECH // 20.26</div>
+                    <div class="data-fragment data-2">COLONIAL PATHWAY</div>
                 </div>
             </div>
 
