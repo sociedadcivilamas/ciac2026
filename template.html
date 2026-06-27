@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 - Recreación Hero</title>
+    <title>CIMC 2026 - Hero Glassmorphism Perfeccionado</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,12 +11,12 @@
 
     <style>
         :root {
-            --primary-blue: #093c71; /* Azul de los textos y botones */
-            --bg-light-blue: #e8f1f8; /* Fondo general fuera de la imagen */
-            --nav-text: #1da1f2; /* Azul claro de los links del menú */
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-blur: blur(12px);
-            --glass-border: rgba(255, 255, 255, 0.9);
+            --primary-blue: #093c71; /* Azul profundo original */
+            --bg-light-blue: #e8f1f8; /* Fondo detrás de la tarjeta */
+            --nav-text: #1da1f2; /* Azul claro del menú */
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-blur: blur(15px);
+            --glass-border: rgba(255, 255, 255, 0.8);
         }
 
         * {
@@ -59,7 +59,7 @@
             display: flex;
             gap: 2.5rem;
             list-style: none;
-            margin: 0 auto; /* Centrar links en desktop */
+            margin: 0 auto;
         }
 
         .nav-links a {
@@ -67,6 +67,11 @@
             color: var(--nav-text);
             font-weight: 700;
             font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-blue);
         }
 
         /* Pill de Idiomas */
@@ -85,6 +90,7 @@
             font-weight: 800;
             border-radius: 18px;
             color: #fff;
+            transition: background 0.3s ease;
         }
 
         .lang-switch a.active {
@@ -102,7 +108,7 @@
 
         /* --- CONTENEDOR PRINCIPAL HERO --- */
         .main-container {
-            padding: 20px 2vw;
+            padding: 25px 2vw;
             display: flex;
             justify-content: center;
         }
@@ -111,13 +117,14 @@
             position: relative;
             width: 100%;
             max-width: 1400px;
-            height: 80vh;
-            min-height: 600px;
+            height: 85vh;
+            min-height: 650px;
             border-radius: 40px;
             overflow: hidden;
             background-image: url('https://res.cloudinary.com/dh3cjks1a/image/upload/v1781295548/5f33f12c1fd4ac34e715c02c_cq9tlc.jpg');
             background-size: cover;
             background-position: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         /* --- CONTENIDO DEL HERO --- */
@@ -128,36 +135,41 @@
             width: 100%;
             height: 100%;
             display: flex;
+            justify-content: flex-end; /* Alineación a la derecha en Desktop */
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .content-wrapper {
+            display: flex;
             flex-direction: column;
-            padding: 5% 8%;
+            align-items: flex-end;
+            gap: 20px;
         }
 
         .hero-title-group {
-            align-self: flex-end;
             text-align: right;
             color: #fff;
-            margin-bottom: auto;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
 
         .hero-title-group h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(3rem, 5vw, 5rem);
             font-weight: 900;
             line-height: 1;
             margin-bottom: 5px;
+            letter-spacing: -0.02em;
         }
 
         .hero-title-group h2 {
-            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-size: clamp(1.4rem, 2vw, 2rem);
             font-weight: 700;
         }
 
         /* --- TARJETAS GLASSMORPHISM --- */
         .glass-cards-container {
             display: flex;
-            gap: 25px;
-            align-self: flex-end;
-            margin-top: auto;
+            gap: 20px;
         }
 
         .glass-card {
@@ -176,14 +188,14 @@
         }
 
         .card-icon {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 15px;
         }
 
         .glass-card h3 {
             font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
+            font-weight: 900;
+            margin-bottom: 10px;
             color: var(--primary-blue);
         }
 
@@ -199,9 +211,9 @@
             background: transparent;
             border: 1px solid var(--primary-blue);
             color: var(--primary-blue);
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -213,7 +225,7 @@
             color: #fff;
         }
 
-        /* --- RESPONSIVO MÓVIL (Basado en la 2da captura) --- */
+        /* --- RESPONSIVO MÓVIL (COMPACTO Y VISIBLE) --- */
         @media (max-width: 968px) {
             .navbar-wrapper {
                 border-radius: 0;
@@ -224,11 +236,11 @@
             }
 
             .nav-links {
-                display: none; /* Ocultamos links en móvil */
+                display: none;
             }
 
             .menu-btn {
-                display: block; /* Mostramos hamburguesa */
+                display: block;
             }
 
             .lang-switch {
@@ -236,42 +248,73 @@
             }
 
             .main-container {
-                padding: 0; /* Imagen pegada a los bordes en móvil */
+                padding: 0; /* Ocupar todo el ancho */
             }
 
             .hero-card {
                 border-radius: 0;
-                height: auto;
-                min-height: 100vh;
-                background-position: center top;
+                /* Usamos svh para adaptarnos a las barras de navegación en móviles */
+                height: 100svh; 
+                min-height: auto;
+                /* Ajuste de posición para que la catedral sea visible siempre */
+                background-position: 60% center; 
             }
 
             .hero-content {
-                padding: 40px 20px;
+                justify-content: center;
+                padding: 80px 15px 30px 15px; /* Espacio para el navbar */
+            }
+
+            .content-wrapper {
                 align-items: center;
+                width: 100%;
+                gap: 15px; /* Reducimos el espacio vertical */
             }
 
             .hero-title-group {
-                align-self: center;
                 text-align: center;
-                margin-bottom: 40px;
+                margin-bottom: 10px;
             }
 
             .hero-title-group h1 {
-                font-size: 3rem;
+                font-size: 3rem; /* Título escalado para no robar espacio */
+            }
+            
+            .hero-title-group h2 {
+                font-size: 1.3rem;
             }
 
             .glass-cards-container {
                 flex-direction: column;
-                align-self: center;
                 width: 100%;
-                max-width: 320px;
-                gap: 20px;
+                gap: 15px; /* Tarjetas más juntas */
+                align-items: center;
             }
 
             .glass-card {
                 width: 100%;
-                padding: 40px 20px;
+                max-width: 320px;
+                padding: 20px 20px; /* Reducción de padding interior */
+                height: auto;
+            }
+
+            .card-icon {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+
+            .glass-card h3 {
+                font-size: 1.5rem; /* Textos de tarjeta reducidos */
+                margin-bottom: 5px;
+            }
+
+            .glass-card p {
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+            }
+            
+            .glass-btn {
+                padding: 8px 20px;
             }
         }
     </style>
@@ -298,26 +341,30 @@
     <main class="main-container">
         <section class="hero-card">
             <div class="hero-content">
-                
-                <div class="hero-title-group">
-                    <h1>CIMC 2026<br>CONGRESS</h1>
-                    <h2>17–20 September</h2>
-                </div>
-
-                <div class="glass-cards-container">
+                <div class="content-wrapper">
                     
-                    <div class="glass-card">
-                        <div class="card-icon">🍷</div> <h3>Opening</h3>
-                        <p>Thursday, 17 September<br>15:00</p>
-                        <a href="#" class="glass-btn">Navigate me there</a>
+                    <div class="hero-title-group">
+                        <h1>CIMC 2026<br>CONGRESS</h1>
+                        <h2>17–20 September</h2>
                     </div>
 
-                    <div class="glass-card">
-                        <div class="card-icon">🧭</div> <h3>Venue</h3>
-                        <p>Clarion Hotel® Helsinki</p>
-                        <a href="#" class="glass-btn">Open website</a>
-                    </div>
+                    <div class="glass-cards-container">
+                        
+                        <div class="glass-card">
+                            <div class="card-icon">🍷</div>
+                            <h3>Opening</h3>
+                            <p>Thursday, 17 September<br>15:00</p>
+                            <a href="#" class="glass-btn">Navigate me there</a>
+                        </div>
 
+                        <div class="glass-card">
+                            <div class="card-icon">🧭</div>
+                            <h3>Venue</h3>
+                            <p>Clarion Hotel® Helsinki</p>
+                            <a href="#" class="glass-btn">Open website</a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
