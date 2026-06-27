@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 | Experimental Glassmorphism</title>
+    <title>CIMC 2026 | Congreso Médico Campeche</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --brand-cyan: #00f0ff;
-            --brand-magenta: #ff007b;
-            --brand-purple: #7000ff;
-            --bg-deep: #050507;
+            /* ADN CROMÁTICO EXTRAÍDO DE TU LOGOTIPO */
+            --logo-teal: #1cb5c2;
+            --logo-gold: #f2aa2a;
+            --logo-indigo: #3b52a3;
+            --logo-magenta: #e41b77;
+            --logo-purple: #7552a0;
             
-            /* Glassmorphism Ultra-Premium */
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            --glass-blur: blur(40px);
-            --glass-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8);
+            --bg-deep: #07090f; /* Un índigo casi negro para que el logo resalte */
+            
+            /* Sistema Glassmorphism Premium Adaptado */
+            --glass-bg: rgba(20, 25, 40, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            --glass-blur: blur(30px);
+            --glass-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.6);
+            
+            --font-main: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
@@ -34,327 +40,252 @@
             height: 100%;
             background-color: var(--bg-deep);
             color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Congelado en el Hero para el impacto inicial */
+            font-family: var(--font-main);
+            overflow: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 1. FONDO DE RUIDO Y AURORA (EL SECRETO PREMIUM) --- */
+        /* --- 1. RUIDO FOTOGRÁFICO Y ATMÓSFERA --- */
         .noise-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.4;
-            /* Textura de ruido SVG generada en CSS */
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 50; opacity: 0.35;
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .aurora-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            overflow: hidden; z-index: 1;
         }
 
+        /* Orbes pintados con los colores exactos de tu logo */
         .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.6;
-            animation: breathe 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute; border-radius: 50%; filter: blur(140px);
+            opacity: 0.6; animation: breathe 18s infinite alternate ease-in-out;
         }
 
-        .orb-1 {
-            width: 50vw; height: 50vw;
-            background: var(--brand-magenta);
-            top: -20%; right: -10%;
+        .orb-fortress {
+            width: 55vw; height: 55vw;
+            background: linear-gradient(135deg, var(--logo-gold), var(--logo-teal));
+            top: -20%; left: -10%;
         }
 
-        .orb-2 {
+        .orb-medical {
             width: 60vw; height: 60vw;
-            background: var(--brand-purple);
-            bottom: -30%; left: -20%;
+            background: linear-gradient(135deg, var(--logo-indigo), var(--logo-magenta));
+            bottom: -30%; right: -15%;
             animation-delay: -5s;
         }
 
-        .orb-3 {
+        .orb-accent {
             width: 40vw; height: 40vw;
-            background: var(--brand-cyan);
-            top: 40%; left: 30%;
-            opacity: 0.4;
-            animation-delay: -10s;
+            background: var(--logo-purple);
+            top: 30%; left: 40%;
+            opacity: 0.3;
+            animation-delay: -9s;
             mix-blend-mode: screen;
         }
 
         @keyframes breathe {
             0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.2) translate(-5vw, 5vh); }
+            100% { transform: scale(1.15) translate(3vw, 4vh); }
         }
 
-        /* --- 2. ELEMENTOS 3D FLOTANTES (PARA MOSTRAR EL BLUR) --- */
+        /* --- 2. GEOMETRÍA TEMÁTICA (ARCO DE BALUARTE + DATA MÉDICA) --- */
         .geometry {
-            position: absolute;
-            z-index: 2;
-            background: linear-gradient(135deg, var(--brand-cyan), var(--brand-purple));
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            animation: floatShape 20s infinite linear;
+            position: absolute; z-index: 2;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: floatShape 25s infinite linear;
         }
 
-        .geo-sphere {
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            top: 15%; right: 25%;
-            background: linear-gradient(135deg, var(--brand-magenta), #ff8a00);
+        /* Representación abstracta del arco de la muralla de Campeche */
+        .geo-arch {
+            width: 220px; height: 320px;
+            border-radius: 110px 110px 0 0; /* Forma de arco */
+            bottom: -50px; left: 15%;
+            background: linear-gradient(180deg, rgba(242, 170, 42, 0.15), transparent);
+            border-top: 1px solid rgba(242, 170, 42, 0.4);
+            transform: rotate(-15deg);
         }
 
-        .geo-pill {
-            width: 120px; height: 300px;
-            border-radius: 60px;
-            bottom: -50px; left: 20%;
-            transform: rotate(45deg);
+        .geo-circle {
+            width: 140px; height: 140px; border-radius: 50%;
+            top: 20%; right: 20%;
+            background: linear-gradient(135deg, rgba(28, 181, 194, 0.2), rgba(59, 82, 163, 0.2));
+            border: 1px solid rgba(28, 181, 194, 0.4);
+            animation: floatShapeReverse 20s infinite linear;
         }
 
         @keyframes floatShape {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            0% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-40px) rotate(-5deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+        @keyframes floatShapeReverse {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(30px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
         }
 
-        /* --- 3. NAVEGACIÓN MINIMALISTA --- */
-        .nav-pill {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            padding: 15px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        /* --- 3. NAVEGACIÓN (CON EL LOGO) --- */
+        .navbar {
+            position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1300px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 30px;
+            background: rgba(10, 15, 25, 0.5);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
-            border-radius: 100px;
-            z-index: 20;
-            box-shadow: var(--glass-shadow);
+            border-radius: 20px; z-index: 20;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .nav-pill a {
-            color: #fff;
-            text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .nav-brand img {
+            height: 45px; width: auto; display: block;
+        }
+
+        .nav-links {
+            display: flex; gap: 35px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1; text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
             transition: color 0.3s ease;
         }
+        .nav-links a:hover { color: var(--logo-gold); }
 
-        .nav-pill a:hover { color: var(--brand-cyan); }
-        
-        .nav-brand {
-            font-size: 1.2rem !important;
-            color: var(--brand-cyan) !important;
+        .btn-lang {
+            padding: 8px 18px; border-radius: 8px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none;
+            transition: all 0.3s ease;
         }
+        .btn-lang:hover { background: rgba(255,255,255,0.15); border-color: var(--logo-teal); }
 
-        /* --- 4. HERO SECTION EXPERIMENTAL --- */
+        /* --- 4. HERO SECTION CARD --- */
         .hero-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
+            position: relative; width: 100vw; height: 100vh;
+            display: flex; align-items: center; justify-content: center; z-index: 10;
         }
 
         .glass-hero-card {
-            width: 90%;
-            max-width: 1200px;
-            padding: 80px;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
+            width: 90%; max-width: 1250px; padding: 70px 80px;
+            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border); border-radius: 32px;
             box-shadow: var(--glass-shadow), var(--glass-highlight);
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Brillo de esquina sutil dentro del cristal */
-        .glass-hero-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 40%);
-            pointer-events: none;
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
+            align-items: center; position: relative; overflow: hidden;
+            margin-top: 40px;
         }
 
         .hero-content { position: relative; z-index: 2; }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 16px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 6px 14px; margin-bottom: 2rem;
+            background: rgba(242, 170, 42, 0.1); border: 1px solid rgba(242, 170, 42, 0.3);
             border-radius: 100px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            color: var(--brand-cyan);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em;
+            color: var(--logo-gold); text-transform: uppercase;
         }
 
-        .hero-badge span {
-            width: 6px; height: 6px;
-            background: var(--brand-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--brand-cyan);
+        .hero-tag span {
+            width: 6px; height: 6px; background: var(--logo-gold); border-radius: 50%;
+            box-shadow: 0 0 10px var(--logo-gold);
         }
 
         .hero-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3.5rem, 6vw, 5.5rem);
-            font-weight: 900;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            margin-bottom: 2rem;
+            font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.05;
+            letter-spacing: -0.03em; margin-bottom: 1.5rem;
         }
 
+        /* Gradiente inspirado en la fusión del fuerte y la medicina */
         .text-gradient {
-            background: linear-gradient(to right, #fff, rgba(255,255,255,0.4));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: linear-gradient(90deg, var(--logo-teal), var(--logo-magenta), var(--logo-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero-desc {
-            font-size: 1.1rem;
-            font-weight: 300;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.7);
-            max-width: 450px;
-            margin-bottom: 3rem;
+            font-size: 1.15rem; font-weight: 300; line-height: 1.7; color: #94a3b8;
+            max-width: 500px; margin-bottom: 3rem;
         }
 
-        /* Botón Experimental */
-        .btn-exp {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.2rem 3rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: #fff;
-            text-transform: uppercase;
-            text-decoration: none;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 100px;
-            overflow: hidden;
-            transition: all 0.4s ease;
+        .cta-group { display: flex; gap: 15px; }
+
+        .btn-primary {
+            padding: 1.1rem 2.2rem; border-radius: 12px;
+            background: linear-gradient(90deg, var(--logo-indigo), var(--logo-purple));
+            color: #fff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+            text-decoration: none; border: none;
+            box-shadow: 0 10px 25px rgba(59, 82, 163, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(59, 82, 163, 0.6); }
 
-        .btn-exp::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, var(--brand-cyan), var(--brand-purple));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .btn-secondary {
+            padding: 1.1rem 2.2rem; border-radius: 12px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+            text-decoration: none; transition: all 0.3s ease;
         }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-        .btn-exp:hover {
-            border-color: transparent;
-            box-shadow: 0 15px 30px rgba(112, 0, 255, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .btn-exp:hover::before { opacity: 1; }
-
-        /* Elemento Abstracto Derecho */
+        /* Elemento Abstracto Visual (Derecha) */
         .hero-visual {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            position: relative; height: 100%; display: flex; align-items: center; justify-content: center;
         }
 
-        .glass-ring {
-            width: 300px; height: 300px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.1);
-            position: absolute;
-            right: 10%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Representación de cruce de datos e historia médica */
+        .medical-ring {
+            width: 320px; height: 320px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative; display: flex; align-items: center; justify-content: center;
         }
 
-        .glass-ring::before {
-            content: '';
-            width: 260px; height: 260px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255,255,255,0.2);
-            animation: spin 30s linear infinite;
+        .medical-ring::before {
+            content: ''; position: absolute; width: 280px; height: 280px; border-radius: 50%;
+            border-top: 2px solid var(--logo-teal); border-right: 2px solid transparent;
+            border-bottom: 2px solid var(--logo-magenta); border-left: 2px solid transparent;
+            animation: spin 15s linear infinite;
         }
 
-        .data-point {
-            position: absolute;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            padding: 15px 25px;
-            border-radius: 12px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--brand-cyan);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        .data-card {
+            position: absolute; background: rgba(10, 15, 25, 0.6); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1); padding: 18px 24px; border-radius: 16px;
+            font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; gap: 5px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        .dp-1 { top: 20%; right: -5%; }
-        .dp-2 { bottom: 25%; right: 40%; color: var(--brand-magenta); }
+        .dc-1 { top: 10%; right: -10%; border-top: 2px solid var(--logo-gold); }
+        .dc-2 { bottom: 15%; left: -10%; border-bottom: 2px solid var(--logo-teal); }
+
+        .data-card span { color: #94a3b8; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .data-card strong { color: #fff; font-size: 1rem; }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* --- RESPONSIVO --- */
         @media (max-width: 968px) {
             body, html { overflow-y: auto; height: auto; }
-            .nav-pill { display: none; }
+            .navbar { padding: 15px 20px; }
+            .nav-links, .btn-lang { display: none; }
             .glass-hero-card {
-                grid-template-columns: 1fr;
-                padding: 40px 25px;
-                margin-top: 80px;
-                margin-bottom: 40px;
+                grid-template-columns: 1fr; padding: 40px 30px;
+                margin-top: 120px; margin-bottom: 40px; text-align: center;
             }
-            .hero-title { font-size: 3rem; }
-            .hero-visual { height: 250px; justify-content: center; margin-top: 20px; }
-            .glass-ring { right: auto; width: 220px; height: 220px; }
-            .glass-ring::before { width: 180px; height: 180px; }
-            .dp-1 { right: 0; }
+            .hero-tag { margin: 0 auto 2rem auto; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-desc { margin: 0 auto 2.5rem auto; }
+            .cta-group { flex-direction: column; }
+            .hero-visual { height: 280px; margin-top: 30px; }
+            .medical-ring { width: 240px; height: 240px; }
+            .medical-ring::before { width: 200px; height: 200px; }
+            .dc-1 { right: 0; }
+            .dc-2 { left: 0; }
         }
     </style>
 </head>
@@ -363,46 +294,60 @@
     <div class="noise-overlay"></div>
 
     <div class="aurora-container">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+        <div class="orb orb-fortress"></div>
+        <div class="orb orb-medical"></div>
+        <div class="orb orb-accent"></div>
     </div>
 
-    <div class="geometry geo-sphere"></div>
-    <div class="geometry geo-pill"></div>
+    <div class="geometry geo-arch"></div>
+    <div class="geometry geo-circle"></div>
 
-    <nav class="nav-pill">
-        <a href="#" class="nav-brand">CIMC</a>
-        <a href="#">Inicio</a>
-        <a href="#">Programa</a>
-        <a href="#">Speakers</a>
-        <a href="#">Registro</a>
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026 Logo">
+        </a>
+        <div class="nav-links">
+            <a href="#" style="color: #fff;">Inicio</a>
+            <a href="#">Programa</a>
+            <a href="#">Abstracts</a>
+            <a href="#">Sede</a>
+        </div>
+        <a href="#" class="btn-lang">EN</a>
     </nav>
 
     <div class="hero-wrapper">
         <div class="glass-hero-card">
             
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span></span> EDICIÓN 2026
+                <div class="hero-tag">
+                    <span></span> CAMPECHE, MÉXICO
                 </div>
                 
                 <h1 class="hero-title">
-                    Medicina <br>
-                    <span class="text-gradient">Redefinida.</span>
+                    Medicina del Futuro en la <br>
+                    <span class="text-gradient">Ciudad Amurallada.</span>
                 </h1>
                 
                 <p class="hero-desc">
-                    El epicentro donde la tecnología de vanguardia y la bioética convergen. Únete a los líderes globales de la salud en Campeche.
+                    El epicentro donde la innovación tecnológica y los nuevos paradigmas de la salud convergen con la historia y riqueza patrimonial del sureste mexicano.
                 </p>
                 
-                <a href="#" class="btn-exp">Inicia tu registro</a>
+                <div class="cta-group">
+                    <a href="#" class="btn-primary">Registrarse ahora</a>
+                    <a href="#" class="btn-secondary">Ver Ponentes</a>
+                </div>
             </div>
 
             <div class="hero-visual">
-                <div class="glass-ring">
-                    <div class="data-point dp-1">BioTech // 37.4</div>
-                    <div class="data-point dp-2">Genómica Aplicada</div>
+                <div class="medical-ring">
+                    <div class="data-card dc-1">
+                        <span>Edición</span>
+                        <strong>37° Congreso</strong>
+                    </div>
+                    <div class="data-card dc-2">
+                        <span>Eje Temático</span>
+                        <strong>Salud Global</strong>
+                    </div>
                 </div>
             </div>
 
