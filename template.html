@@ -3,33 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 | Congreso Internacional Médico de Campeche | Glassmorphism</title>
+    <title>CIMC 2026 | Experimental Glassmorphism</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES DE DISEÑO (Adaptadas para tema Claro Colorido) --- */
         :root {
-            /* Colores de la marca CIMC del logotipo */
-            --brand-blue: #3b52a3;
-            --brand-teal: #1cb5c2;
-            --brand-magenta: #e41b77;
-            --brand-gold: #f2aa2a;
-            --brand-purple: #7552a0;
-
-            /* Sistema Glassmorphism Claro Colorido/Sofisticado */
-            --glass-bg: rgba(255, 255, 255, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --glass-blur: blur(20px);
-            --glass-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+            --brand-cyan: #00f0ff;
+            --brand-magenta: #ff007b;
+            --brand-purple: #7000ff;
+            --bg-deep: #050507;
             
-            --dark-text: #0f172a;
-            --text-muted: #475569;
-            
-            --font-main: 'Plus Jakarta Sans', sans-serif;
-            --bezier: cubic-bezier(0.16, 1, 0.3, 1);
+            /* Glassmorphism Ultra-Premium */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            --glass-blur: blur(40px);
+            --glass-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8);
         }
 
         * {
@@ -38,541 +30,384 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-main);
-            color: var(--dark-text);
-            background: #f1f5f9;
-            overflow-x: hidden;
+        body, html {
+            height: 100%;
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Congelado en el Hero para el impacto inicial */
             -webkit-font-smoothing: antialiased;
-            position: relative;
         }
 
-        /* --- FONDO DE MOVIMIENTO DE FLUIDO COLORIDO (Mismo de CIMC Image) --- */
-        .fluid-background {
+        /* --- 1. FONDO DE RUIDO Y AURORA (EL SECRETO PREMIUM) --- */
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
-            background: linear-gradient(-45deg, #e0f2fe 0%, #fef9c3 50%, #fce7f3 100%);
-            background-size: 400% 400%;
-            animation: fluidGradient 15s ease infinite;
-            overflow: hidden;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.4;
+            /* Textura de ruido SVG generada en CSS */
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .ambient-orbs {
+        .aurora-container {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .blur-orb {
+        .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(120px);
             opacity: 0.6;
-            mix-blend-mode: multiply;
-            animation: orbFloat 20s infinite alternate ease-in-out;
+            animation: breathe 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .orb-1 { width: 50vw; height: 50vw; background: var(--brand-teal); top: -10%; left: -10%; }
-        .orb-2 { width: 60vw; height: 60vw; background: var(--brand-gold); bottom: -20%; right: -10%; animation-delay: -5s; }
-        .orb-3 { width: 45vw; height: 45vw; background: var(--brand-magenta); top: 30%; right: 20%; animation-delay: -10s; }
-
-        @keyframes fluidGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .orb-1 {
+            width: 50vw; height: 50vw;
+            background: var(--brand-magenta);
+            top: -20%; right: -10%;
         }
 
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5vw, 5vh) scale(1.1); }
+        .orb-2 {
+            width: 60vw; height: 60vw;
+            background: var(--brand-purple);
+            bottom: -30%; left: -20%;
+            animation-delay: -5s;
         }
 
-        /* --- UTILIDADES --- */
-        .container {
-            max-width: 1350px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 5vw;
+        .orb-3 {
+            width: 40vw; height: 40vw;
+            background: var(--brand-cyan);
+            top: 40%; left: 30%;
+            opacity: 0.4;
+            animation-delay: -10s;
+            mix-blend-mode: screen;
         }
 
-        .glass-panel {
+        @keyframes breathe {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(-5vw, 5vh); }
+        }
+
+        /* --- 2. ELEMENTOS 3D FLOTANTES (PARA MOSTRAR EL BLUR) --- */
+        .geometry {
+            position: absolute;
+            z-index: 2;
+            background: linear-gradient(135deg, var(--brand-cyan), var(--brand-purple));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: floatShape 20s infinite linear;
+        }
+
+        .geo-sphere {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            top: 15%; right: 25%;
+            background: linear-gradient(135deg, var(--brand-magenta), #ff8a00);
+        }
+
+        .geo-pill {
+            width: 120px; height: 300px;
+            border-radius: 60px;
+            bottom: -50px; left: 20%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes floatShape {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        /* --- 3. NAVEGACIÓN MINIMALISTA --- */
+        .nav-pill {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            z-index: 20;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .nav-pill a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-pill a:hover { color: var(--brand-cyan); }
+        
+        .nav-brand {
+            font-size: 1.2rem !important;
+            color: var(--brand-cyan) !important;
+        }
+
+        /* --- 4. HERO SECTION EXPERIMENTAL --- */
+        .hero-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .glass-hero-card {
+            width: 90%;
+            max-width: 1200px;
+            padding: 80px;
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 1rem 2.2rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s var(--bezier);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: var(--brand-blue);
-            color: #fff;
-            box-shadow: 0 10px 25px rgba(59, 82, 163, 0.15);
-        }
-        .btn-primary:hover { background: #2f4185; transform: translateY(-2px); }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.5);
-            color: var(--dark-text);
-            border: 1px solid var(--glass-border);
-        }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.8); transform: translateY(-2px); }
-
-        .section-tag {
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--brand-gold);
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        /* --- NAVBAR DE CIMC IMAGE --- */
-        .navbar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1400px;
-            height: 80px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-        }
-
-        .branding-block img {
-            height: 45px;
-            width: auto;
-            display: block;
-        }
-
-        .nav-content {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-text);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--brand-magenta); }
-
-        /* Botón de English con fondo sólido */
-        .btn-english {
-            background: #232a3f;
-            color: #fff;
-            padding: 0.6rem 1.4rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(35, 42, 63, 0.1);
-        }
-
-        .menu-btn { display: none; }
-
-        /* --- SECCIÓN 1: INICIO (CIMC HERO ADAPTADO) --- */
-        .section-hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 150px;
-            padding-bottom: 80px;
-        }
-
-        .hero-grid {
+            border-radius: 32px;
+            box-shadow: var(--glass-shadow), var(--glass-highlight);
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 60px;
             align-items: center;
-            width: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-text-container {
-            max-width: 700px;
+        /* Brillo de esquina sutil dentro del cristal */
+        .glass-hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--brand-cyan);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-badge span {
+            width: 6px; height: 6px;
+            background: var(--brand-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--brand-cyan);
         }
 
         .hero-title {
-            font-size: clamp(3rem, 5vw, 4.8rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
             margin-bottom: 2rem;
         }
 
-        /* Acento de Magenta para 'Retos Médicos' */
-        .hero-title span.accent {
-            background: linear-gradient(90deg, var(--brand-magenta), var(--brand-purple));
+        .text-gradient {
+            background: linear-gradient(to right, #fff, rgba(255,255,255,0.4));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-description {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: var(--text-muted);
+        .hero-desc {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.7);
+            max-width: 450px;
             margin-bottom: 3rem;
         }
 
-        .cta-container {
-            display: flex;
-            gap: 15px;
-        }
-
-        /* Ilustración de Cristal CIMC Image */
-        .hero-composition {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Botón Experimental */
+        .btn-exp {
             position: relative;
-            height: 450px;
-        }
-
-        .abstract-glass {
-            width: 320px;
-            height: 320px;
-            border-radius: 40px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
-            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.05);
-            position: relative;
-        }
-
-        .overlapping-sphere {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--brand-teal), var(--brand-magenta));
-            top: -20px;
-            right: -20px;
-            z-index: -1;
-        }
-
-        /* --- SECCIÓN 2: ¿QUÉ ES EL CONGRESO? (Preservada de Diseño Anterior con Texto CIMC) --- */
-        .about-section { padding: 100px 0; }
-        
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-img {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            height: 500px;
-        }
-
-        .about-img img { width: 100%; height: 100%; object-fit: cover; }
-
-        .floating-badge {
-            position: absolute;
-            bottom: -30px;
-            left: -30px;
-            padding: 25px;
-            max-width: 250px;
-            z-index: 10;
-        }
-        
-        .floating-badge h4 { color: var(--brand-gold); font-size: 1.2rem; margin-bottom: 5px; }
-        .floating-badge p { font-size: 0.9rem; line-height: 1.4; color: var(--dark-text); }
-
-        /* --- SECCIÓN 3: OBJETIVO / PANELES (Preservada con Texto CIMC) --- */
-        .activities-section { padding: 80px 0; }
-        
-        .activity-card {
-            padding: 60px;
-            margin-bottom: 40px;
-        }
-
-        .act-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .act-grid.reverse { grid-template-columns: 1fr 1.2fr; }
-        .act-grid.reverse .act-text { grid-column: 2; grid-row: 1; }
-        
-        .act-text h2 { margin-bottom: 1rem; }
-        .act-text p { font-size: 1.1rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 2rem; }
-
-        .arrow-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            border: 1px solid var(--glass-border);
-            color: var(--dark-text);
+            padding: 1.2rem 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #fff;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .arrow-link:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-
-        .act-img { border-radius: 20px; overflow: hidden; height: 350px; }
-        .act-img img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* --- SECCIÓN 4: CONTACTO (Preservada con Texto CIMC) --- */
-        .contact-section { padding: 100px 0 140px 0; }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 80px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        .contact-info h3 { color: var(--brand-gold); font-size: 1.2rem; margin-bottom: 10px; }
-        .contact-info p { margin-bottom: 2.5rem; color: var(--text-muted); font-size: 1.1rem; }
-        
-        .contact-form { padding: 50px; }
-        .contact-form h2 { margin-bottom: 2rem; font-size: 1.8rem; text-align: center; color: var(--dark-text); }
+        .btn-exp::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--brand-cyan), var(--brand-purple));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        
-        input, textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.3);
+        .btn-exp:hover {
+            border-color: transparent;
+            box-shadow: 0 15px 30px rgba(112, 0, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn-exp:hover::before { opacity: 1; }
+
+        /* Elemento Abstracto Derecho */
+        .hero-visual {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .glass-ring {
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.1);
+            position: absolute;
+            right: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-ring::before {
+            content: '';
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,255,255,0.2);
+            animation: spin 30s linear infinite;
+        }
+
+        .data-point {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 18px 20px;
+            padding: 15px 25px;
             border-radius: 12px;
-            color: var(--dark-text);
-            font-family: var(--font-main);
-            font-size: 1rem;
-            outline: none;
-            transition: border 0.3s ease, background 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--brand-cyan);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        input:focus, textarea:focus {
-            border-color: var(--brand-magenta);
-            background: rgba(255, 255, 255, 0.5);
-        }
+        .dp-1 { top: 20%; right: -5%; }
+        .dp-2 { bottom: 25%; right: 40%; color: var(--brand-magenta); }
 
-        textarea { height: 150px; resize: none; margin-bottom: 20px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- RESPONSIVO MÓVIL --- */
+        /* --- RESPONSIVO --- */
         @media (max-width: 968px) {
-            .navbar { width: 95%; padding: 0 1.5rem; height: 70px; border-radius: 18px; top: 15px; }
-            .nav-content { display: none; }
-            .nav-English { display: none; }
-            
-            .menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: none;
-                border: 1px solid var(--glass-border);
-                color: var(--dark-text);
-                width: 42px; height: 42px;
-                border-radius: 10px;
-                font-size: 1.2rem;
-                cursor: pointer;
-                z-index: 1001;
+            body, html { overflow-y: auto; height: auto; }
+            .nav-pill { display: none; }
+            .glass-hero-card {
+                grid-template-columns: 1fr;
+                padding: 40px 25px;
+                margin-top: 80px;
+                margin-bottom: 40px;
             }
-
-            .section-hero { padding-top: 130px; }
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-text-container { margin: 0 auto; max-width: 100%; }
-            .cta-container { flex-direction: column; width: 100%; }
-            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
-            .hero-composition { display: none; }
-
-            .about-grid, .act-grid, .contact-grid { grid-template-columns: 1fr !important; gap: 40px; text-align: center; }
-            .act-grid.reverse .act-text { grid-column: 1; grid-row: 2; }
-            .floating-badge { position: relative; bottom: 0; left: 0; width: 100%; max-width: 100%; margin-top: 20px; text-align: left; }
-            .activity-card { padding: 30px; }
-            .form-row { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3rem; }
+            .hero-visual { height: 250px; justify-content: center; margin-top: 20px; }
+            .glass-ring { right: auto; width: 220px; height: 220px; }
+            .glass-ring::before { width: 180px; height: 180px; }
+            .dp-1 { right: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="fluid-background">
-        <div class="ambient-orbs">
-            <div class="blur-orb orb-1"></div>
-            <div class="blur-orb orb-2"></div>
-            <div class="blur-orb orb-3"></div>
-        </div>
+    <div class="noise-overlay"></div>
+
+    <div class="aurora-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <nav class="navbar glass-panel">
-        <div class="branding-block">
-            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="CIMC 2026 Campeche México Logo">
-        </div>
-        <div class="nav-content">
-            <ul class="nav-links">
-                <li><a href="#" style="border-bottom: 2px solid var(--brand-blue); padding-bottom: 5px;">INICIO</a></li>
-                <li><a href="#que-es">¿QUÉ ES?</a></li>
-                <li><a href="#">PONENTES</a></li>
-                <li><a href="#registro">INSCRIPCIÓN</a></li>
-            </ul>
-        </div>
-        <a href="#" class="btn-english nav-English">ENGLISH</a>
-        <button class="menu-btn" id="menuBtn">☰</button>
+    <div class="geometry geo-sphere"></div>
+    <div class="geometry geo-pill"></div>
+
+    <nav class="nav-pill">
+        <a href="#" class="nav-brand">CIMC</a>
+        <a href="#">Inicio</a>
+        <a href="#">Programa</a>
+        <a href="#">Speakers</a>
+        <a href="#">Registro</a>
     </nav>
 
-    <section class="section-hero container">
-        <div class="hero-grid">
-            <div class="hero-text-container">
-                <span class="section-tag" style="border-bottom: 2px solid var(--brand-blue); color: var(--brand-blue); font-weight: 800; padding-bottom: 5px; margin-bottom: 1rem;">Congreso Internacional Médico de Campeche</span>
-                <h1 class="hero-title">Avanzando hacia los <span class="accent">Retos Médicos</span> del futuro.</h1>
-                <p class="hero-description">Una experiencia inmersiva donde la vanguardia de la tecnología global de la salud converge con la riqueza patrimonial de Campeche.</p>
-                <div class="cta-container">
-                    <a href="#registro" class="btn-primary" style="background: #111827; padding: 1rem 2.2rem;">REGISTRARSE AHORA</a>
-                    <a href="#que-es" class="btn-secondary" style="border: 1px solid var(--glass-border); padding: 1rem 2.2rem; background: rgba(255,255,255,0.4);">SABER MÁS</a>
-                </div>
-            </div>
-            <div class="hero-composition">
-                <div class="abstract-glass">
-                    <div class="overlapping-sphere"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="que-es" class="about-section container">
-        <div class="about-grid">
-            <div class="about-text">
-                <span class="section-tag" style="border-bottom: 2px solid var(--brand-gold); padding-bottom: 5px;">WELCOME TO CIMC 2026 ⭐</span>
-                <h2 class="section-title">¿Qué es el Congreso Internacional De Medicina?</h2>
-                <p>El Congreso Internacional de Medicina del Tecnológico de Monterrey es un encuentro académico y profesional que reúne a estudiantes, médicos, investigadores y líderes del sector salud.</p>
-                <p>Este espacio está diseñado para impulsar el intercambio de conocimientos, actualizarse en temas médicos de vanguardia y fortalecer habilidades clínicas y científicas a través de conferencias, paneles, talleres y actividades académicas.</p>
-                <p>Cada edición reúne a expertos nacionales e internacionales que comparten las tendencias que están transformando la medicina, brindando una experiencia integral en un ambiente de innovación, investigación y excelencia académica.</p>
-            </div>
-            <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80" alt="Conferencia Medica">
-                <div class="floating-badge glass-panel" style="backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); background: rgba(255,255,255,0.5);">
-                    <h4>Enfoque</h4>
-                    <p>Medicina del Futuro: Innovación, Humanismo y Equidad.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="activities-section container">
-        
-        <div class="activity-card glass-panel">
-            <div class="act-grid">
-                <div class="act-text">
-                    <span class="section-tag" style="border-bottom: 2px solid var(--brand-teal); padding-bottom: 5px;">ARE YOU READY FOR THIS EDITION? ⚡</span>
-                    <h2 class="section-title">Objetivo</h2>
-                    <p>Fomentar el aprendizaje, la actualización y el intercambio de conocimientos entre estudiantes, profesionales de la salud e investigadores, impulsando el desarrollo de habilidades y el entendimiento de los avances médicos y científicos actuales a través de actividades de alto nivel académico.</p>
-                </div>
-                <div class="act-img">
-                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80" alt="Objetivos">
-                </div>
-            </div>
-        </div>
-
-        <div class="activity-card glass-panel">
-            <div class="act-grid reverse">
-                <div class="act-img">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80" alt="Paneles Prácticos">
-                </div>
-                <div class="act-text">
-                    <h2 class="section-title">Paneles</h2>
-                    <p>Disfruta de paneles interactivos con especialistas que discutirán temas clave en medicina moderna. Estos espacios fomentan el aprendizaje colaborativo, el análisis crítico y el diálogo multidisciplinario para comprender los desafíos actuales y las perspectivas que marcarán el futuro de la salud.</p>
-                    <a href="#" class="arrow-link" style="color: var(--brand-blue);">↘</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="activity-card glass-panel">
-            <div class="act-grid">
-                <div class="act-text">
-                    <h2 class="section-title">Concurso de Abstracts</h2>
-                    <p>Participa en nuestro Concurso de Abstracts, una oportunidad para impulsar la investigación en estudiantes de medicina. Los participantes desarrollarán un caso clínico orientado a innovación, elaborarán un abstract y presentarán un póster durante el congreso, promoviendo el pensamiento crítico y el desarrollo científico.</p>
-                    <a href="#" class="arrow-link" style="color: var(--brand-blue);">↘</a>
-                </div>
-                <div class="act-img">
-                    <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80" alt="Investigacion">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="registro" class="contact-section container">
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>Lugar</h3>
-                <p>Centro de Congresos del Tecnológico de Monterrey, Campus Monterrey</p>
-                
-                <h3>Email</h3>
-                <p>contacto@congresodemedicinatec.com</p>
-                
-                <h3>Instagram</h3>
-                <p>@congresodemedicinatec</p>
-            </div>
+    <div class="hero-wrapper">
+        <div class="glass-hero-card">
             
-            <form class="contact-form glass-panel">
-                <h2>¿TIENES ALGUNA DUDA? ¡CONTÁCTANOS!</h2>
-                <div class="form-row">
-                    <input type="text" placeholder="Nombre *">
-                    <input type="email" placeholder="Email *">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span></span> EDICIÓN 2026
                 </div>
-                <textarea placeholder="Mensaje *"></textarea>
-                <button type="submit" class="btn-primary" style="background: #111827; width: 100%;">ENVIAR ↘</button>
-            </form>
+                
+                <h1 class="hero-title">
+                    Medicina <br>
+                    <span class="text-gradient">Redefinida.</span>
+                </h1>
+                
+                <p class="hero-desc">
+                    El epicentro donde la tecnología de vanguardia y la bioética convergen. Únete a los líderes globales de la salud en Campeche.
+                </p>
+                
+                <a href="#" class="btn-exp">Inicia tu registro</a>
+            </div>
+
+            <div class="hero-visual">
+                <div class="glass-ring">
+                    <div class="data-point dp-1">BioTech // 37.4</div>
+                    <div class="data-point dp-2">Genómica Aplicada</div>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
 
 </body>
 </html>
