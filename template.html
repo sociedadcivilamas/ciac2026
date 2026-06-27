@@ -53,11 +53,16 @@
         }
 
         .nav-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            color: var(--text-main);
+            display: flex;
+            align-items: center;
             text-decoration: none;
+            height: 100%; /* Se alinea al alto disponible de la barra */
+        }
+        
+        .nav-logo img {
+            height: 45px; /* Controla la altura del logo para que se vea elegante */
+            width: auto;  /* Mantiene la proporción original para que no se deforme */
+            display: block;
         }
         
         .nav-logo span {
@@ -294,7 +299,7 @@
     </div>
 
     <nav class="navbar">
-        <a href="#" class="nav-logo">CIMC<span>2026</span></a>
+        <a href="#" class="nav-logo"> <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="Logo CIMC 2026"></a>
         <ul class="nav-links">
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Programa</a></li>
