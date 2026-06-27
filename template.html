@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIMC 2026 - Light Glassmorphism Hero</title>
+    <title>CIMC 2026 - Experiencia Completa</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Colores basados en la ilustración para Light Mode */
+            /* --- Variables Sección 1 (Light Mode) --- */
             --glow-cyan: #35c4d6;
             --glow-orange: #f29c38;
-            --bg-light: #f4f7fb; /* Fondo muy claro y limpio */
-            
-            /* Light Glassmorphism */
+            --bg-light: #f4f7fb; 
             --glass-bg: rgba(255, 255, 255, 0.75);
             --glass-border: rgba(255, 255, 255, 1);
             --glass-blur: blur(24px);
             --glass-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-            
-            --text-main: #0f172a; /* Texto oscuro para legibilidad */
+            --text-main: #0f172a; 
             --text-muted: #475569;
+
+            /* --- Variables Sección 2 (Cathedral) --- */
+            --primary-blue: #093c71;
+            --cathedral-glass: rgba(255, 255, 255, 0.55);
+            --cathedral-blur: blur(15px);
+            --cathedral-border: rgba(255, 255, 255, 0.8);
         }
 
         * {
@@ -40,7 +43,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- NAVEGACIÓN MINIMALISTA --- */
+        /* =========================================
+           BARRA DE NAVEGACIÓN UNIFICADA
+        ========================================= */
         .navbar {
             position: absolute;
             top: 0;
@@ -49,30 +54,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 200;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
             text-decoration: none;
-            height: 100%; /* Se alinea al alto disponible de la barra */
+            height: 100%;
         }
         
         .nav-logo img {
-            height: 55px; /* Controla la altura del logo para que se vea elegante */
-            width: auto;  /* Mantiene la proporción original para que no se deforme */
+            height: 55px; 
+            width: auto;  
             display: block;
-        }
-        
-        .nav-logo span {
-            color: var(--glow-cyan);
         }
 
         .nav-links {
             display: flex;
             gap: 3rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -89,7 +91,48 @@
             color: var(--glow-orange);
         }
 
-        /* --- LUCES AMBIENTALES DEL FONDO (SUAVES PARA LIGHT MODE) --- */
+        .btn-lang {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            color: var(--text-main) !important; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px;
+            text-decoration: none;
+            text-transform: uppercase;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .btn-lang:hover {
+            background: #ffffff;
+            border-color: var(--glow-cyan);
+            color: var(--glow-cyan) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(53, 196, 214, 0.15);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* =========================================
+           SECCIÓN 1: HERO ILUSTRACIÓN
+        ========================================= */
         .ambient-lights {
             position: absolute;
             top: 0; left: 0;
@@ -103,7 +146,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(120px);
-            opacity: 0.25; /* Opacidad baja para que no ensucie el fondo blanco */
+            opacity: 0.25;
             animation: drift 15s infinite alternate ease-in-out;
             mix-blend-mode: multiply;
         }
@@ -126,40 +169,6 @@
             100% { transform: translate(-5vw, 5vh) scale(1.1); }
         }
 
-        /* Botón de Idioma Estilo Semi-Flat */
-        .btn-lang {
-            /* Fondo de cristal claro */
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            
-            color: var(--text-main); /* Usamos el texto oscuro de la paleta actual */
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            padding: 0.6rem 1.4rem;
-            border-radius: 100px; /* Forma de píldora moderna */
-            text-decoration: none;
-            text-transform: uppercase;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Sombra ultra suave */
-            transition: all 0.3s ease;
-        }
-
-        .btn-lang:hover {
-            background: #ffffff;
-            border-color: var(--glow-cyan); /* Toque de color del logo/ilustración */
-            color: var(--glow-cyan);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(53, 196, 214, 0.15); /* Resplandor cyan sutil */
-        }
-
-        /* --- HERO SECTION --- */
         .hero-container {
             min-height: 100vh;
             display: flex;
@@ -178,8 +187,7 @@
             align-items: center;
         }
 
-        /* Lado Izquierdo: Tarjeta Glassmorphism Clara */
-        .glass-card {
+        .glass-card-main {
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -252,7 +260,6 @@
             transform: translateY(-3px);
         }
 
-        /* Lado Derecho: La Ilustración */
         .hero-illustration {
             display: flex;
             justify-content: center;
@@ -266,12 +273,10 @@
             max-width: 590px;
             height: auto;
             object-fit: contain;
-            /* Una sombra más suave para el modo claro */
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
             animation: floatImage 6s infinite ease-in-out;
         }
 
-        /* Reflejo/Brillo sutil detrás de la imagen para que resalte en el fondo claro */
         .illustration-glow {
             position: absolute;
             width: 300px;
@@ -287,40 +292,149 @@
             100% { transform: translateY(0px); }
         }
 
-        /* --- RESPONSIVO MÓVIL --- */
+        /* =========================================
+           SECCIÓN 2: CATEDRAL HERO
+        ========================================= */
+        .cathedral-wrapper {
+            padding: 50px 2vw;
+            display: flex;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif; /* Tipografía específica para esta sección */
+        }
+
+        .cathedral-banner {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            height: 85vh;
+            min-height: 650px;
+            border-radius: 40px;
+            overflow: hidden;
+            background-image: url('https://res.cloudinary.com/dh3cjks1a/image/upload/v1781295548/5f33f12c1fd4ac34e715c02c_cq9tlc.jpg');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .cathedral-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 6%;
+        }
+
+        .cathedral-title-group {
+            text-align: left;
+            align-self: flex-start;
+            color: #fff;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+        }
+
+        .cathedral-title-group h2 {
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 5px;
+            letter-spacing: -0.02em;
+        }
+
+        .cathedral-title-group h3 {
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+        }
+
+        .cathedral-cards-container {
+            display: flex;
+            gap: 20px;
+            align-self: flex-end;
+            margin-top: auto;
+        }
+
+        .cathedral-card {
+            background: var(--cathedral-glass);
+            backdrop-filter: var(--cathedral-blur);
+            -webkit-backdrop-filter: var(--cathedral-blur);
+            border: 2px solid var(--cathedral-border);
+            border-radius: 30px;
+            padding: 35px 25px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cathedral-card .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .cathedral-card h4 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .cathedral-card p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+        }
+
+        .cathedral-btn {
+            background: transparent;
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 10px 22px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .cathedral-btn:hover {
+            background: var(--primary-blue);
+            color: #fff;
+        }
+
+        /* =========================================
+           RESPONSIVO MÓVIL
+        ========================================= */
         @media (max-width: 968px) {
+            /* Navbar Móvil */
             .navbar { padding: 20px 5vw; }
             .nav-links { display: none; }
+            .menu-btn { display: block; margin-left: auto; margin-right: 20px;}
             
-            .hero-container {
-                padding-top: 120px; /* Espacio para el navbar */
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: center;
-            }
-
-            /* Texto Primero, Ilustración Después (Por defecto en el DOM, solo aseguramos el orden) */
-            .glass-card {
-                padding: 40px 25px;
-            }
-
-            .tagline {
-                border-left: none;
-                border-bottom: 2px solid var(--glow-orange);
-                padding-left: 0;
-                padding-bottom: 5px;
-            }
-
+            /* Hero Ilustración Móvil */
+            .hero-container { padding-top: 100px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .glass-card-main { padding: 40px 25px; }
+            .tagline { border-left: none; border-bottom: 2px solid var(--glow-orange); padding-left: 0; padding-bottom: 5px; }
             .hero-title { font-size: 2.3rem; }
-            
-            /* Ajustes para hacer la ilustración "chiquita" en móvil */
-            .hero-illustration img { 
-                max-width: 50%; /* Reduce el tamaño a la mitad */
-                max-height: 30vh; /* Asegura que no rompa el alto de la pantalla */
-            }
+            .hero-illustration img { max-width: 50%; max-height: 30vh; }
+
+            /* Cathedral Hero Móvil */
+            .cathedral-wrapper { padding: 0; margin-top: 40px;}
+            .cathedral-banner { border-radius: 0; height: 100svh; min-height: auto; background-position: 35% center; }
+            .cathedral-content { justify-content: center; align-items: center; padding: 60px 15px 30px 15px; }
+            .cathedral-title-group { text-align: center; align-self: center; margin-bottom: 25px; }
+            .cathedral-title-group h2 { font-size: 3rem; }
+            .cathedral-title-group h3 { font-size: 1.3rem; }
+            .cathedral-cards-container { flex-direction: column; align-self: center; margin-top: 0; width: 100%; gap: 15px; align-items: center; }
+            .cathedral-card { width: 100%; max-width: 320px; padding: 20px; height: auto; }
+            .cathedral-card h4 { font-size: 1.5rem; margin-bottom: 5px; }
+            .cathedral-card p { font-size: 0.85rem; margin-bottom: 15px; }
+            .cathedral-card .card-icon { font-size: 1.8rem; margin-bottom: 8px; }
+            .cathedral-btn { padding: 8px 20px; }
         }
     </style>
 </head>
@@ -332,22 +446,24 @@
     </div>
 
     <nav class="navbar">
-        <a href="#" class="nav-logo"> <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="Logo CIMC 2026"></a>
+        <a href="#" class="nav-logo">
+            <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782436342/Tama%C3%B1o_Chico_-_WEBP_aofj8y.webp" alt="Logo CIMC 2026">
+        </a>
         <ul class="nav-links">
             <li><a href="#">Inicio</a></li>
             <li><a href="#">Programa</a></li>
             <li><a href="#">Sede</a></li>
             <li><a href="#">Contacto</a></li>
-             <a href="en.html" class="btn-lang">English</a>
+            <a href="en.html" class="btn-lang">English</a>
         </ul>
+        <button class="menu-btn">☰</button>
     </nav>
 
     <div class="hero-container">
         <div class="hero-grid">
-            
-            <div class="glass-card">
-                <h1 class="hero-title"><span>Congreso Internacional Médico de Campeche 2026</span></h1>
+            <div class="glass-card-main">
                 <span class="tagline">Retos de la medicina en el futuro cercano</span>
+                <h1 class="hero-title"><span>Congreso Internacional Médico de Campeche 2026</span></h1>
                 <p class="hero-description">
                     CIMC 2026 fusiona la herencia estructural de los centros históricos con la vanguardia del diseño sostenible y las tecnologías globales.
                 </p>
@@ -358,9 +474,38 @@
                 <div class="illustration-glow"></div>
                 <img src="https://res.cloudinary.com/dh3cjks1a/image/upload/v1782526579/FreeSample-Vectorizer-io-Ilustraci%C3%B3n_-_WEPM_zebkab.webp" alt="Ilustración CIMC 2026">
             </div>
-
         </div>
     </div>
+
+    <section class="cathedral-wrapper">
+        <div class="cathedral-banner">
+            <div class="cathedral-content">
+                
+                <div class="cathedral-title-group">
+                    <h2>CIMC 2026<br>CONGRESS</h2>
+                    <h3>17–20 September</h3>
+                </div>
+
+                <div class="cathedral-cards-container">
+                    
+                    <div class="cathedral-card">
+                        <div class="card-icon">🍷</div>
+                        <h4>Opening</h4>
+                        <p>Thursday, 17 September<br>15:00</p>
+                        <a href="#" class="cathedral-btn">Navigate me there</a>
+                    </div>
+
+                    <div class="cathedral-card">
+                        <div class="card-icon">🧭</div>
+                        <h4>Venue</h4>
+                        <p>Clarion Hotel® Helsinki</p>
+                        <a href="#" class="cathedral-btn">Open website</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
